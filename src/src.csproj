@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard1.1</TargetFramework>
+    <AssemblyName>Fuzzy</AssemblyName>
+    <RootNamespace>Fuzzy</RootNamespace>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>0.1.0</Version>
+    <Authors>Oleg Sych</Authors>
+    <Company />
+    <Description />
+    <RepositoryUrl></RepositoryUrl>
+    <PackageProjectUrl>https://github.com/olegsych/fuzzy</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/olegsych/fuzzy/blob/master/LICENSE</PackageLicenseUrl>
+  </PropertyGroup>
+</Project>
