@@ -6,13 +6,10 @@ namespace Fuzzy
     public class RandomFuzzTest
     {
         readonly IFuzz sut;
-       
+
         readonly int seed = new Random().Next();
 
-        public RandomFuzzTest()
-        {
-            sut = new RandomFuzz(seed);
-        }
+        public RandomFuzzTest() => sut = new RandomFuzz(seed);
 
         public class Consrtuctor : RandomFuzzTest
         {
