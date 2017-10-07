@@ -2,30 +2,24 @@
 
 namespace Fuzzy
 {
-    public struct Range
+    public abstract class Range<TRange> where TRange : Range<TRange>, new()
     {
-        readonly int? min;
-        readonly int? max;
-
-        Range(int? min, int? max)
-        {
-            this.min = min;
-            this.max = max;
-        }
+        int? min;
+        int? max;
 
         public int Maximum => max ?? 13;
 
         public int Minimum => min ?? 5;
 
-        public static Range Between(int min, int max)
+        public static TRange Between(int minimum, int maximum)
         {
-            if (min > max)
-                throw new ArgumentException($"Minimum {min} is larger than maximum {max}.");
-            return new Range(min, max);
+            if (minimum > maximum)
+                throw new ArgumentException($"Minimum {minimum} is larger than maximum {maximum}.");
+            return new TRange { min = minimum, max = maximum };
         }
 
-        public static Range Min(int min) => new Range(min, default);
+        public static TRange Min(int value) => new TRange { min = value};
 
-        public static Range Max(int max) => new Range(default, max);
+        public static TRange Max(int value) => new TRange { max = value };
     }
 }

@@ -17,7 +17,7 @@ namespace Fuzzy
             [Fact]
             public void ReturnsCountInitializedWithGivenMinimumAndMaximumValues()
             {
-                var sut = Range.Between(min, max);
+                var sut = TestRange.Between(min, max);
                 Assert.Equal(min, sut.Minimum);
                 Assert.Equal(max, sut.Maximum);
             }
@@ -25,7 +25,7 @@ namespace Fuzzy
             [Fact]
             public void ThrowsDescriptiveExceptionWhenMaxIsLessThanMin()
             {
-                var e = Assert.Throws<ArgumentException>(() => Range.Between(min, min - 1));
+                var e = Assert.Throws<ArgumentException>(() => TestRange.Between(min, min - 1));
                 Assert.Contains(min.ToString(), e.Message);
                 Assert.Contains((min - 1).ToString(), e.Message);
             }
@@ -38,18 +38,8 @@ namespace Fuzzy
             [Fact]
             public void ReturnsCountInitializedWithGivenMaximumValue()
             {
-                var sut = Range.Max(max);
+                var sut = TestRange.Max(max);
                 Assert.Equal(max, sut.Maximum);
-            }
-        }
-
-        public class Maximum : RangeTest
-        {
-            [Fact]
-            public void DefaultsToValueAppropriateForCollections()
-            {
-                Range sut = default;
-                Assert.Equal(13, sut.Maximum);
             }
         }
 
@@ -60,19 +50,11 @@ namespace Fuzzy
             [Fact]
             public void ReturnsCountInitializedWithGivenMinimumValue()
             {
-                var sut = Range.Min(min);
+                var sut = TestRange.Min(min);
                 Assert.Equal(min, sut.Minimum);
             }
         }
 
-        public class Minimum : RangeTest
-        {
-            [Fact]
-            public void DefaultsToValueAppropriateForCollections()
-            {
-                Range sut = default;
-                Assert.Equal(5, sut.Minimum);
-            }
-        }
+        sealed class TestRange : Range<TestRange> { }
     }
 }
