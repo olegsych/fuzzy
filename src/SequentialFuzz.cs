@@ -2,10 +2,10 @@
 {
     public class SequentialFuzz : IFuzz
     {
-        int seed;
+        int current;
 
-        public SequentialFuzz(int seed = default) => this.seed = seed;
+        public SequentialFuzz(int seed = default) => current = seed;
 
-        public int Int32() => ++seed;
+        public int Int32() => ++current;
     }
 }
