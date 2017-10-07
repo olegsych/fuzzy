@@ -4,6 +4,7 @@
     <AssemblyName>Fuzzy</AssemblyName>
     <RootNamespace>Fuzzy</RootNamespace>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <LangVersion>latest</LangVersion>
     <Version>0.1.0</Version>
     <Authors>Oleg Sych</Authors>
     <Company />
