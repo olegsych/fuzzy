@@ -15,7 +15,7 @@ namespace Fuzzy
             public Between() => max = min + random.Next() % 10;
 
             [Fact]
-            public void ReturnsCountInitializedWithGivenMinimumAndMaximumValues()
+            public void ReturnsRangeInitializedWithGivenMinimumAndMaximumValues()
             {
                 var sut = TestRange.Between(min, max);
                 Assert.Equal(min, sut.Minimum);
@@ -36,10 +36,17 @@ namespace Fuzzy
             readonly int max = random.Next();
 
             [Fact]
-            public void ReturnsCountInitializedWithGivenMaximumValue()
+            public void ReturnsRangeInitializedWithGivenMaximumValue()
             {
                 var sut = TestRange.Max(max);
                 Assert.Equal(max, sut.Maximum);
+            }
+
+            [Fact]
+            public void ReturnsRangeWithMinimumValueLessThanGivenMaximum()
+            {
+                var sut = TestRange.Max(2);
+                Assert.True(sut.Minimum < sut.Maximum);
             }
         }
 
@@ -48,10 +55,17 @@ namespace Fuzzy
             readonly int min = random.Next();
 
             [Fact]
-            public void ReturnsCountInitializedWithGivenMinimumValue()
+            public void ReturnsRangeInitializedWithGivenMinimumValue()
             {
                 var sut = TestRange.Min(min);
                 Assert.Equal(min, sut.Minimum);
+            }
+
+            [Fact]
+            public void ReturnsRangeWithMaximumGreaterThanGivenMinimum()
+            {
+                var sut = TestRange.Min(14);
+                Assert.True(sut.Minimum < sut.Maximum);
             }
         }
 

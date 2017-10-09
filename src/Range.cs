@@ -26,13 +26,18 @@ namespace Fuzzy
             return range;
         }
 
-        public static TRange Min(int value)
+        public static TRange Min(int min)
         {
             var range = new TRange();
-            range.Initialize(value, default);
+            range.Initialize(min, min + 1);
             return range;
         }
 
-        public static TRange Max(int value) => new TRange { max = value };
+        public static TRange Max(int max)
+        {
+            var range = new TRange();
+            range.Initialize(max - 1, max);
+            return range;
+        }
     }
 }
