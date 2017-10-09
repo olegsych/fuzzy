@@ -2,6 +2,6 @@
 {
     public class LengthTest
     {
-        readonly NaturalRange sut = new Length();
+        readonly NaturalRange<Length> sut = new Length();
     }
 }

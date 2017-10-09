@@ -5,8 +5,6 @@ namespace Fuzzy
 {
     public class NaturalRangeTest
     {
-        readonly NaturalRange sut = NaturalRange.Min(42);
-
         static readonly Random random = new Random();
 
         public class Between : NaturalRangeTest
@@ -16,7 +14,7 @@ namespace Fuzzy
             [Fact]
             public void ThrowsDescriptiveExceptionWhenMinIsLessThan0()
             {
-                Assert.Throws<ArgumentOutOfRangeException>(() => NaturalRange.Between(-1, max));
+                Assert.Throws<ArgumentOutOfRangeException>(() => TestRange.Between(-1, max));
             }
         }
 
@@ -25,8 +23,10 @@ namespace Fuzzy
             [Fact]
             public void ThrowsDescriptiveExceptionWhenValueIsLessThan0()
             {
-                Assert.Throws<ArgumentOutOfRangeException>(() => NaturalRange.Min(-1));
+                Assert.Throws<ArgumentOutOfRangeException>(() => TestRange.Min(-1));
             }
         }
+
+        class TestRange : NaturalRange<TestRange> {}
     }
 }

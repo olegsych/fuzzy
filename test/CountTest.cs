@@ -2,6 +2,6 @@
 {
     public class CountTest
     {
-        readonly NaturalRange sut = new Count();
+        readonly NaturalRange<Count> sut = new Count();
     }
 }
