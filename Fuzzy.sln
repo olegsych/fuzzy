@@ -1,18 +1,23 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "src", "src\src.csproj", "{3DE1FECC-02B8-43B5-81DF-2D979816C145}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "test", "test\test.csproj", "{BF862D0F-7C4C-456B-BE96-5EF10AE4D623}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DC6A0333-3329-4A80-AFF7-543A8BA62089}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_", "_", "{DC6A0333-3329-4A80-AFF7-543A8BA62089}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
+		.gitmodules = .gitmodules
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "modules", "modules", "{A8CDD6C8-B891-4792-9C98-5545BCA83B8D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inspector", "modules\inspector\src\Inspector.csproj", "{573B8435-1124-48EC-A9E5-79ACBDD5ABC0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,9 +33,16 @@ Global
 		{BF862D0F-7C4C-456B-BE96-5EF10AE4D623}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF862D0F-7C4C-456B-BE96-5EF10AE4D623}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF862D0F-7C4C-456B-BE96-5EF10AE4D623}.Release|Any CPU.Build.0 = Release|Any CPU
+		{573B8435-1124-48EC-A9E5-79ACBDD5ABC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{573B8435-1124-48EC-A9E5-79ACBDD5ABC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{573B8435-1124-48EC-A9E5-79ACBDD5ABC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{573B8435-1124-48EC-A9E5-79ACBDD5ABC0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{573B8435-1124-48EC-A9E5-79ACBDD5ABC0} = {A8CDD6C8-B891-4792-9C98-5545BCA83B8D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {82E45EF4-33CC-4D7E-96E1-8381C347FEEF}

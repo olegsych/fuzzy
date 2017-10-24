@@ -1,0 +1,3 @@
+[submodule "modules/inspector"]
+	path = modules/inspector
+	url = https://github.com/olegsych/inspector.git
