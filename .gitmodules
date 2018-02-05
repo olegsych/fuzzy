@@ -1,3 +1,6 @@
 [submodule "modules/inspector"]
 	path = modules/inspector
 	url = https://github.com/olegsych/inspector.git
+[submodule "modules/csharp.editorconfig"]
+	path = modules/csharp.editorconfig
+	url = https://github.com/olegsych/csharp.editorconfig.git
