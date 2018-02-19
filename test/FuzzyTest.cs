@@ -27,6 +27,12 @@ namespace Fuzzy
                 var actual = Assert.IsType<ArgumentNullException>(thrown.InnerException);
                 Assert.Equal(constructor.Parameter<IFuzz>().Name, actual.ParamName);
             }
+
+            [Fact]
+            public void InitializesFuzzFieldWithGivenArgument()
+            {
+                Assert.Same(fuzz, sut.Field<IFuzz>().Value);
+            }
         }
 
         public class ImplicitTypeConversionOperator : FuzzyTest

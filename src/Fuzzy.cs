@@ -8,8 +8,7 @@ namespace Fuzzy
 
         public Fuzzy(IFuzz fuzz)
         {
-            if (fuzz == null)
-                throw new ArgumentNullException(nameof(fuzz));
+            this.fuzz = fuzz ?? throw new ArgumentNullException(nameof(fuzz));
         }
 
         public abstract T New();
