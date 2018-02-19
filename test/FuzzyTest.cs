@@ -13,9 +13,8 @@ namespace Fuzzy
 
         // Constructor parameters
         readonly IFuzz fuzz = Substitute.For<IFuzz>();
-        readonly Func<IFuzz, TestClass> factory = Substitute.For<Func<IFuzz, TestClass>>();
 
-        public FuzzyTest() => sut = new Fuzzy<TestClass>(fuzz, factory);
+        public FuzzyTest() => sut = Substitute.ForPartsOf<Fuzzy<TestClass>>(fuzz);
 
         public class Constructor : FuzzyTest
         {
@@ -24,18 +23,26 @@ namespace Fuzzy
             [Fact]
             public void ThrowsDescriptiveExceptionWhenFuzzIsNullToFailFast()
             {
-                var thrown = Assert.Throws<ArgumentNullException>(() => new Fuzzy<TestClass>(null, factory));
-                Assert.Equal(constructor.Parameter<IFuzz>().Name, thrown.ParamName);
-            }
-
-            [Fact]
-            public void ThrowsDescriptiveExceptionWhenFactoryIsNullToFailFast()
-            {
-                var thrown = Assert.Throws<ArgumentNullException>(() => new Fuzzy<TestClass>(fuzz, null));
-                Assert.Equal(constructor.Parameter<Func<IFuzz, TestClass>>().Name, thrown.ParamName);
+                var thrown = Assert.Throws<TargetInvocationException>(() => Substitute.ForPartsOf<Fuzzy<TestClass>>(default(IFuzz)));
+                var actual = Assert.IsType<ArgumentNullException>(thrown.InnerException);
+                Assert.Equal(constructor.Parameter<IFuzz>().Name, actual.ParamName);
             }
         }
 
-        class TestClass {}
+        public class ImplicitTypeConversionOperator : FuzzyTest
+        {
+            [Fact]
+            public void ReturnsInstanceCreatedByFactory()
+            {
+                var expected = new TestClass();
+                sut.New().Returns(expected);
+
+                TestClass actual = sut;
+
+                Assert.Same(expected, actual);
+            }
+        }
+
+        public class TestClass {}
     }
 }

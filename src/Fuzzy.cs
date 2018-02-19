@@ -2,15 +2,21 @@
 
 namespace Fuzzy
 {
-    public class Fuzzy<T>
+    public abstract class Fuzzy<T>
     {
         readonly IFuzz fuzz;
-        readonly Func<IFuzz, T> factory;
 
-        public Fuzzy(IFuzz fuzz, Func<IFuzz, T> factory)
+        public Fuzzy(IFuzz fuzz)
         {
-            this.fuzz = fuzz ?? throw new ArgumentNullException(nameof(fuzz));
-            this.factory = factory ?? throw new ArgumentNullException(nameof(factory));
+            if (fuzz == null)
+                throw new ArgumentNullException(nameof(fuzz));
+        }
+
+        public abstract T New();
+
+        public static implicit operator T(Fuzzy<T> fuzzy)
+        {
+            return fuzzy.New();
         }
     }
 }
