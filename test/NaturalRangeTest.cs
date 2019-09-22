@@ -12,19 +12,15 @@ namespace Fuzzy
             readonly int max = Math.Abs(random.Next());
 
             [Fact]
-            public void ThrowsDescriptiveExceptionWhenMinIsLessThan0()
-            {
+            public void ThrowsDescriptiveExceptionWhenMinIsLessThan0() =>
                 Assert.Throws<ArgumentOutOfRangeException>(() => TestRange.Between(-1, max));
-            }
         }
 
         public class Min : NaturalRangeTest
         {
             [Fact]
-            public void ThrowsDescriptiveExceptionWhenValueIsLessThan0()
-            {
+            public void ThrowsDescriptiveExceptionWhenValueIsLessThan0() =>
                 Assert.Throws<ArgumentOutOfRangeException>(() => TestRange.Min(-1));
-            }
         }
 
         class TestRange : NaturalRange<TestRange> {}

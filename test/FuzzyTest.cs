@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection;
 using Inspector;
 using NSubstitute;
+using NSubstitute.Core;
 using Xunit;
 
 namespace Fuzzy
@@ -27,10 +28,8 @@ namespace Fuzzy
             }
 
             [Fact]
-            public void InitializesFuzzFieldWithGivenArgument()
-            {
+            public void InitializesFuzzFieldWithGivenArgument() =>
                 Assert.Same(fuzz, sut.Field<IFuzz>().Value);
-            }
         }
 
         public class ImplicitTypeConversionOperator : FuzzyTest
@@ -39,7 +38,7 @@ namespace Fuzzy
             public void ReturnsInstanceCreatedByFactory()
             {
                 var expected = new TestClass();
-                sut.New().Returns(expected);
+                ConfiguredCall arrange = sut.New().Returns(expected);
 
                 TestClass actual = sut;
 
