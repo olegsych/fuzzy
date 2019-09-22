@@ -18,14 +18,12 @@ namespace Fuzzy
 
         public class Constructor : FuzzyTest
         {
-            readonly ConstructorInfo constructor = typeof(Fuzzy<TestClass>).Constructors().Single();
-
             [Fact]
             public void ThrowsDescriptiveExceptionWhenFuzzIsNullToFailFast()
             {
                 var thrown = Assert.Throws<TargetInvocationException>(() => Substitute.ForPartsOf<Fuzzy<TestClass>>(default(IFuzz)));
                 var actual = Assert.IsType<ArgumentNullException>(thrown.InnerException);
-                Assert.Equal(constructor.Parameter<IFuzz>().Name, actual.ParamName);
+                Assert.Equal(sut.DeclaredBy<Fuzzy<TestClass>>().Constructor().Parameter<IFuzz>().Name, actual.ParamName);
             }
 
             [Fact]
