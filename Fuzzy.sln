@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2005
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "src", "src\src.csproj", "{3DE1FECC-02B8-43B5-81DF-2D979816C145}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fuzzy", "src\Fuzzy.csproj", "{3DE1FECC-02B8-43B5-81DF-2D979816C145}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "test", "test\test.csproj", "{BF862D0F-7C4C-456B-BE96-5EF10AE4D623}"
 EndProject
@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_", "_", "{DC6A0333-3329-4A
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
 		.gitmodules = .gitmodules
+		fuzzy.snk = fuzzy.snk
+		LICENSE = LICENSE
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "modules", "modules", "{A8CDD6C8-B891-4792-9C98-5545BCA83B8D}"
