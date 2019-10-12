@@ -23,7 +23,7 @@
             "type": "process",
             "args": [
                 "test",
-                "${workspaceFolder}/test/Tests.csproj",
+                "${workspaceFolder}/Fuzzy.sln",
                 "--nologo"
             ],
             "problemMatcher": "$msCompile",

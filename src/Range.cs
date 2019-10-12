@@ -26,6 +26,8 @@ namespace Fuzzy
             return range;
         }
 
+        public static TRange Exactly(int value) => throw new NotImplementedException();
+
         public static TRange Min(int min)
         {
             var range = new TRange();
