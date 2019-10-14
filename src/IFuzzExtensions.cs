@@ -5,15 +5,50 @@ namespace Fuzzy
 {
     public static class IFuzzExtensions
     {
-        public static T[] Array<T>(this IFuzz fuzzy, Func<T> createElement, Length length = default) => throw new NotImplementedException();
-        public static T[] Array<T>(this IFuzz fuzzy, IEnumerable<T> elements, Length length = default) => throw new NotImplementedException();
+        public static Fuzzy<T[]> Array<T>(this IFuzz fuzzy, Func<T> createElement) => throw new NotImplementedException();
+        public static Fuzzy<T[]> Array<T>(this IFuzz fuzzy, Func<Fuzzy<T>> createElement) => throw new NotImplementedException();
 
-        public static DateTimeOffset DateTimeOffset(this IFuzz fuzzy) => throw new NotImplementedException();
-        public static DateTimeOffset DateTimeOffset(this IFuzz fuzzy, IBuilder<DateTimeOffset> builder) => throw new NotImplementedException();
+        public static Fuzzy<T[]> Array<T>(this IFuzz fuzzy, Func<T> createElement, Length length) => throw new NotImplementedException();
+        public static Fuzzy<T[]> Array<T>(this IFuzz fuzzy, Func<Fuzzy<T>> createElement, Length length) => throw new NotImplementedException();
 
-        public static string String(this IFuzz fuzzy) => throw new NotImplementedException();
-        public static string String(this IFuzz fuzzy, Length length) => throw new NotImplementedException();
-        public static string String(this IFuzz fuzzy, IBuilder<string> builder) => throw new NotImplementedException();
-        public static string String(this IFuzz fuzzy, IBuilder<string> builder, Length length) => throw new NotImplementedException();
+        public static Fuzzy<T[]> Array<T>(this IFuzz fuzzy, IEnumerable<T> elements, Length length) => throw new NotImplementedException();
+
+        public static bool Boolean(this IFuzz fuzzy) => throw new NotImplementedException();
+
+        public static Fuzzy<byte> Byte(this IFuzz fuzzy) => throw new NotImplementedException();
+
+        public static Fuzzy<char> Char(this IFuzz fuzzy) => throw new NotImplementedException();
+
+        public static Fuzzy<DateTime> DateTime(this IFuzz fuzzy) => throw new NotImplementedException();
+
+        public static Fuzzy<DateTimeOffset> DateTimeOffset(this IFuzz fuzzy) => throw new NotImplementedException();
+
+        public static Fuzzy<decimal> Decimal(this IFuzz fuzzy) => throw new NotImplementedException();
+
+        public static Fuzzy<double> Double(this IFuzz fuzzy) => throw new NotImplementedException();
+
+        public static Fuzzy<T> Enum<T>(this IFuzz fuzzy) where T : Enum => throw new NotImplementedException();
+
+        public static Fuzzy<short> Int16(this IFuzz fuzzy) => throw new NotImplementedException();
+
+        public static Fuzzy<long> Int64(this IFuzz fuzzy) => throw new NotImplementedException();
+
+        public static Fuzzy<sbyte> SByte(this IFuzz fuzzy) => throw new NotImplementedException();
+
+        public static Fuzzy<float> Single(this IFuzz fuzzy) => throw new NotImplementedException();
+
+        public static Fuzzy<string> String(this IFuzz fuzzy) => throw new NotImplementedException();
+        public static Fuzzy<string> String(this IFuzz fuzzy, Length length) => throw new NotImplementedException();
+        public static Fuzzy<string> Format(this Fuzzy<string> s, string format) => throw new NotImplementedException();
+
+        public static Fuzzy<TimeSpan> TimeSpan(this IFuzz fuzzy) => throw new NotImplementedException();
+
+        public static Fuzzy<ushort> UInt16(this IFuzz fuzzy) => throw new NotImplementedException();
+
+        public static Fuzzy<uint> UInt32(this IFuzz fuzzy) => throw new NotImplementedException();
+
+        public static Fuzzy<ulong> UInt64(this IFuzz fuzzy) => throw new NotImplementedException();
+
+        public static Fuzzy<Uri> Uri(this IFuzz fuzzy) => throw new NotImplementedException();
     }
 }

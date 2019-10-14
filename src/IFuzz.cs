@@ -2,6 +2,6 @@
 {
     public interface IFuzz
     {
-        int Int32();
+        Fuzzy<int> Int32();
     }
 }

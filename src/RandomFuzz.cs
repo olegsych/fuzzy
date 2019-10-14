@@ -8,6 +8,6 @@ namespace Fuzzy
 
         public RandomFuzz(int seed = 0) => random = new Random(seed);
 
-        public int Int32() => random.Next();
+        public Fuzzy<int> Int32() => throw new NotImplementedException();
     }
 }

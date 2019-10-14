@@ -1,13 +1,14 @@
-﻿using Xunit;
+﻿using Fuzzy;
+using Xunit;
 
-namespace Fuzzy
+namespace Example
 {
-    public class Int32Scenario
+    public class Int32Example
     {
         static readonly IFuzz fuzzy = new SequentialFuzz();
 
         [Fact]
-        public void GetFuzzyIntegers() {
+        public void GetValue() {
             int number;
             number = fuzzy.Int32();
             number = fuzzy.Int32().LessThan(42);
@@ -15,6 +16,11 @@ namespace Fuzzy
             number = fuzzy.Int32().Between(41, 43);
             number = fuzzy.Int32().GreaterThan(41).LessThan(43);
             number = fuzzy.Int32().Not(42);
+        }
+
+        [Fact]
+        public void GetArray() {
+            int[] numbers = fuzzy.Array(fuzzy.Int32);
         }
     }
 }

@@ -1,9 +1,10 @@
 ﻿using System;
+using Fuzzy;
 using Xunit;
 
-namespace Fuzzy
+namespace Example
 {
-    public class ArrayScenario
+    public class ArrayExample
     {
         static readonly IFuzz fuzzy = new SequentialFuzz();
 

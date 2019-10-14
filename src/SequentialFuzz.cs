@@ -1,4 +1,6 @@
-﻿namespace Fuzzy
+﻿using System;
+
+namespace Fuzzy
 {
     public class SequentialFuzz : IFuzz
     {
@@ -6,6 +8,6 @@
 
         public SequentialFuzz(int seed = default) => current = seed;
 
-        public int Int32() => ++current;
+        public Fuzzy<int> Int32() => throw new NotImplementedException();
     }
 }
