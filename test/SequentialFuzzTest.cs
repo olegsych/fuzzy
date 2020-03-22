@@ -18,17 +18,17 @@ namespace Fuzzy
             {
                 var expected = new SequentialFuzz(0);
                 var actual = new SequentialFuzz();
-                Assert.Equal(expected.Int32(), actual.Int32());
+                Assert.Equal(expected.Next(), actual.Next());
             }
         }
 
-        public class Int32 : SequentialFuzzTest
+        public class Next : SequentialFuzzTest
         {
             [Fact]
             public void ReturnIncrementedSeedValue()
             {
-                Assert.Equal(seed + 1, sut.Int32());
-                Assert.Equal(seed + 2, sut.Int32());
+                Assert.Equal(seed + 1, sut.Next());
+                Assert.Equal(seed + 2, sut.Next());
             }
         }
     }
