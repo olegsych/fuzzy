@@ -18,17 +18,17 @@ namespace Fuzzy
             {
                 var expected = new RandomFuzz(0);
                 var actual = new RandomFuzz();
-                Assert.Equal(expected.Int32(), actual.Int32());
+                Assert.Equal(expected.Next(), actual.Next());
             }
         }
 
-        public class Int32 : RandomFuzzTest
+        public class Next : RandomFuzzTest
         {
             [Fact]
             public void ReturnsNextRandomValue()
             {
                 var expected = new Random(seed);
-                Assert.Equal(expected.Next(), sut.Int32());
+                Assert.Equal(expected.Next(), sut.Next());
             }
         }
     }
