@@ -31,6 +31,8 @@ namespace Fuzzy
 
         public static Fuzzy<short> Int16(this IFuzz fuzzy) => throw new NotImplementedException();
 
+        public static Fuzzy<int> Int32(this IFuzz fuzzy) => throw new NotImplementedException();
+
         public static Fuzzy<long> Int64(this IFuzz fuzzy) => throw new NotImplementedException();
 
         public static Fuzzy<sbyte> SByte(this IFuzz fuzzy) => throw new NotImplementedException();

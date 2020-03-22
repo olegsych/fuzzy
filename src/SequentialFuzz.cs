@@ -8,6 +8,6 @@ namespace Fuzzy
 
         public SequentialFuzz(int seed = default) => current = seed;
 
-        public Fuzzy<int> Int32() => throw new NotImplementedException();
+        public int Next() => throw new NotImplementedException();
     }
 }
