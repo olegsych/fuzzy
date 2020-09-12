@@ -8,18 +8,22 @@ namespace Fuzzy
         static readonly IFuzz fuzzy = new SequentialFuzz();
 
         [Fact]
-        public void GetValue() {
-            TimeSpan d;
-            d = fuzzy.TimeSpan();
-            d = fuzzy.TimeSpan().GreaterThan(TimeSpan.FromMinutes(2));
-            d = fuzzy.TimeSpan().LessThan(TimeSpan.FromMinutes(5));
-            d = fuzzy.TimeSpan().Between(TimeSpan.FromMinutes(2), TimeSpan.FromMinutes(5));
-            d = fuzzy.TimeSpan().Not(TimeSpan.FromMinutes(2));
+        public void GetFuzzyValue() {
+            TimeSpan value = fuzzy.TimeSpan();
         }
 
         [Fact]
-        public void GetArray() {
-            TimeSpan[] d = fuzzy.Array(fuzzy.TimeSpan);
+        public void GetArrayOfFuzzyValues() {
+            TimeSpan[] values = fuzzy.Array(fuzzy.TimeSpan);
+        }
+
+        [Fact(Skip = Reason.NotImplemented)]
+        public void ConstrainFuzzyValue() {
+            TimeSpan value;
+            value = fuzzy.TimeSpan().GreaterThan(TimeSpan.FromMinutes(2));
+            value = fuzzy.TimeSpan().LessThan(TimeSpan.FromMinutes(5));
+            value = fuzzy.TimeSpan().Between(TimeSpan.FromMinutes(2), TimeSpan.FromMinutes(5));
+            value = fuzzy.TimeSpan().Not(TimeSpan.FromMinutes(2));
         }
     }
 }
