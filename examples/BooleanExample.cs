@@ -8,12 +8,12 @@ namespace Fuzzy
 
         [Fact]
         public void GetFuzzyBoolean() {
-            bool b = fuzzy.Boolean();
+            bool value = fuzzy.Boolean();
         }
 
         [Fact]
         public void GetArrayOfFuzzyBooleanValues() {
-            bool[] bs = fuzzy.Array(fuzzy.Boolean);
+            bool[] values = fuzzy.Array(fuzzy.Boolean);
         }
     }
 }
