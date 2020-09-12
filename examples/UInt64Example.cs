@@ -7,18 +7,22 @@ namespace Fuzzy
         static readonly IFuzz fuzzy = new SequentialFuzz();
 
         [Fact]
-        public void GetValue() {
-            ulong d;
-            d = fuzzy.UInt64();
-            d = fuzzy.UInt64().GreaterThan(2u);
-            d = fuzzy.UInt64().LessThan(5u);
-            d = fuzzy.UInt64().Between(2u, 5u);
-            d = fuzzy.UInt64().Not(4u);
+        public void GetFuzzyValue() {
+            ulong value = fuzzy.UInt64();
         }
 
         [Fact]
-        public void GetArray() {
-            ulong[] d = fuzzy.Array(fuzzy.UInt64);
+        public void GetArrayOfFuzzyValues() {
+            ulong[] values = fuzzy.Array(fuzzy.UInt64);
+        }
+
+        [Fact(Skip = Reason.NotImplemented)]
+        public void ConstrainFuzzyValue() {
+            ulong value;
+            value = fuzzy.UInt64().GreaterThan(2u);
+            value = fuzzy.UInt64().LessThan(5u);
+            value = fuzzy.UInt64().Between(2u, 5u);
+            value = fuzzy.UInt64().Not(4u);
         }
     }
 }
