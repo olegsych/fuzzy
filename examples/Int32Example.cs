@@ -1,4 +1,4 @@
-﻿using Fuzzy;
+using Fuzzy;
 using Xunit;
 
 namespace Example
@@ -9,18 +9,22 @@ namespace Example
 
         [Fact]
         public void GetValue() {
-            int number;
-            number = fuzzy.Int32();
-            number = fuzzy.Int32().LessThan(42);
-            number = fuzzy.Int32().GreaterThan(42);
-            number = fuzzy.Int32().Between(41, 43);
-            number = fuzzy.Int32().GreaterThan(41).LessThan(43);
-            number = fuzzy.Int32().Not(42);
+            int number = fuzzy.Int32();
         }
 
         [Fact]
         public void GetArray() {
             int[] numbers = fuzzy.Array(fuzzy.Int32);
+        }
+
+        [Fact(Skip = "Not Implemented")]
+        public void GetValueFromGivenRange() {
+            int number;
+            number = fuzzy.Int32().LessThan(42);
+            number = fuzzy.Int32().GreaterThan(42);
+            number = fuzzy.Int32().Between(41, 43);
+            number = fuzzy.Int32().GreaterThan(41).LessThan(43);
+            number = fuzzy.Int32().Not(42);
         }
     }
 }
