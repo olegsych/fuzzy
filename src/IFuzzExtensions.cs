@@ -1,9 +1,11 @@
-﻿using System;
+using System;
 
 namespace Fuzzy
 {
     public static class IFuzzExtensions
     {
+        public static Fuzzy<bool> Boolean(this IFuzz fuzzy) => throw new NotImplementedException();
+
         public static Fuzzy<byte> Byte(this IFuzz fuzzy) => throw new NotImplementedException();
 
         public static Fuzzy<char> Char(this IFuzz fuzzy) => throw new NotImplementedException();
