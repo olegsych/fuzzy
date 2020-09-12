@@ -8,7 +8,7 @@ namespace Fuzzy
     {
         public static Fuzzy<bool> Boolean(this IFuzz fuzzy) => new FuzzyBoolean(fuzzy);
 
-        public static Fuzzy<byte> Byte(this IFuzz fuzzy) => throw new NotImplementedException();
+        public static Fuzzy<byte> Byte(this IFuzz fuzzy) => new FuzzyByte(fuzzy);
 
         public static Fuzzy<char> Char(this IFuzz fuzzy) => throw new NotImplementedException();
 

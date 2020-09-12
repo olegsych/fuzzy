@@ -20,6 +20,15 @@ namespace Fuzzy
             }
         }
 
+        public class Byte: IFuzzExtensionsTest
+        {
+            [Fact]
+            public void ReturnsFuzzyByte() {
+                var actual = Assert.IsType<FuzzyByte>(fuzzy.Byte());
+                Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
+            }
+        }
+
         public class Int32: IFuzzExtensionsTest
         {
             [Fact]
