@@ -6,7 +6,7 @@ namespace Fuzzy
 {
     public static class IFuzzExtensions
     {
-        public static Fuzzy<bool> Boolean(this IFuzz fuzzy) => throw new NotImplementedException();
+        public static Fuzzy<bool> Boolean(this IFuzz fuzzy) => new FuzzyBoolean(fuzzy);
 
         public static Fuzzy<byte> Byte(this IFuzz fuzzy) => throw new NotImplementedException();
 
