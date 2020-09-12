@@ -7,18 +7,22 @@ namespace Fuzzy
         static readonly IFuzz fuzzy = new SequentialFuzz();
 
         [Fact]
-        public void GetValue() {
-            double d;
-            d = fuzzy.Double();
-            d = fuzzy.Double().GreaterThan(.2d);
-            d = fuzzy.Double().LessThan(.5d);
-            d = fuzzy.Double().Between(.2d, .5d);
-            d = fuzzy.Double().Not(.4d);
+        public void GetFuzzyValue() {
+            double d = fuzzy.Double();
         }
 
         [Fact]
-        public void GetArray() {
+        public void GetArrayOfFuzzyValues() {
             double[] d = fuzzy.Array(fuzzy.Double);
+        }
+
+        [Fact(Skip = Reason.NotImplemented)]
+        public void ConstrainFuzzyValue() {
+            double value;
+            value = fuzzy.Double().GreaterThan(.2d);
+            value = fuzzy.Double().LessThan(.5d);
+            value = fuzzy.Double().Between(.2d, .5d);
+            value = fuzzy.Double().Not(.4d);
         }
     }
 }
