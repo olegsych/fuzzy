@@ -11,11 +11,6 @@ namespace Fuzzy
             short value = fuzzy.Int16();
         }
 
-        [Fact]
-        public void GetArrayOfFuzzyValues() {
-            short[] d = fuzzy.Array(fuzzy.Int16);
-        }
-
         [Fact(Skip = Reason.NotImplemented)]
         public void ConstrainFuzzyValue() {
             short value;

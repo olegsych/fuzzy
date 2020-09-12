@@ -12,11 +12,6 @@ namespace Fuzzy
             TypeCode value = fuzzy.Enum<TypeCode>();
         }
 
-        [Fact]
-        public void GetArrayOfFuzzyValues() {
-            TypeCode[] values = fuzzy.Array(fuzzy.Enum<TypeCode>);
-        }
-
         [Fact(Skip = Reason.NotImplemented)]
         public void ControlFuzzyValue() {
             TypeCode value;

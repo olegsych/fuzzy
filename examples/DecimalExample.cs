@@ -11,11 +11,6 @@ namespace Fuzzy
             decimal value = fuzzy.Decimal();
         }
 
-        [Fact]
-        public void GetArrayOfFuzzyValues() {
-            decimal[] value = fuzzy.Array(fuzzy.Decimal);
-        }
-
         [Fact(Skip = Reason.NotImplemented)]
         public void ConstrainFuzzyValue() {
             decimal value;

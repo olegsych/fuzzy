@@ -11,11 +11,6 @@ namespace Fuzzy
             float value = fuzzy.Single();
         }
 
-        [Fact]
-        public void GetArrayOfFuzzyValues() {
-            float[] values = fuzzy.Array(fuzzy.Single);
-        }
-
         [Fact(Skip = Reason.NotImplemented)]
         public void ConstrainFuzzyValue() {
             float value;

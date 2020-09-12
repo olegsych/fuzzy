@@ -11,11 +11,6 @@ namespace Fuzzy
             long value = fuzzy.Int64();
         }
 
-        [Fact]
-        public void GetArrayOfFuzzyValues() {
-            long[] values = fuzzy.Array(fuzzy.Int64);
-        }
-
         [Fact(Skip = Reason.NotImplemented)]
         public void ConstrainFuzzyValue() {
             long value;

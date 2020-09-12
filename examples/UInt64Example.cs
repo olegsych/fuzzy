@@ -11,11 +11,6 @@ namespace Fuzzy
             ulong value = fuzzy.UInt64();
         }
 
-        [Fact]
-        public void GetArrayOfFuzzyValues() {
-            ulong[] values = fuzzy.Array(fuzzy.UInt64);
-        }
-
         [Fact(Skip = Reason.NotImplemented)]
         public void ConstrainFuzzyValue() {
             ulong value;

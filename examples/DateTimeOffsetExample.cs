@@ -12,11 +12,6 @@ namespace Fuzzy
             DateTimeOffset value = fuzzy.DateTimeOffset();
         }
 
-        [Fact]
-        public void GetArrayOfFuzzyValues() {
-            DateTimeOffset[] values = fuzzy.Array(fuzzy.DateTimeOffset);
-        }
-
         [Fact(Skip = Reason.NotImplemented)]
         public void ConstrainFuzzyValue() {
             DateTimeOffset value;

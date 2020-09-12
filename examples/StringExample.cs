@@ -12,11 +12,6 @@ namespace Fuzzy
         }
 
         [Fact]
-        public void GetArrayOfFuzzyValues() {
-            string[] values = fuzzy.Array(fuzzy.String);
-        }
-
-        [Fact]
         public void GetFuzzyStringWithLengthConstraint() {
             string value = fuzzy.String(Length.Between(41, 43));
         }

@@ -11,10 +11,5 @@ namespace Fuzzy
         public void GetFuzzyValue() {
             Uri value = fuzzy.Uri();
         }
-
-        [Fact]
-        public void GetArrayOfFuzzyValues() {
-            Uri[] s = fuzzy.Array(fuzzy.Uri);
-        }
     }
 }

@@ -11,11 +11,6 @@ namespace Fuzzy
             int value = fuzzy.Int32();
         }
 
-        [Fact]
-        public void GetArrayOfFuzzyValues() {
-            int[] values = fuzzy.Array(fuzzy.Int32);
-        }
-
         [Fact(Skip = "Not Implemented")]
         public void ConstrainFuzzyValue() {
             int value;

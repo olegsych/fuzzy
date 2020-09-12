@@ -12,11 +12,6 @@ namespace Fuzzy
             DateTime date = fuzzy.DateTime();
         }
 
-        [Fact]
-        public void GetArrayOfFuzzyValues() {
-            DateTime[] values = fuzzy.Array(fuzzy.DateTime);
-        }
-
         [Fact(Skip = Reason.NotImplemented)]
         public void ConstrainFuzzyValue() {
             DateTime value;

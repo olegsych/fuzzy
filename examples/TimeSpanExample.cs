@@ -12,11 +12,6 @@ namespace Fuzzy
             TimeSpan value = fuzzy.TimeSpan();
         }
 
-        [Fact]
-        public void GetArrayOfFuzzyValues() {
-            TimeSpan[] values = fuzzy.Array(fuzzy.TimeSpan);
-        }
-
         [Fact(Skip = Reason.NotImplemented)]
         public void ConstrainFuzzyValue() {
             TimeSpan value;

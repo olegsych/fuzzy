@@ -11,11 +11,6 @@ namespace Fuzzy
             sbyte value = fuzzy.SByte();
         }
 
-        [Fact]
-        public void GetArrayOfFuzzyValues() {
-            sbyte[] values = fuzzy.Array(fuzzy.SByte);
-        }
-
         [Fact(Skip = Reason.NotImplemented)]
         public void ConstrainFuzzyValue() {
             sbyte value;

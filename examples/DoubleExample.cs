@@ -11,11 +11,6 @@ namespace Fuzzy
             double d = fuzzy.Double();
         }
 
-        [Fact]
-        public void GetArrayOfFuzzyValues() {
-            double[] d = fuzzy.Array(fuzzy.Double);
-        }
-
         [Fact(Skip = Reason.NotImplemented)]
         public void ConstrainFuzzyValue() {
             double value;

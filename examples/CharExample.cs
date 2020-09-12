@@ -11,11 +11,6 @@ namespace Fuzzy
             char value = fuzzy.Char();
         }
 
-        [Fact]
-        public void GetArrayOfFuzzyValues() {
-            char[] values = fuzzy.Array(fuzzy.Char);
-        }
-
         [Fact(Skip = Reason.NotImplemented)]
         public void ConstrainFuzzyValue() {
             char value;

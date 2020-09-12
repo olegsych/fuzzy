@@ -11,11 +11,6 @@ namespace Fuzzy
             ushort value = fuzzy.UInt16();
         }
 
-        [Fact]
-        public void GetArray() {
-            ushort[] values = fuzzy.Array(fuzzy.UInt16);
-        }
-
         [Fact(Skip = Reason.NotImplemented)]
         public void ConstrainFuzzyValue() {
             ushort value;
