@@ -7,17 +7,21 @@ namespace Fuzzy
         static readonly IFuzz fuzzy = new SequentialFuzz();
 
         [Fact]
-        public void GetValue() {
-            string s;
-            s = fuzzy.String();
-            s = fuzzy.String(Length.Between(41, 43));
-            s = fuzzy.String().Format("foo{0}");
-            s = fuzzy.String(Length.Between(42, 43)).Format("foo{0}");
+        public void GetFuzzyValue() {
+            string value = fuzzy.String();
         }
 
         [Fact]
-        public void GetArray() {
-            string[] s = fuzzy.Array(fuzzy.String);
+        public void GetArrayOfFuzzyValues() {
+            string[] values = fuzzy.Array(fuzzy.String);
+        }
+
+        [Fact(Skip = Reason.NotImplemented)]
+        public void ConstrainFuzzyValue() {
+            string value;
+            value = fuzzy.String(Length.Between(41, 43));
+            value = fuzzy.String().Format("foo{0}");
+            value = fuzzy.String(Length.Between(42, 43)).Format("foo{0}");
         }
     }
 }
