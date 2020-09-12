@@ -8,17 +8,17 @@ namespace Fuzzy
         static readonly IFuzz fuzzy = new SequentialFuzz();
 
         [Fact]
-        public void GetFuzzyDateTimeOffsetValues() {
+        public void GetFuzzyValue() {
             DateTimeOffset value = fuzzy.DateTimeOffset();
         }
 
         [Fact]
-        public void GetArrayOfFuzzyDateTimes() {
+        public void GetArrayOfFuzzyValues() {
             DateTimeOffset[] values = fuzzy.Array(fuzzy.DateTimeOffset);
         }
 
         [Fact(Skip = Reason.NotImplemented)]
-        public void ConstrainFuzzyValues() {
+        public void ConstrainFuzzyValue() {
             DateTimeOffset value;
             value = fuzzy.DateTimeOffset().GreaterThan(DateTimeOffset.Now);
             value = fuzzy.DateTimeOffset().LessThan(DateTimeOffset.Now);
