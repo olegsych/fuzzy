@@ -8,17 +8,21 @@ namespace Fuzzy
 
         [Fact]
         public void GetFuzzyBytes() {
-            byte b;
-            b = fuzzy.Byte();
-            b = fuzzy.Byte().GreaterThan(3);
-            b = fuzzy.Byte().LessThan(5);
-            b = fuzzy.Byte().Between(3, 5);
-            b = fuzzy.Byte().Not(4);
+            byte value = fuzzy.Byte();
         }
 
         [Fact]
         public void GetArrayOfFuzzyBytes() {
-            byte[] bytes = fuzzy.Array(fuzzy.Byte);
+            byte[] values = fuzzy.Array(fuzzy.Byte);
+        }
+
+        [Fact(Skip = Reason.NotImplemented)]
+        public void ConstrainFuzzyValue() {
+            byte value;
+            value = fuzzy.Byte().GreaterThan(3);
+            value = fuzzy.Byte().LessThan(5);
+            value = fuzzy.Byte().Between(3, 5);
+            value = fuzzy.Byte().Not(4);
         }
     }
 }
