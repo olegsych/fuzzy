@@ -10,7 +10,7 @@ namespace Fuzzy
 
         public static Fuzzy<byte> Byte(this IFuzz fuzzy) => new FuzzyByte(fuzzy);
 
-        public static Fuzzy<char> Char(this IFuzz fuzzy) => throw new NotImplementedException();
+        public static Fuzzy<char> Char(this IFuzz fuzzy) => new FuzzyChar(fuzzy);
 
         public static Fuzzy<DateTime> DateTime(this IFuzz fuzzy) => throw new NotImplementedException();
 

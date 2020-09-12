@@ -1,4 +1,3 @@
-using System;
 using Fuzzy.Implementation;
 using Inspector;
 using NSubstitute;
@@ -25,6 +24,15 @@ namespace Fuzzy
             [Fact]
             public void ReturnsFuzzyByte() {
                 var actual = Assert.IsType<FuzzyByte>(fuzzy.Byte());
+                Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
+            }
+        }
+
+        public class Char: IFuzzExtensionsTest
+        {
+            [Fact]
+            public void ReturnsFuzzyChar() {
+                var actual = Assert.IsType<FuzzyChar>(fuzzy.Char());
                 Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
             }
         }
