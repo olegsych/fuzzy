@@ -8,12 +8,12 @@ namespace Fuzzy
         static readonly IFuzz fuzzy = new SequentialFuzz();
 
         [Fact]
-        public void GetFuzzyDateTime() {
+        public void GetFuzzyValue() {
             DateTime date = fuzzy.DateTime();
         }
 
         [Fact]
-        public void GetArrayOfFuzzyDateTimes() {
+        public void GetArrayOfFuzzyValues() {
             DateTime[] values = fuzzy.Array(fuzzy.DateTime);
         }
 
