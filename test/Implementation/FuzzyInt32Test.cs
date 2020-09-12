@@ -6,15 +6,9 @@ using Xunit;
 
 namespace Fuzzy.Implementation
 {
-    public class FuzzyInt32Test
+    public class FuzzyInt32Test: FuzzyTestFixture
     {
         readonly Fuzzy<int> sut;
-
-        // Constructor parameters
-        readonly IFuzz fuzzy = Substitute.For<IFuzz>();
-
-        // Test fixture
-        readonly Random random = new Random();
 
         public FuzzyInt32Test() =>
             sut = new FuzzyInt32(fuzzy);
@@ -46,16 +40,6 @@ namespace Fuzzy.Implementation
                 int actual = sut.New();
 
                 Assert.Equal(-expected, actual);
-            }
-
-            int EvenNumber() {
-                int value = random.Next();
-                return value % 2 == 0 ? value : value + 1;
-            }
-
-            int OddNumber() {
-                int value = random.Next();
-                return value % 2 == 1 ? value : value + 1;
             }
         }
     }

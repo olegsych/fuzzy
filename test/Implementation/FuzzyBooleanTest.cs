@@ -1,4 +1,3 @@
-using System;
 using Inspector;
 using NSubstitute;
 using NSubstitute.Core;
@@ -6,15 +5,9 @@ using Xunit;
 
 namespace Fuzzy.Implementation
 {
-    public class FuzzyBooleanTest
+    public class FuzzyBooleanTest: FuzzyTestFixture
     {
         readonly Fuzzy<bool> sut;
-
-        // Constructor parameters
-        readonly IFuzz fuzzy = Substitute.For<IFuzz>();
-
-        // Test fixture
-        readonly Random random = new Random();
 
         public FuzzyBooleanTest() =>
             sut = new FuzzyBoolean(fuzzy);
@@ -37,18 +30,7 @@ namespace Fuzzy.Implementation
             [Fact]
             public void ReturnsFalseWhenNextFuzzyValueIsEven() {
                 ConfiguredCall arrange = fuzzy.Next().Returns(EvenNumber());
-
                 Assert.False(sut.New());
-            }
-
-            int EvenNumber() {
-                int value = random.Next();
-                return value % 2 == 0 ? value : value + 1;
-            }
-
-            int OddNumber() {
-                int value = random.Next();
-                return value % 2 == 1 ? value : value + 1;
             }
         }
     }
