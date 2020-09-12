@@ -5,6 +5,9 @@
     <AssemblyName>Fuzzy.Tests</AssemblyName>
     <RootNamespace>Fuzzy</RootNamespace>
     <LangVersion>latest</LangVersion>
+    <!-- https://docs.microsoft.com/en-us/dotnet/standard/library-guidance/strong-naming -->
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\Fuzzy.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
