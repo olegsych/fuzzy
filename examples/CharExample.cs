@@ -7,12 +7,12 @@ namespace Fuzzy
         static readonly IFuzz fuzzy = new SequentialFuzz();
 
         [Fact]
-        public void GetFuzzyChars() {
+        public void GetFuzzyValue() {
             char value = fuzzy.Char();
         }
 
         [Fact]
-        public void GetArrayOfFuzzyChars() {
+        public void GetArrayOfFuzzyValues() {
             char[] values = fuzzy.Array(fuzzy.Char);
         }
 
