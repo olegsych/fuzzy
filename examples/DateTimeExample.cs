@@ -9,17 +9,21 @@ namespace Fuzzy
 
         [Fact]
         public void GetFuzzyDateTime() {
-            DateTime date;
-            date = fuzzy.DateTime();
-            date = fuzzy.DateTime().GreaterThan(DateTime.Now);
-            date = fuzzy.DateTime().LessThan(DateTime.Now);
-            date = fuzzy.DateTime().Between(DateTime.Now, DateTime.Now + TimeSpan.FromDays(2));
-            date = fuzzy.DateTime().Between(DateTime.Now, TimeSpan.FromDays(2));
+            DateTime date = fuzzy.DateTime();
         }
 
         [Fact]
         public void GetArrayOfFuzzyDateTimes() {
-            DateTime[] dates = fuzzy.Array(fuzzy.DateTime);
+            DateTime[] values = fuzzy.Array(fuzzy.DateTime);
+        }
+
+        [Fact(Skip = Reason.NotImplemented)]
+        public void ConstrainFuzzyValue() {
+            DateTime value;
+            value = fuzzy.DateTime().GreaterThan(DateTime.Now);
+            value = fuzzy.DateTime().LessThan(DateTime.Now);
+            value = fuzzy.DateTime().Between(DateTime.Now, DateTime.Now + TimeSpan.FromDays(2));
+            value = fuzzy.DateTime().Between(DateTime.Now, TimeSpan.FromDays(2));
         }
     }
 }
