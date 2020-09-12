@@ -1,7 +1,6 @@
-﻿using Fuzzy;
 using Xunit;
 
-namespace Example
+namespace Fuzzy
 {
     public class BooleanExample
     {

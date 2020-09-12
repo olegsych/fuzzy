@@ -1,4 +1,4 @@
-﻿namespace Examples
+namespace Fuzzy
 {
     public class ElementExample
     {

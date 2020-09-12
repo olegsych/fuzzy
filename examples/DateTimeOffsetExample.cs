@@ -1,8 +1,7 @@
-﻿using System;
-using Fuzzy;
+using System;
 using Xunit;
 
-namespace Example
+namespace Fuzzy
 {
     public class DateTimeOffsetExample
     {
