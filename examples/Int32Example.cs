@@ -7,23 +7,23 @@ namespace Fuzzy
         static readonly IFuzz fuzzy = new SequentialFuzz();
 
         [Fact]
-        public void GetValue() {
-            int number = fuzzy.Int32();
+        public void GetFuzzyValue() {
+            int value = fuzzy.Int32();
         }
 
         [Fact]
-        public void GetArray() {
-            int[] numbers = fuzzy.Array(fuzzy.Int32);
+        public void GetArrayOfFuzzyValues() {
+            int[] values = fuzzy.Array(fuzzy.Int32);
         }
 
         [Fact(Skip = "Not Implemented")]
-        public void GetValueFromGivenRange() {
-            int number;
-            number = fuzzy.Int32().LessThan(42);
-            number = fuzzy.Int32().GreaterThan(42);
-            number = fuzzy.Int32().Between(41, 43);
-            number = fuzzy.Int32().GreaterThan(41).LessThan(43);
-            number = fuzzy.Int32().Not(42);
+        public void ConstrainFuzzyValue() {
+            int value;
+            value = fuzzy.Int32().LessThan(42);
+            value = fuzzy.Int32().GreaterThan(42);
+            value = fuzzy.Int32().Between(41, 43);
+            value = fuzzy.Int32().GreaterThan(41).LessThan(43);
+            value = fuzzy.Int32().Not(42);
         }
     }
 }
