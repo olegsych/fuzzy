@@ -8,17 +8,21 @@ namespace Fuzzy
 
         [Fact]
         public void GetFuzzyChars() {
-            char c;
-            c = fuzzy.Char();
-            c = fuzzy.Char().GreaterThan('a');
-            c = fuzzy.Char().LessThan('f');
-            c = fuzzy.Char().Between('a', 'f');
-            c = fuzzy.Char().Not('c');
+            char value = fuzzy.Char();
         }
 
         [Fact]
         public void GetArrayOfFuzzyChars() {
-            char[] chars = fuzzy.Array(fuzzy.Char);
+            char[] values = fuzzy.Array(fuzzy.Char);
+        }
+
+        [Fact(Skip = Reason.NotImplemented)]
+        public void ConstrainFuzzyValue() {
+            char value;
+            value = fuzzy.Char().GreaterThan('a');
+            value = fuzzy.Char().LessThan('f');
+            value = fuzzy.Char().Between('a', 'f');
+            value = fuzzy.Char().Not('c');
         }
     }
 }
