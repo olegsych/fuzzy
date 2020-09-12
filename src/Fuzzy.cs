@@ -4,10 +4,10 @@ namespace Fuzzy
 {
     public abstract class Fuzzy<T>
     {
-        readonly IFuzz fuzz;
+        protected readonly IFuzz fuzzy;
 
         public Fuzzy(IFuzz fuzz) =>
-            this.fuzz = fuzz ?? throw new ArgumentNullException(nameof(fuzz));
+            this.fuzzy = fuzz ?? throw new ArgumentNullException(nameof(fuzz));
 
         public abstract T New();
 

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Fuzzy.Implementation;
 
 namespace Fuzzy
 {
@@ -25,7 +26,7 @@ namespace Fuzzy
 
         public static Fuzzy<short> Int16(this IFuzz fuzzy) => throw new NotImplementedException();
 
-        public static Fuzzy<int> Int32(this IFuzz fuzzy) => throw new NotImplementedException();
+        public static Fuzzy<int> Int32(this IFuzz fuzzy) => new FuzzyInt32(fuzzy);
 
         public static Fuzzy<long> Int64(this IFuzz fuzzy) => throw new NotImplementedException();
 
