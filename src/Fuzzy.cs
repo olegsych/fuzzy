@@ -6,8 +6,8 @@ namespace Fuzzy
     {
         protected readonly IFuzz fuzzy;
 
-        public Fuzzy(IFuzz fuzz) =>
-            this.fuzzy = fuzz ?? throw new ArgumentNullException(nameof(fuzz));
+        public Fuzzy(IFuzz fuzzy) =>
+            this.fuzzy = fuzzy ?? throw new ArgumentNullException(nameof(fuzzy));
 
         public abstract T New();
 
