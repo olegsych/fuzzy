@@ -55,6 +55,15 @@ namespace Fuzzy
             }
         }
 
+        public class SByte: IFuzzExtensionsTest
+        {
+            [Fact]
+            public void ReturnsFuzzySByte() {
+                var actual = Assert.IsType<FuzzySByte>(fuzzy.SByte());
+                Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
+            }
+        }
+
         public class UInt16: IFuzzExtensionsTest
         {
             [Fact]
