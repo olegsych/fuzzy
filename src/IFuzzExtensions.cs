@@ -24,7 +24,7 @@ namespace Fuzzy
 
         public static Fuzzy<T> Enum<T>(this IFuzz fuzzy) where T : Enum => throw new NotImplementedException();
 
-        public static Fuzzy<short> Int16(this IFuzz fuzzy) => throw new NotImplementedException();
+        public static Fuzzy<short> Int16(this IFuzz fuzzy) => new FuzzyInt16(fuzzy);
 
         public static Fuzzy<int> Int32(this IFuzz fuzzy) => new FuzzyInt32(fuzzy);
 
