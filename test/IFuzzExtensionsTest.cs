@@ -72,5 +72,14 @@ namespace Fuzzy
                 Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
             }
         }
+
+        public class UInt32: IFuzzExtensionsTest
+        {
+            [Fact]
+            public void ReturnsFuzzyUInt32() {
+                var actual = Assert.IsType<FuzzyUInt32>(fuzzy.UInt32());
+                Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
+            }
+        }
     }
 }
