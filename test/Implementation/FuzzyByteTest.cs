@@ -28,8 +28,14 @@ namespace Fuzzy.Implementation
 
                 byte actual = sut.New();
 
-                var expected = (byte)(next % byte.MaxValue);
+                var expected = (byte)(next % (byte.MaxValue + 1));
                 Assert.Equal(expected, actual);
+            }
+
+            [Fact]
+            public void CanReturnMaxValue() {
+                ConfiguredCall arrange = fuzzy.Next().Returns(byte.MaxValue);
+                Assert.Equal(byte.MaxValue, sut.New());
             }
         }
     }
