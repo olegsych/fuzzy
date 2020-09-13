@@ -34,7 +34,7 @@ namespace Fuzzy
 
         public static Fuzzy<float> Single(this IFuzz fuzzy) => throw new NotImplementedException();
 
-        public static Fuzzy<string> String(this IFuzz fuzzy) => throw new NotImplementedException();
+        public static Fuzzy<string> String(this IFuzz fuzzy) => new FuzzyString(fuzzy);
         public static Fuzzy<string> String(this IFuzz fuzzy, Length length) => throw new NotImplementedException();
         public static Fuzzy<string> Format(this Fuzzy<string> s, string format) => throw new NotImplementedException();
 
