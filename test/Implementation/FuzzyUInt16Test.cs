@@ -1,4 +1,3 @@
-using Inspector;
 using NSubstitute;
 using NSubstitute.Core;
 using Xunit;
@@ -11,13 +10,6 @@ namespace Fuzzy.Implementation
 
         public FuzzyUInt16Test() =>
             sut = new FuzzyUInt16(fuzzy);
-
-        public class Constructor: FuzzyUInt16Test
-        {
-            [Fact]
-            public void PassesFuzzyToBaseConstructor() =>
-                Assert.Same(fuzzy, sut.Inherited().Field<IFuzz>().Value);
-        }
 
         public class New: FuzzyUInt16Test
         {
