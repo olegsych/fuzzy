@@ -8,6 +8,10 @@ namespace Fuzzy
 
         public SequentialFuzz(int seed = default) => current = seed;
 
+        public T GetValue<T>(Fuzzy<T> fuzzy) {
+            throw new NotImplementedException();
+        }
+
         public int Next() => ++current;
     }
 }
