@@ -28,7 +28,7 @@ namespace Fuzzy
 
         public static Fuzzy<int> Int32(this IFuzz fuzzy) => new FuzzyInt32(fuzzy);
 
-        public static Fuzzy<long> Int64(this IFuzz fuzzy) => throw new NotImplementedException();
+        public static Fuzzy<long> Int64(this IFuzz fuzzy) => new FuzzyInt64(fuzzy);
 
         public static Fuzzy<sbyte> SByte(this IFuzz fuzzy) => new FuzzySByte(fuzzy);
 
