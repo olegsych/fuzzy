@@ -44,7 +44,7 @@ namespace Fuzzy
 
         public static Fuzzy<uint> UInt32(this IFuzz fuzzy) => new FuzzyUInt32(fuzzy);
 
-        public static Fuzzy<ulong> UInt64(this IFuzz fuzzy) => throw new NotImplementedException();
+        public static Fuzzy<ulong> UInt64(this IFuzz fuzzy) => new FuzzyUInt64(fuzzy);
 
         public static Fuzzy<Uri> Uri(this IFuzz fuzzy) => throw new NotImplementedException();
     }

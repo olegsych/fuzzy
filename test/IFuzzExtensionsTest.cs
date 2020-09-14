@@ -99,5 +99,14 @@ namespace Fuzzy
                 Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
             }
         }
+
+        public class UInt64: IFuzzExtensionsTest
+        {
+            [Fact]
+            public void ReturnsFuzzyUInt64() {
+                var actual = Assert.IsType<FuzzyUInt64>(fuzzy.UInt64());
+                Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
+            }
+        }
     }
 }
