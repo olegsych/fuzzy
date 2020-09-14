@@ -38,7 +38,7 @@ namespace Fuzzy
         public static Fuzzy<string> String(this IFuzz fuzzy, Length length) => throw new NotImplementedException();
         public static Fuzzy<string> Format(this Fuzzy<string> s, string format) => throw new NotImplementedException();
 
-        public static Fuzzy<TimeSpan> TimeSpan(this IFuzz fuzzy) => throw new NotImplementedException();
+        public static Fuzzy<TimeSpan> TimeSpan(this IFuzz fuzzy) => new FuzzyTimeSpan(fuzzy);
 
         public static Fuzzy<ushort> UInt16(this IFuzz fuzzy) => new FuzzyUInt16(fuzzy);
 

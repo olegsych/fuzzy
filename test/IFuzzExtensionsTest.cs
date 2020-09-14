@@ -82,6 +82,15 @@ namespace Fuzzy
             }
         }
 
+        public class TimeSpan: IFuzzExtensionsTest
+        {
+            [Fact]
+            public void ReturnsFuzzyTimeSpan() {
+                var actual = Assert.IsType<FuzzyTimeSpan>(fuzzy.TimeSpan());
+                Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
+            }
+        }
+
         public class UInt16: IFuzzExtensionsTest
         {
             [Fact]
