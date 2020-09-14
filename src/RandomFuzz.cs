@@ -1,17 +1,13 @@
-﻿using System;
+using System;
 
 namespace Fuzzy
 {
-    public class RandomFuzz : IFuzz
+    public class RandomFuzz : Implementation.Fuzz
     {
         readonly Random random;
 
         public RandomFuzz(int seed = 0) => random = new Random(seed);
 
-        public T GetValue<T>(Fuzzy<T> fuzzy) {
-            throw new NotImplementedException();
-        }
-
-        public int Next() => random.Next();
+        public override int Next() => random.Next();
     }
 }

@@ -1,11 +1,12 @@
-﻿using System;
+using System;
+using Fuzzy.Implementation;
 using Xunit;
 
 namespace Fuzzy
 {
     public class SequentialFuzzTest
     {
-        readonly IFuzz sut;
+        readonly Fuzz sut;
 
         readonly int seed = new Random().Next();
 

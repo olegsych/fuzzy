@@ -1,17 +1,11 @@
-﻿using System;
-
 namespace Fuzzy
 {
-    public class SequentialFuzz : IFuzz
+    public class SequentialFuzz : Implementation.Fuzz
     {
         int current;
 
         public SequentialFuzz(int seed = default) => current = seed;
 
-        public T GetValue<T>(Fuzzy<T> fuzzy) {
-            throw new NotImplementedException();
-        }
-
-        public int Next() => ++current;
+        public override int Next() => ++current;
     }
 }

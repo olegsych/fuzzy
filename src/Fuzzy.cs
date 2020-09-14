@@ -11,7 +11,9 @@ namespace Fuzzy
 
         public abstract T New();
 
-        public static implicit operator T(Fuzzy<T> fuzzy) =>
-            fuzzy.New();
+        public static implicit operator T(Fuzzy<T> fuzzy) => fuzzy.Build();
+
+        // Call virtual IFuzz.Build<T>() for testability
+        T Build() => fuzzy.Build(this);
     }
 }
