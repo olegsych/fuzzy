@@ -18,8 +18,8 @@ namespace Fuzzy.Implementation
                 int fuzzyInt32 = random.Next();
                 var fuzzyUInt32 = (uint)random.Next() | 0x80000000;
                 ConfiguredCall arrange;
-                arrange = fuzzy.GetValue(Arg.Any<Fuzzy<int>>()).Returns(fuzzyInt32);
-                arrange = fuzzy.GetValue(Arg.Any<Fuzzy<uint>>()).Returns(fuzzyUInt32);
+                arrange = fuzzy.Build(Arg.Any<Fuzzy<int>>()).Returns(fuzzyInt32);
+                arrange = fuzzy.Build(Arg.Any<Fuzzy<uint>>()).Returns(fuzzyUInt32);
 
                 long actual = sut.New();
 
