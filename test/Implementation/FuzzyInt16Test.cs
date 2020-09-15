@@ -1,3 +1,5 @@
+using System;
+using Inspector;
 using NSubstitute;
 using NSubstitute.Core;
 using Xunit;
@@ -6,32 +8,37 @@ namespace Fuzzy.Implementation
 {
     public class FuzzyInt16Test: FuzzyTestFixture
     {
-        readonly Fuzzy<short> sut;
+        readonly FuzzyRange<short> sut;
 
         public FuzzyInt16Test() =>
             sut = new FuzzyInt16(fuzzy);
 
-        public class New: FuzzyInt16Test
+        public class Constructor: FuzzyInt16Test
         {
             [Fact]
-            public void ReturnsPositiveFuzzyValueWhenFirstNumberIsEven() {
-                int next = random.Next();
-                ConfiguredCall arrange = fuzzy.Next().Returns(EvenNumber(), next);
-
-                short actual = sut.New();
-
-                var expected = (short)(next % (short.MaxValue + 1));
-                Assert.Equal(expected, actual);
+            public void InitializesBaseClass() {
+                Assert.Same(fuzzy, sut.Field<IFuzz>().Value);
+                Assert.Equal(short.MinValue, sut.Minimum);
+                Assert.Equal(short.MaxValue, sut.Maximum);
             }
+        }
 
-            [Fact]
-            public void ReturnsNegativeFuzzyValueWhenFirstNumberIsOdd() {
-                int next = random.Next();
-                ConfiguredCall arrange = fuzzy.Next().Returns(OddNumber(), next);
+        public class New: FuzzyInt16Test
+        {
+            [Theory]
+            [InlineData(-5, 5, 0, -5)]
+            [InlineData(-5, 5, 5, 0)]
+            [InlineData(-5, 5, 10, 5)]
+            [InlineData(-5, 5, -10, 5)] // In case SequentialFuzz has negative seed
+            [InlineData(short.MinValue, short.MaxValue, 0, short.MinValue)]
+            [InlineData(short.MinValue, short.MaxValue, ushort.MaxValue, short.MaxValue)]
+            public void CalculatesValueBasedOnMinimumMaximumAndNextSample(short minimum, short maximum, int next, short expected) {
+                sut.Minimum = minimum;
+                sut.Maximum = maximum;
+                ConfiguredCall arrange = fuzzy.Next().Returns(next);
 
                 short actual = sut.New();
 
-                var expected = (short)(-next % (short.MaxValue + 1));
                 Assert.Equal(expected, actual);
             }
         }

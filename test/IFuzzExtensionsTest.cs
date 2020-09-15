@@ -41,7 +41,8 @@ namespace Fuzzy
         {
             [Fact]
             public void ReturnsFuzzyInt16() {
-                var actual = Assert.IsType<FuzzyInt16>(fuzzy.Int16());
+                FuzzyRange<short> actual = fuzzy.Int16();
+                Assert.IsType<FuzzyInt16>(actual);
                 Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
             }
         }
