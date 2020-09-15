@@ -21,7 +21,7 @@ namespace Fuzzy.Implementation
 
                 ulong actual = sut.New();
 
-                ulong expected = first * second;
+                var expected = (ulong)first * second;
                 Assert.Equal(expected, actual);
             }
         }

@@ -16,7 +16,7 @@ namespace Fuzzy.Implementation
         {
             [Fact]
             public void ReturnsTimeSpanCreatedFromInt64() {
-                long ticks = int.MaxValue * random.Next();
+                var ticks = (long)int.MaxValue * random.Next();
                 ConfiguredCall arrange = fuzzy.Build(Arg.Any<Fuzzy<long>>()).Returns(ticks);
 
                 TimeSpan actual = sut.New();

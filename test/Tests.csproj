@@ -8,6 +8,8 @@
     <!-- https://docs.microsoft.com/en-us/dotnet/standard/library-guidance/strong-naming -->
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\Fuzzy.snk</AssemblyOriginatorKeyFile>
+    <!-- Make integer arithmetics checked by default -->
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
