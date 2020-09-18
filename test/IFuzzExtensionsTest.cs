@@ -32,7 +32,8 @@ namespace Fuzzy
         {
             [Fact]
             public void ReturnsFuzzyChar() {
-                var actual = Assert.IsType<FuzzyChar>(fuzzy.Char());
+                FuzzyRange<char> actual = fuzzy.Char();
+                Assert.IsType<FuzzyChar>(actual);
                 Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
             }
         }
