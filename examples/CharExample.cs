@@ -11,13 +11,12 @@ namespace Fuzzy
             char value = fuzzy.Char();
         }
 
-        [Fact(Skip = Reason.NotImplemented)]
+        [Fact]
         public void ConstrainFuzzyValue() {
             char value;
-            value = fuzzy.Char().GreaterThan('a');
-            value = fuzzy.Char().LessThan('f');
+            value = fuzzy.Char().Minimum('a');
+            value = fuzzy.Char().Maximum('f');
             value = fuzzy.Char().Between('a', 'f');
-            value = fuzzy.Char().Not('c');
         }
     }
 }
