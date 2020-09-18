@@ -26,7 +26,7 @@ namespace Fuzzy
 
         public static FuzzyRange<short> Int16(this IFuzz fuzzy) => new FuzzyInt16(fuzzy);
 
-        public static Fuzzy<int> Int32(this IFuzz fuzzy) => new FuzzyInt32(fuzzy);
+        public static FuzzyRange<int> Int32(this IFuzz fuzzy) => new FuzzyInt32(fuzzy);
 
         public static Fuzzy<long> Int64(this IFuzz fuzzy) => new FuzzyInt64(fuzzy);
 

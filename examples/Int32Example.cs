@@ -11,14 +11,13 @@ namespace Fuzzy
             int value = fuzzy.Int32();
         }
 
-        [Fact(Skip = "Not Implemented")]
+        [Fact]
         public void ConstrainFuzzyValue() {
             int value;
-            value = fuzzy.Int32().LessThan(42);
-            value = fuzzy.Int32().GreaterThan(42);
+            value = fuzzy.Int32().Maximum(42);
+            value = fuzzy.Int32().Minimum(42);
             value = fuzzy.Int32().Between(41, 43);
-            value = fuzzy.Int32().GreaterThan(41).LessThan(43);
-            value = fuzzy.Int32().Not(42);
+            value = fuzzy.Int32().Minimum(41).Maximum(43);
         }
     }
 }
