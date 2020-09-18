@@ -11,13 +11,12 @@ namespace Fuzzy
             sbyte value = fuzzy.SByte();
         }
 
-        [Fact(Skip = Reason.NotImplemented)]
+        [Fact]
         public void ConstrainFuzzyValue() {
             sbyte value;
-            value = fuzzy.SByte().GreaterThan(3);
-            value = fuzzy.SByte().LessThan(5);
+            value = fuzzy.SByte().Minimum(3);
+            value = fuzzy.SByte().Maximum(5);
             value = fuzzy.SByte().Between(3, 5);
-            value = fuzzy.SByte().Not(4);
         }
     }
 }

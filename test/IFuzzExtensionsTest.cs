@@ -71,7 +71,8 @@ namespace Fuzzy
         {
             [Fact]
             public void ReturnsFuzzySByte() {
-                var actual = Assert.IsType<FuzzySByte>(fuzzy.SByte());
+                FuzzyRange<sbyte> actual = fuzzy.SByte();
+                Assert.IsType<FuzzySByte>(actual);
                 Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
             }
         }

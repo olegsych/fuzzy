@@ -30,7 +30,7 @@ namespace Fuzzy
 
         public static Fuzzy<long> Int64(this IFuzz fuzzy) => new FuzzyInt64(fuzzy);
 
-        public static Fuzzy<sbyte> SByte(this IFuzz fuzzy) => new FuzzySByte(fuzzy);
+        public static FuzzyRange<sbyte> SByte(this IFuzz fuzzy) => new FuzzySByte(fuzzy);
 
         public static Fuzzy<float> Single(this IFuzz fuzzy) => throw new NotImplementedException();
 
