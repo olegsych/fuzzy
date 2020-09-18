@@ -1,3 +1,6 @@
+using System;
+using System.Linq.Expressions;
+using Inspector;
 using NSubstitute;
 using NSubstitute.Core;
 using Xunit;
@@ -6,22 +9,39 @@ namespace Fuzzy.Implementation
 {
     public class FuzzyUInt64Test: FuzzyTestFixture
     {
-        readonly Fuzzy<ulong> sut;
+        readonly FuzzyRange<ulong> sut;
 
         public FuzzyUInt64Test() =>
             sut = new FuzzyUInt64(fuzzy);
 
-        public class New: FuzzyUInt64Test
+        public class Constructor: FuzzyUInt64Test
         {
             [Fact]
-            public void ReturnsUInt64CalculatedByMultiplyingTwoUInt32Values() {
-                var first = (uint)random.Next() | 0x80000000;
-                var second = (uint)random.Next() | 0x80000000;
-                ConfiguredCall arrange = fuzzy.Build(Arg.Any<Fuzzy<uint>>()).Returns(first, second);
+            public void InitializesBaseClass() {
+                Assert.Same(fuzzy, sut.Field<IFuzz>().Value);
+                Assert.Equal(ulong.MinValue, sut.Minimum);
+                Assert.Equal(ulong.MaxValue, sut.Maximum);
+            }
+        }
+
+        public class New: FuzzyUInt64Test
+        {
+            [Theory]
+            [InlineData(5, 15, 0, 5)]
+            [InlineData(5, 15, 5, 10)]
+            [InlineData(5, 15, 10, 15)]
+            [InlineData(ulong.MinValue, ulong.MaxValue, 0, ulong.MinValue)]
+            [InlineData(ulong.MinValue, ulong.MaxValue, ulong.MaxValue, ulong.MaxValue)]
+            public void CalculatesValueBasedOnMinimumMaximumAndNextSample(ulong minimum, ulong maximum, ulong next, ulong expected) {
+                sut.Minimum = minimum;
+                sut.Maximum = maximum;
+                var first = (uint)(next & 0xFFFFFFFF);
+                var second = (uint)(next >> 32);
+                Expression<Predicate<FuzzyRange<uint>>> unlimitedUInt32 = f => f.Minimum == uint.MinValue && f.Maximum == uint.MaxValue;
+                ConfiguredCall arrange = fuzzy.Build(Arg.Is(unlimitedUInt32)).Returns(first, second);
 
                 ulong actual = sut.New();
 
-                var expected = (ulong)first * second;
                 Assert.Equal(expected, actual);
             }
         }
