@@ -7,6 +7,8 @@ namespace Fuzzy
     {
         public static Fuzzy<T[]> Array<T>(this IFuzz fuzzy, Func<T> createElement, Length length = default) => throw new NotImplementedException();
         public static Fuzzy<T[]> Array<T>(this IFuzz fuzzy, Func<Fuzzy<T>> createElement, Length length = default) => throw new NotImplementedException();
+        public static Fuzzy<T[]> Array<T>(this IFuzz fuzzy, Func<FuzzyRange<T>> createElement, Length length = default) where T: struct, IComparable<T>
+            => throw new NotImplementedException();
         public static Fuzzy<T[]> Array<T>(this IFuzz fuzzy, IEnumerable<T> elements, Length length = default) => throw new NotImplementedException();
     }
 }
