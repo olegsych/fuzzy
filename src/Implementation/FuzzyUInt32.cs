@@ -1,12 +1,16 @@
 namespace Fuzzy.Implementation
 {
-    sealed class FuzzyUInt32: Fuzzy<uint>
+    sealed class FuzzyUInt32: FuzzyRange<uint>
     {
-        public FuzzyUInt32(IFuzz fuzzy) : base(fuzzy) { }
+        public FuzzyUInt32(IFuzz fuzzy) : base(fuzzy, uint.MinValue, uint.MaxValue) { }
 
         public override uint New() {
-            uint mask = fuzzy.Next() % 2 == 0 ? 0 : 0x80000000;
-            return mask | (uint)fuzzy.Next();
+            ushort low = fuzzy.UInt16();
+            ushort high = fuzzy.UInt16();
+            long sample = high << 16 | low;
+            uint range = Maximum - Minimum;
+            var increment = (uint)(sample % (range + 1L));
+            return Minimum + increment;
         }
     }
 }

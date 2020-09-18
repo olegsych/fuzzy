@@ -109,7 +109,8 @@ namespace Fuzzy
         {
             [Fact]
             public void ReturnsFuzzyUInt32() {
-                var actual = Assert.IsType<FuzzyUInt32>(fuzzy.UInt32());
+                FuzzyRange<uint> actual = fuzzy.UInt32();
+                Assert.IsType<FuzzyUInt32>(actual);
                 Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
             }
         }

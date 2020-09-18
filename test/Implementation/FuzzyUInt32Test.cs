@@ -1,3 +1,6 @@
+using System;
+using System.Linq.Expressions;
+using Inspector;
 using NSubstitute;
 using NSubstitute.Core;
 using Xunit;
@@ -6,32 +9,39 @@ namespace Fuzzy.Implementation
 {
     public class FuzzyUInt32Test: FuzzyTestFixture
     {
-        readonly Fuzzy<uint> sut;
+        readonly FuzzyRange<uint> sut;
 
         public FuzzyUInt32Test() =>
             sut = new FuzzyUInt32(fuzzy);
 
-        public class New: FuzzyUInt32Test
+        public class Constructor: FuzzyUInt32Test
         {
             [Fact]
-            public void ReturnsFuzzyValueWithinInt32RangeWhenFirstNumberIsEven() {
-                int next = random.Next();
-                ConfiguredCall arrange = fuzzy.Next().Returns(EvenNumber(), next);
-
-                uint actual = sut.New();
-
-                var expected = (uint)next;
-                Assert.Equal(expected, actual);
+            public void InitializesBaseClass() {
+                Assert.Same(fuzzy, sut.Field<IFuzz>().Value);
+                Assert.Equal(uint.MinValue, sut.Minimum);
+                Assert.Equal(uint.MaxValue, sut.Maximum);
             }
+        }
 
-            [Fact]
-            public void ReturnsFuzzyValueOutsideOfInt32RangeWhenFirstNumberIsOdd() {
-                int next = random.Next();
-                ConfiguredCall arrange = fuzzy.Next().Returns(OddNumber(), next);
+        public class New: FuzzyUInt32Test
+        {
+            [Theory]
+            [InlineData(5, 15, 0, 5)]
+            [InlineData(5, 15, 5, 10)]
+            [InlineData(5, 15, 10, 15)]
+            [InlineData(uint.MinValue, uint.MaxValue, 0, uint.MinValue)]
+            [InlineData(uint.MinValue, uint.MaxValue, uint.MaxValue, uint.MaxValue)]
+            public void CalculatesValueBasedOnMinimumMaximumAndNextSample(uint minimum, uint maximum, uint next, uint expected) {
+                sut.Minimum = minimum;
+                sut.Maximum = maximum;
+                var first = (ushort)(next & 0xFFFF);
+                var second = (ushort)(next >> 16);
+                Expression<Predicate<FuzzyRange<ushort>>> unlimitedUInt16 = f => f.Minimum == ushort.MinValue && f.Maximum == ushort.MaxValue;
+                ConfiguredCall arrange = fuzzy.Build(Arg.Is(unlimitedUInt16)).Returns(first, second);
 
                 uint actual = sut.New();
 
-                var expected = (uint)next | 0x80000000;
                 Assert.Equal(expected, actual);
             }
         }

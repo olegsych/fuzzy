@@ -11,13 +11,12 @@ namespace Fuzzy
             uint value = fuzzy.UInt32();
         }
 
-        [Fact(Skip = Reason.NotImplemented)]
+        [Fact]
         public void ConstrainFuzzyValue() {
             uint value;
-            value = fuzzy.UInt32().GreaterThan(2u);
-            value = fuzzy.UInt32().LessThan(5u);
+            value = fuzzy.UInt32().Maximum(2u);
+            value = fuzzy.UInt32().Minimum(5u);
             value = fuzzy.UInt32().Between(2u, 5u);
-            value = fuzzy.UInt32().Not(4u);
         }
     }
 }
