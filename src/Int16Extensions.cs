@@ -4,16 +4,28 @@ namespace Fuzzy
 {
     public static class Int16Extensions
     {
-        public static Fuzzy<short> Between(this Fuzzy<short> fuzzy, short min, short max)
-            => throw new NotImplementedException();
+        public static FuzzyRange<short> Between(this FuzzyRange<short> value, short minimum, short maximum) {
+            Require(value);
+            value.Minimum = minimum;
+            value.Maximum = maximum;
+            return value;
+        }
 
-        public static Fuzzy<short> GreaterThan(this Fuzzy<short> fuzzy, short min)
-            => throw new NotImplementedException();
+        public static FuzzyRange<short> Maximum(this FuzzyRange<short> value, short maximum) {
+            Require(value);
+            value.Maximum = maximum;
+            return value;
+        }
 
-        public static Fuzzy<short> LessThan(this Fuzzy<short> fuzzy, short max)
-            => throw new NotImplementedException();
+        public static FuzzyRange<short> Minimum(this FuzzyRange<short> value, short minimum) {
+            Require(value);
+            value.Minimum = minimum;
+            return value;
+        }
 
-        public static Fuzzy<short> Not(this Fuzzy<short> fuzzy, short unexpected)
-            => throw new NotImplementedException();
+        static void Require(FuzzyRange<short> value) {
+            if(value == null)
+                throw new ArgumentNullException(nameof(value));
+        }
     }
 }
