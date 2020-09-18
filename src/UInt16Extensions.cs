@@ -1,19 +1,31 @@
-﻿using System;
+using System;
 
 namespace Fuzzy
 {
     public static class UInt16Extensions
     {
-        public static Fuzzy<ushort> Between(this Fuzzy<ushort> fuzzy, ushort min, ushort max)
-            => throw new NotImplementedException();
+        public static FuzzyRange<ushort> Between(this FuzzyRange<ushort> value, ushort minimum, ushort maximum) {
+            Require(value);
+            value.Minimum = minimum;
+            value.Maximum = maximum;
+            return value;
+        }
 
-        public static Fuzzy<ushort> GreaterThan(this Fuzzy<ushort> fuzzy, ushort min)
-            => throw new NotImplementedException();
+        public static FuzzyRange<ushort> Maximum(this FuzzyRange<ushort> value, ushort maximum) {
+            Require(value);
+            value.Maximum = maximum;
+            return value;
+        }
 
-        public static Fuzzy<ushort> LessThan(this Fuzzy<ushort> fuzzy, ushort max)
-            => throw new NotImplementedException();
+        public static FuzzyRange<ushort> Minimum(this FuzzyRange<ushort> value, ushort minimum) {
+            Require(value);
+            value.Minimum = minimum;
+            return value;
+        }
 
-        public static Fuzzy<ushort> Not(this Fuzzy<ushort> fuzzy, ushort unexpected)
-            => throw new NotImplementedException();
+        static void Require(FuzzyRange<ushort> value) {
+            if(value == null)
+                throw new ArgumentNullException(nameof(value));
+        }
     }
 }

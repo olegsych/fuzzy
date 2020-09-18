@@ -11,13 +11,12 @@ namespace Fuzzy
             ushort value = fuzzy.UInt16();
         }
 
-        [Fact(Skip = Reason.NotImplemented)]
+        [Fact]
         public void ConstrainFuzzyValue() {
             ushort value;
-            value = fuzzy.UInt16().GreaterThan(2);
-            value = fuzzy.UInt16().LessThan(5);
+            value = fuzzy.UInt16().Minimum(2);
+            value = fuzzy.UInt16().Maximum(5);
             value = fuzzy.UInt16().Between(2, 5);
-            value = fuzzy.UInt16().Not(4);
         }
     }
 }
