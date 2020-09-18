@@ -1,31 +1,12 @@
-using System;
-
 namespace Fuzzy
 {
+    /// <remarks>
+    /// Needed because compiler cannot resolve <see cref="FuzzyRangeExtensions"/> calls made with literal numbers.
+    /// </remarks>
     public static class UInt16Extensions
     {
-        public static FuzzyRange<ushort> Between(this FuzzyRange<ushort> value, ushort minimum, ushort maximum) {
-            Require(value);
-            value.Minimum = minimum;
-            value.Maximum = maximum;
-            return value;
-        }
-
-        public static FuzzyRange<ushort> Maximum(this FuzzyRange<ushort> value, ushort maximum) {
-            Require(value);
-            value.Maximum = maximum;
-            return value;
-        }
-
-        public static FuzzyRange<ushort> Minimum(this FuzzyRange<ushort> value, ushort minimum) {
-            Require(value);
-            value.Minimum = minimum;
-            return value;
-        }
-
-        static void Require(FuzzyRange<ushort> value) {
-            if(value == null)
-                throw new ArgumentNullException(nameof(value));
-        }
+        public static FuzzyRange<ushort> Between(this FuzzyRange<ushort> value, ushort minimum, ushort maximum) => FuzzyRangeExtensions.Between(value, minimum, maximum);
+        public static FuzzyRange<ushort> Maximum(this FuzzyRange<ushort> value, ushort maximum) => FuzzyRangeExtensions.Maximum(value, maximum);
+        public static FuzzyRange<ushort> Minimum(this FuzzyRange<ushort> value, ushort minimum) => FuzzyRangeExtensions.Minimum(value, minimum);
     }
 }

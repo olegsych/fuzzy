@@ -1,5 +1,3 @@
-﻿using System;
-
 namespace Fuzzy
 {
     /// <remarks>
@@ -7,28 +5,8 @@ namespace Fuzzy
     /// </remarks>
     public static class SByteExtensions
     {
-        public static FuzzyRange<sbyte> Between(this FuzzyRange<sbyte> value, sbyte minimum, sbyte maximum) {
-            Require(value);
-            value.Minimum = minimum;
-            value.Maximum = maximum;
-            return value;
-        }
-
-        public static FuzzyRange<sbyte> Maximum(this FuzzyRange<sbyte> value, sbyte maximum) {
-            Require(value);
-            value.Maximum = maximum;
-            return value;
-        }
-
-        public static FuzzyRange<sbyte> Minimum(this FuzzyRange<sbyte> value, sbyte minimum) {
-            Require(value);
-            value.Minimum = minimum;
-            return value;
-        }
-
-        static void Require(FuzzyRange<sbyte> value) {
-            if(value == null)
-                throw new ArgumentNullException(nameof(value));
-        }
+        public static FuzzyRange<sbyte> Between(this FuzzyRange<sbyte> value, sbyte minimum, sbyte maximum) => FuzzyRangeExtensions.Between(value, minimum, maximum);
+        public static FuzzyRange<sbyte> Maximum(this FuzzyRange<sbyte> value, sbyte maximum) => FuzzyRangeExtensions.Maximum(value, maximum);
+        public static FuzzyRange<sbyte> Minimum(this FuzzyRange<sbyte> value, sbyte minimum) => FuzzyRangeExtensions.Minimum(value, minimum);
     }
 }
