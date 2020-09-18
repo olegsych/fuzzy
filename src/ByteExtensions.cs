@@ -2,18 +2,33 @@
 
 namespace Fuzzy
 {
+    /// <remarks>
+    /// Needed because compiler cannot resolve <see cref="FuzzyRangeExtensions"/> calls made with literal numbers.
+    /// </remarks>
     public static class ByteExtensions
     {
-        public static Fuzzy<byte> Between(this Fuzzy<byte> fuzzy, byte min, byte max)
-            => throw new NotImplementedException();
+        public static FuzzyRange<byte> Between(this FuzzyRange<byte> value, byte minimum, byte maximum) {
+            Require(value);
+            value.Minimum = minimum;
+            value.Maximum = maximum;
+            return value;
+        }
 
-        public static Fuzzy<byte> GreaterThan(this Fuzzy<byte> fuzzy, byte min)
-            => throw new NotImplementedException();
+        public static FuzzyRange<byte> Maximum(this FuzzyRange<byte> value, byte maximum) {
+            Require(value);
+            value.Maximum = maximum;
+            return value;
+        }
 
-        public static Fuzzy<byte> LessThan(this Fuzzy<byte> fuzzy, byte max)
-            => throw new NotImplementedException();
+        public static FuzzyRange<byte> Minimum(this FuzzyRange<byte> value, byte minimum) {
+            Require(value);
+            value.Minimum = minimum;
+            return value;
+        }
 
-        public static Fuzzy<byte> Not(this Fuzzy<byte> fuzzy, byte unexpected)
-            => throw new NotImplementedException();
+        static void Require(FuzzyRange<byte> value) {
+            if(value == null)
+                throw new ArgumentNullException(nameof(value));
+        }
     }
 }

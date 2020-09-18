@@ -23,7 +23,8 @@ namespace Fuzzy
         {
             [Fact]
             public void ReturnsFuzzyByte() {
-                var actual = Assert.IsType<FuzzyByte>(fuzzy.Byte());
+                FuzzyRange<byte> actual = fuzzy.Byte();
+                Assert.IsType<FuzzyByte>(actual);
                 Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
             }
         }

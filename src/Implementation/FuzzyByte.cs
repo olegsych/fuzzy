@@ -1,8 +1,8 @@
 namespace Fuzzy.Implementation
 {
-    sealed class FuzzyByte: Fuzzy<byte>
+    sealed class FuzzyByte: FuzzyRange<byte>
     {
-        public FuzzyByte(IFuzz fuzzy) : base(fuzzy) {}
-        public override byte New() => (byte)(fuzzy.Next() % (byte.MaxValue + 1));
+        public FuzzyByte(IFuzz fuzzy) : base(fuzzy, byte.MinValue, byte.MaxValue) {}
+        public override byte New() => (byte)fuzzy.UInt16().Between(Minimum, Maximum);
     }
 }
