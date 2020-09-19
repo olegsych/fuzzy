@@ -11,14 +11,13 @@ namespace Fuzzy
             long value = fuzzy.Int64();
         }
 
-        [Fact(Skip = Reason.NotImplemented)]
+        [Fact]
         public void ConstrainFuzzyValue() {
             long value;
-            value = fuzzy.Int64().LessThan(42L);
-            value = fuzzy.Int64().GreaterThan(42L);
+            value = fuzzy.Int64().Minimum(42L);
+            value = fuzzy.Int64().Maximum(42L);
             value = fuzzy.Int64().Between(41L, 43L);
-            value = fuzzy.Int64().GreaterThan(41L).LessThan(43L);
-            value = fuzzy.Int64().Not(42L);
+            value = fuzzy.Int64().Minimum(41L).Maximum(43L);
         }
     }
 }
