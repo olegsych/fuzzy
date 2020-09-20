@@ -11,6 +11,6 @@ namespace Fuzzy.Implementation
             this.candidates = candidates ?? throw new System.ArgumentNullException(nameof(candidates));
 
         public override T New() =>
-            candidates.ElementAt(fuzzy.Int32().Between(0, candidates.Count()));
+            candidates.ElementAt(fuzzy.Int32().Between(0, candidates.Count() - 1));
     }
 }
