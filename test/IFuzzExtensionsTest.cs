@@ -92,7 +92,8 @@ namespace Fuzzy
         {
             [Fact]
             public void ReturnsFuzzyTimeSpan() {
-                var actual = Assert.IsType<FuzzyTimeSpan>(fuzzy.TimeSpan());
+                FuzzyRange<System.TimeSpan> actual = fuzzy.TimeSpan();
+                Assert.IsType<FuzzyTimeSpan>(actual);
                 Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
             }
         }

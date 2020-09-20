@@ -12,13 +12,12 @@ namespace Fuzzy
             TimeSpan value = fuzzy.TimeSpan();
         }
 
-        [Fact(Skip = Reason.NotImplemented)]
+        [Fact]
         public void ConstrainFuzzyValue() {
             TimeSpan value;
-            value = fuzzy.TimeSpan().GreaterThan(TimeSpan.FromMinutes(2));
-            value = fuzzy.TimeSpan().LessThan(TimeSpan.FromMinutes(5));
+            value = fuzzy.TimeSpan().Minimum(TimeSpan.FromMinutes(2));
+            value = fuzzy.TimeSpan().Maximum(TimeSpan.FromMinutes(5));
             value = fuzzy.TimeSpan().Between(TimeSpan.FromMinutes(2), TimeSpan.FromMinutes(5));
-            value = fuzzy.TimeSpan().Not(TimeSpan.FromMinutes(2));
         }
     }
 }
