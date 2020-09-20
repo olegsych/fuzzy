@@ -20,7 +20,7 @@ namespace Fuzzy
 
         public static Fuzzy<double> Double(this IFuzz fuzzy) => throw new NotImplementedException();
 
-        public static Fuzzy<T> Element<T>(this IFuzz fuzzy, IEnumerable<T> candidates) => throw new NotImplementedException();
+        public static Fuzzy<T> Element<T>(this IFuzz fuzzy, IEnumerable<T> candidates) => new FuzzyElement<T>(fuzzy, candidates);
 
         public static Fuzzy<T> Enum<T>(this IFuzz fuzzy) where T : Enum => throw new NotImplementedException();
 

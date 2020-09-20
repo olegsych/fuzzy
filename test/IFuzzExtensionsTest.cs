@@ -39,6 +39,16 @@ namespace Fuzzy
             }
         }
 
+        public class Element: IFuzzExtensionsTest
+        {
+            [Fact]
+            public void ReturnsFuzzyElement() {
+                Fuzzy<TestStruct> actual = fuzzy.Element(new[] { new TestStruct(default) });
+                Assert.IsType<FuzzyElement<TestStruct>>(actual);
+                Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
+            }
+        }
+
         public class Int16: IFuzzExtensionsTest
         {
             [Fact]
