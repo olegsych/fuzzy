@@ -12,7 +12,7 @@ namespace Fuzzy
 
         public static FuzzyRange<char> Char(this IFuzz fuzzy) => new FuzzyChar(fuzzy);
 
-        public static Fuzzy<DateTime> DateTime(this IFuzz fuzzy) => throw new NotImplementedException();
+        public static FuzzyRange<DateTime> DateTime(this IFuzz fuzzy) => new FuzzyDateTime(fuzzy);
 
         public static Fuzzy<DateTimeOffset> DateTimeOffset(this IFuzz fuzzy) => throw new NotImplementedException();
 

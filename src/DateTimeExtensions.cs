@@ -4,6 +4,12 @@ namespace Fuzzy
 {
     public static class DateTimeExtensions
     {
-        public static Fuzzy<DateTime> Between(this Fuzzy<DateTime> fuzzy, DateTime min, TimeSpan max) => throw new NotImplementedException();
+        public static FuzzyRange<DateTime> Between(this FuzzyRange<DateTime> value, DateTime minimum, TimeSpan timeSpan) {
+            if(value is null)
+                throw new ArgumentNullException(nameof(value));
+            value.Minimum = minimum;
+            value.Maximum = minimum + timeSpan;
+            return value;
+        }
     }
 }

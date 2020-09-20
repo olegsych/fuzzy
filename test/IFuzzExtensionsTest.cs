@@ -39,6 +39,16 @@ namespace Fuzzy
             }
         }
 
+        public class DateTime: IFuzzExtensionsTest
+        {
+            [Fact]
+            public void ReturnsFuzzyDateTime() {
+                FuzzyRange<System.DateTime> actual = fuzzy.DateTime();
+                Assert.IsType<FuzzyDateTime>(actual);
+                Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
+            }
+        }
+
         public class Element: IFuzzExtensionsTest
         {
             [Fact]
