@@ -22,7 +22,7 @@ namespace Fuzzy
 
         public static Fuzzy<T> Element<T>(this IFuzz fuzzy, IEnumerable<T> candidates) => new FuzzyElement<T>(fuzzy, candidates);
 
-        public static Fuzzy<T> Enum<T>(this IFuzz fuzzy) where T : Enum => throw new NotImplementedException();
+        public static Fuzzy<T> Enum<T>(this IFuzz fuzzy) where T : Enum => new FuzzyEnum<T>(fuzzy);
 
         public static FuzzyRange<short> Int16(this IFuzz fuzzy) => new FuzzyInt16(fuzzy);
 

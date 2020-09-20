@@ -49,6 +49,16 @@ namespace Fuzzy
             }
         }
 
+        public class Enum: IFuzzExtensionsTest
+        {
+            [Fact]
+            public void ReturnsFuzzyEnum() {
+                Fuzzy<TestEnum> actual = fuzzy.Enum<TestEnum>();
+                Assert.IsType<FuzzyEnum<TestEnum>>(actual);
+                Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
+            }
+        }
+
         public class Int16: IFuzzExtensionsTest
         {
             [Fact]
