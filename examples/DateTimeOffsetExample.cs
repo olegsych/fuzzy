@@ -12,11 +12,11 @@ namespace Fuzzy
             DateTimeOffset value = fuzzy.DateTimeOffset();
         }
 
-        [Fact(Skip = Reason.NotImplemented)]
+        [Fact]
         public void ConstrainFuzzyValue() {
             DateTimeOffset value;
-            value = fuzzy.DateTimeOffset().GreaterThan(DateTimeOffset.Now);
-            value = fuzzy.DateTimeOffset().LessThan(DateTimeOffset.Now);
+            value = fuzzy.DateTimeOffset().Minimum(DateTimeOffset.Now);
+            value = fuzzy.DateTimeOffset().Maximum(DateTimeOffset.Now);
             value = fuzzy.DateTimeOffset().Between(DateTimeOffset.Now, DateTimeOffset.Now + TimeSpan.FromDays(2));
             value = fuzzy.DateTimeOffset().Between(DateTimeOffset.Now, TimeSpan.FromDays(2));
         }

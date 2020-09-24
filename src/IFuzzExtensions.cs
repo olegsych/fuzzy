@@ -14,7 +14,7 @@ namespace Fuzzy
 
         public static FuzzyRange<DateTime> DateTime(this IFuzz fuzzy) => new FuzzyDateTime(fuzzy);
 
-        public static Fuzzy<DateTimeOffset> DateTimeOffset(this IFuzz fuzzy) => throw new NotImplementedException();
+        public static FuzzyRange<DateTimeOffset> DateTimeOffset(this IFuzz fuzzy) => new FuzzyDateTimeOffset(fuzzy);
 
         public static Fuzzy<decimal> Decimal(this IFuzz fuzzy) => throw new NotImplementedException();
 

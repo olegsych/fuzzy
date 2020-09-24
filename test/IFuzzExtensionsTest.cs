@@ -49,6 +49,16 @@ namespace Fuzzy
             }
         }
 
+        public class DateTimeOffset: IFuzzExtensionsTest
+        {
+            [Fact]
+            public void ReturnsFuzzyDateTimeOffset() {
+                FuzzyRange<System.DateTimeOffset> actual = fuzzy.DateTimeOffset();
+                Assert.IsType<FuzzyDateTimeOffset>(actual);
+                Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
+            }
+        }
+
         public class Element: IFuzzExtensionsTest
         {
             [Fact]
