@@ -119,6 +119,16 @@ namespace Fuzzy
             }
         }
 
+        public class Single: IFuzzExtensionsTest
+        {
+            [Fact]
+            public void ReturnsFuzzySingle() {
+                Fuzzy<float> actual = fuzzy.Single();
+                Assert.IsType<FuzzySingle>(actual);
+                Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
+            }
+        }
+
         public class String: IFuzzExtensionsTest
         {
             [Fact]

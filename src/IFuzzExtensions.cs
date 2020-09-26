@@ -32,7 +32,7 @@ namespace Fuzzy
 
         public static FuzzyRange<sbyte> SByte(this IFuzz fuzzy) => new FuzzySByte(fuzzy);
 
-        public static Fuzzy<float> Single(this IFuzz fuzzy) => throw new NotImplementedException();
+        public static Fuzzy<float> Single(this IFuzz fuzzy) => new FuzzySingle(fuzzy);
 
         public static Fuzzy<string> String(this IFuzz fuzzy) => new FuzzyString(fuzzy);
         public static Fuzzy<string> String(this IFuzz fuzzy, Length length) => throw new NotImplementedException();
