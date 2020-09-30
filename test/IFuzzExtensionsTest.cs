@@ -59,6 +59,16 @@ namespace Fuzzy
             }
         }
 
+        public class Double: IFuzzExtensionsTest
+        {
+            [Fact]
+            public void ReturnsFuzzyDouble() {
+                Fuzzy<double> actual = fuzzy.Double();
+                Assert.IsType<FuzzyDouble>(actual);
+                Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
+            }
+        }
+
         public class Element: IFuzzExtensionsTest
         {
             [Fact]

@@ -18,7 +18,7 @@ namespace Fuzzy
 
         public static Fuzzy<decimal> Decimal(this IFuzz fuzzy) => throw new NotImplementedException();
 
-        public static Fuzzy<double> Double(this IFuzz fuzzy) => throw new NotImplementedException();
+        public static Fuzzy<double> Double(this IFuzz fuzzy) => new FuzzyDouble(fuzzy);
 
         public static Fuzzy<T> Element<T>(this IFuzz fuzzy, IEnumerable<T> candidates) => new FuzzyElement<T>(fuzzy, candidates);
 
