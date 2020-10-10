@@ -44,8 +44,10 @@ namespace Fuzzy
             return range;
         }
 
-        public int New(IFuzz fuzzy) => fuzzy == null
-            ? throw new ArgumentNullException(nameof(fuzzy))
-            : (int)fuzzy.Int32().Between(Minimum, Maximum);
+        public int New(IFuzz fuzzy) {
+            if(fuzzy == null)
+                throw new ArgumentNullException(nameof(fuzzy));
+            return fuzzy.Int32().Between(Minimum, Maximum);
+        }
     }
 }
