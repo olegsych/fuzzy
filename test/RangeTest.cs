@@ -32,6 +32,10 @@ namespace Fuzzy
                 Assert.Contains(min.ToString(), e.Message);
                 Assert.Contains((min - 1).ToString(), e.Message);
             }
+
+            [Fact]
+            public void ThrowsDescriptiveExceptionWhenMinIsLessThan0() =>
+                Assert.Throws<ArgumentOutOfRangeException>(() => TestRange.Between(-1, max));
         }
 
         public class Max: RangeTest
@@ -62,6 +66,10 @@ namespace Fuzzy
                 var sut = TestRange.Min(14);
                 Assert.True(sut.Minimum < sut.Maximum);
             }
+
+            [Fact]
+            public void ThrowsDescriptiveExceptionWhenValueIsLessThan0() =>
+                Assert.Throws<ArgumentOutOfRangeException>(() => TestRange.Min(-1));
         }
 
         public class New: RangeTest
