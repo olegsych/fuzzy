@@ -1,4 +1,8 @@
-﻿using System;
+using System;
+using System.Linq.Expressions;
+using Inspector;
+using NSubstitute;
+using NSubstitute.Core;
 using Xunit;
 
 namespace Fuzzy
@@ -7,68 +11,86 @@ namespace Fuzzy
     {
         static readonly Random random = new Random();
 
-        public class Between : RangeTest
+        // Common method parameters
+        readonly int min = random.Next() % 1000;
+        readonly int max;
+
+        public RangeTest() => max = min + random.Next() % 10;
+
+        public class Between: RangeTest
         {
-            readonly int min = random.Next() % 1000;
-            readonly int max ;
-
-            public Between() => max = min + random.Next() % 10;
-
             [Fact]
-            public void ReturnsRangeInitializedWithGivenMinimumAndMaximumValues()
-            {
+            public void ReturnsRangeInitializedWithGivenMinimumAndMaximumValues() {
                 var sut = TestRange.Between(min, max);
                 Assert.Equal(min, sut.Minimum);
                 Assert.Equal(max, sut.Maximum);
             }
 
             [Fact]
-            public void ThrowsDescriptiveExceptionWhenMaxIsLessThanMin()
-            {
+            public void ThrowsDescriptiveExceptionWhenMaxIsLessThanMin() {
                 var e = Assert.Throws<ArgumentException>(() => TestRange.Between(min, min - 1));
                 Assert.Contains(min.ToString(), e.Message);
                 Assert.Contains((min - 1).ToString(), e.Message);
             }
         }
 
-        public class Max : RangeTest
+        public class Max: RangeTest
         {
-            readonly int max = random.Next();
-
             [Fact]
-            public void ReturnsRangeInitializedWithGivenMaximumValue()
-            {
+            public void ReturnsRangeInitializedWithGivenMaximumValue() {
                 var sut = TestRange.Max(max);
                 Assert.Equal(max, sut.Maximum);
             }
 
             [Fact]
-            public void ReturnsRangeWithMinimumValueLessThanGivenMaximum()
-            {
+            public void ReturnsRangeWithMinimumValueLessThanGivenMaximum() {
                 var sut = TestRange.Max(2);
                 Assert.True(sut.Minimum < sut.Maximum);
             }
         }
 
-        public class Min : RangeTest
+        public class Min: RangeTest
         {
-            readonly int min = random.Next();
-
             [Fact]
-            public void ReturnsRangeInitializedWithGivenMinimumValue()
-            {
+            public void ReturnsRangeInitializedWithGivenMinimumValue() {
                 var sut = TestRange.Min(min);
                 Assert.Equal(min, sut.Minimum);
             }
 
             [Fact]
-            public void ReturnsRangeWithMaximumGreaterThanGivenMinimum()
-            {
+            public void ReturnsRangeWithMaximumGreaterThanGivenMinimum() {
                 var sut = TestRange.Min(14);
                 Assert.True(sut.Minimum < sut.Maximum);
             }
         }
 
-        sealed class TestRange : Range<TestRange> { }
+        public class New: RangeTest
+        {
+            readonly Range<TestRange> sut;
+
+            // Method parameters
+            readonly IFuzz fuzzy = Substitute.For<IFuzz>();
+
+            public New() => sut = TestRange.Between(min, max);
+
+            [Fact]
+            public void ThrowsDescriptiveExceptionWhenFuzzIsNull() {
+                var thrown = Assert.Throws<ArgumentNullException>(() => sut.New(null));
+                Assert.Equal(sut.Method<Func<IFuzz, int>>().Parameter<IFuzz>().Name, thrown.ParamName);
+            }
+
+            [Fact]
+            public void ReturnsFuzzyInt32WithGivenMinimumAndMaximum() {
+                int expected = random.Next();
+                Expression<Predicate<FuzzyRange<int>>> fuzzyUInt32 = v => v.Minimum == sut.Minimum && v.Maximum == sut.Maximum;
+                ConfiguredCall arrange = fuzzy.Build(Arg.Is(fuzzyUInt32)).Returns(expected);
+
+                int actual = sut.New(fuzzy);
+
+                Assert.Equal(expected, actual);
+            }
+        }
+
+        sealed class TestRange: Range<TestRange> { }
     }
 }

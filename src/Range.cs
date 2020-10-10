@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Fuzzy
 {
@@ -41,5 +41,9 @@ namespace Fuzzy
             range.Initialize(max - 1, max);
             return range;
         }
+
+        public int New(IFuzz fuzzy) => fuzzy == null
+            ? throw new ArgumentNullException(nameof(fuzzy))
+            : (int)fuzzy.Int32().Between(Minimum, Maximum);
     }
 }
