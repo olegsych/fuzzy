@@ -1,7 +1,7 @@
-﻿namespace Fuzzy
+namespace Fuzzy
 {
     public class CountTest
     {
-        readonly NaturalRange<Count> sut = new Count();
+        readonly Range<Count> sut = new Count();
     }
 }
