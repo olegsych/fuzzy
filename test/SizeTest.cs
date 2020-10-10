@@ -46,6 +46,13 @@ namespace Fuzzy
                 Assert.Equal(max, sut.Maximum);
                 Assert.Null(sut.Minimum);
             }
+
+            [Fact]
+            public void ThrowsDescriptiveExceptionWhenValueIsLessThan0() {
+                var thrown = Assert.Throws<ArgumentOutOfRangeException>(() => TestSize.Max(-1));
+                Method method = typeof(TestSize).Method(nameof(TestSize.Max));
+                Assert.Equal(method.Parameter<int>().Name, thrown.ParamName);
+            }
         }
 
         public class Min: SizeTest
@@ -58,8 +65,11 @@ namespace Fuzzy
             }
 
             [Fact]
-            public void ThrowsDescriptiveExceptionWhenValueIsLessThan0() =>
-                Assert.Throws<ArgumentOutOfRangeException>(() => TestSize.Min(-1));
+            public void ThrowsDescriptiveExceptionWhenValueIsLessThan0() {
+                var thrown = Assert.Throws<ArgumentOutOfRangeException>(() => TestSize.Min(-1));
+                Method method = typeof(TestSize).Method(nameof(TestSize.Min));
+                Assert.Equal(method.Parameter<int>().Name, thrown.ParamName);
+            }
         }
 
         public class New: SizeTest

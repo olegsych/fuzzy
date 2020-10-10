@@ -11,7 +11,9 @@ namespace Fuzzy
         protected virtual void Initialize(int? min, int? max)
         {
             if(min < 0)
-                throw new ArgumentOutOfRangeException();
+                throw new ArgumentOutOfRangeException(nameof(min));
+            if(max < 0)
+                throw new ArgumentOutOfRangeException(nameof(max));
             if(min > max)
                 throw new ArgumentException($"Minimum {min} is larger than maximum {max}.");
             Minimum = min;
