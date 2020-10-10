@@ -41,30 +41,20 @@ namespace Fuzzy
         public class Max: SizeTest
         {
             [Fact]
-            public void ReturnsRangeInitializedWithGivenMaximumValue() {
+            public void ReturnsRangeInitializedWithGivenMaximumValueAndNoMinimum() {
                 var sut = TestSize.Max(max);
                 Assert.Equal(max, sut.Maximum);
-            }
-
-            [Fact]
-            public void ReturnsRangeWithMinimumValueLessThanGivenMaximum() {
-                var sut = TestSize.Max(2);
-                Assert.True(sut.Minimum < sut.Maximum);
+                Assert.Null(sut.Minimum);
             }
         }
 
         public class Min: SizeTest
         {
             [Fact]
-            public void ReturnsRangeInitializedWithGivenMinimumValue() {
+            public void ReturnsRangeInitializedWithGivenMinimumValueAndNoMaximum() {
                 var sut = TestSize.Min(min);
                 Assert.Equal(min, sut.Minimum);
-            }
-
-            [Fact]
-            public void ReturnsRangeWithMaximumGreaterThanGivenMinimum() {
-                var sut = TestSize.Min(14);
-                Assert.True(sut.Minimum < sut.Maximum);
+                Assert.Null(sut.Maximum);
             }
 
             [Fact]

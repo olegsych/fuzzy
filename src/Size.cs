@@ -4,12 +4,9 @@ namespace Fuzzy
 {
     public abstract class Size<TSize> where TSize : Size<TSize>, new()
     {
-        int? min;
-        int? max;
+        public int? Maximum { get; private set; }
 
-        public int Maximum => max ?? 13;
-
-        public int Minimum => min ?? 5;
+        public int? Minimum { get; private set; }
 
         protected virtual void Initialize(int? min, int? max)
         {
@@ -17,8 +14,8 @@ namespace Fuzzy
                 throw new ArgumentOutOfRangeException();
             if(min > max)
                 throw new ArgumentException($"Minimum {min} is larger than maximum {max}.");
-            this.min = min;
-            this.max = max;
+            Minimum = min;
+            Maximum = max;
         }
 
         public static TSize Between(int minimum, int maximum)
@@ -33,21 +30,21 @@ namespace Fuzzy
         public static TSize Min(int min)
         {
             var range = new TSize();
-            range.Initialize(min, min + 1);
+            range.Initialize(min, null);
             return range;
         }
 
         public static TSize Max(int max)
         {
             var range = new TSize();
-            range.Initialize(max - 1, max);
+            range.Initialize(null, max);
             return range;
         }
 
         public int New(IFuzz fuzzy) {
             if(fuzzy == null)
                 throw new ArgumentNullException(nameof(fuzzy));
-            return fuzzy.Int32().Between(Minimum, Maximum);
+            return fuzzy.Int32().Between(Minimum.Value, Maximum.Value);
         }
     }
 }
