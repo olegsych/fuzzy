@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Fuzzy
 {
-    public class RangeTest
+    public class SizeTest
     {
         static readonly Random random = new Random();
 
@@ -15,71 +15,71 @@ namespace Fuzzy
         readonly int min = random.Next() % 1000;
         readonly int max;
 
-        public RangeTest() => max = min + random.Next() % 10;
+        public SizeTest() => max = min + random.Next() % 10;
 
-        public class Between: RangeTest
+        public class Between: SizeTest
         {
             [Fact]
             public void ReturnsRangeInitializedWithGivenMinimumAndMaximumValues() {
-                var sut = TestRange.Between(min, max);
+                var sut = TestSize.Between(min, max);
                 Assert.Equal(min, sut.Minimum);
                 Assert.Equal(max, sut.Maximum);
             }
 
             [Fact]
             public void ThrowsDescriptiveExceptionWhenMaxIsLessThanMin() {
-                var e = Assert.Throws<ArgumentException>(() => TestRange.Between(min, min - 1));
+                var e = Assert.Throws<ArgumentException>(() => TestSize.Between(min, min - 1));
                 Assert.Contains(min.ToString(), e.Message);
                 Assert.Contains((min - 1).ToString(), e.Message);
             }
 
             [Fact]
             public void ThrowsDescriptiveExceptionWhenMinIsLessThan0() =>
-                Assert.Throws<ArgumentOutOfRangeException>(() => TestRange.Between(-1, max));
+                Assert.Throws<ArgumentOutOfRangeException>(() => TestSize.Between(-1, max));
         }
 
-        public class Max: RangeTest
+        public class Max: SizeTest
         {
             [Fact]
             public void ReturnsRangeInitializedWithGivenMaximumValue() {
-                var sut = TestRange.Max(max);
+                var sut = TestSize.Max(max);
                 Assert.Equal(max, sut.Maximum);
             }
 
             [Fact]
             public void ReturnsRangeWithMinimumValueLessThanGivenMaximum() {
-                var sut = TestRange.Max(2);
+                var sut = TestSize.Max(2);
                 Assert.True(sut.Minimum < sut.Maximum);
             }
         }
 
-        public class Min: RangeTest
+        public class Min: SizeTest
         {
             [Fact]
             public void ReturnsRangeInitializedWithGivenMinimumValue() {
-                var sut = TestRange.Min(min);
+                var sut = TestSize.Min(min);
                 Assert.Equal(min, sut.Minimum);
             }
 
             [Fact]
             public void ReturnsRangeWithMaximumGreaterThanGivenMinimum() {
-                var sut = TestRange.Min(14);
+                var sut = TestSize.Min(14);
                 Assert.True(sut.Minimum < sut.Maximum);
             }
 
             [Fact]
             public void ThrowsDescriptiveExceptionWhenValueIsLessThan0() =>
-                Assert.Throws<ArgumentOutOfRangeException>(() => TestRange.Min(-1));
+                Assert.Throws<ArgumentOutOfRangeException>(() => TestSize.Min(-1));
         }
 
-        public class New: RangeTest
+        public class New: SizeTest
         {
-            readonly Range<TestRange> sut;
+            readonly Size<TestSize> sut;
 
             // Method parameters
             readonly IFuzz fuzzy = Substitute.For<IFuzz>();
 
-            public New() => sut = TestRange.Between(min, max);
+            public New() => sut = TestSize.Between(min, max);
 
             [Fact]
             public void ThrowsDescriptiveExceptionWhenFuzzIsNull() {
@@ -99,6 +99,6 @@ namespace Fuzzy
             }
         }
 
-        sealed class TestRange: Range<TestRange> { }
+        sealed class TestSize: Size<TestSize> { }
     }
 }

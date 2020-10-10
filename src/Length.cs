@@ -1,6 +1,6 @@
 namespace Fuzzy
 {
-    public sealed class Length : Range<Length>
+    public sealed class Length : Size<Length>
     {
     }
 }

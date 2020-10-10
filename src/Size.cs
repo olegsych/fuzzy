@@ -2,7 +2,7 @@ using System;
 
 namespace Fuzzy
 {
-    public abstract class Range<TRange> where TRange : Range<TRange>, new()
+    public abstract class Size<TSize> where TSize : Size<TSize>, new()
     {
         int? min;
         int? max;
@@ -21,25 +21,25 @@ namespace Fuzzy
             this.max = max;
         }
 
-        public static TRange Between(int minimum, int maximum)
+        public static TSize Between(int minimum, int maximum)
         {
-            var range = new TRange();
+            var range = new TSize();
             range.Initialize(minimum, maximum);
             return range;
         }
 
-        public static TRange Exactly(int value) => throw new NotImplementedException();
+        public static TSize Exactly(int value) => throw new NotImplementedException();
 
-        public static TRange Min(int min)
+        public static TSize Min(int min)
         {
-            var range = new TRange();
+            var range = new TSize();
             range.Initialize(min, min + 1);
             return range;
         }
 
-        public static TRange Max(int max)
+        public static TSize Max(int max)
         {
-            var range = new TRange();
+            var range = new TSize();
             range.Initialize(max - 1, max);
             return range;
         }

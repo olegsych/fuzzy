@@ -1,6 +1,6 @@
 namespace Fuzzy
 {
-    public sealed class Count : Range<Count>
+    public sealed class Count : Size<Count>
     {
     }
 }

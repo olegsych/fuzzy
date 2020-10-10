@@ -2,6 +2,6 @@ namespace Fuzzy
 {
     public class LengthTest
     {
-        readonly Range<Length> sut = new Length();
+        readonly Size<Length> sut = new Length();
     }
 }
