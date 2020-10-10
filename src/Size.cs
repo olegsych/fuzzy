@@ -14,16 +14,16 @@ namespace Fuzzy
                 throw new ArgumentOutOfRangeException(nameof(min));
             if(max < 0)
                 throw new ArgumentOutOfRangeException(nameof(max));
-            if(min > max)
-                throw new ArgumentException($"Minimum {min} is larger than maximum {max}.");
+            if(max < min)
+                throw new ArgumentException($"Minimum {min} is larger than maximum {max}.", nameof(max));
             Minimum = min;
             Maximum = max;
         }
 
-        public static TSize Between(int minimum, int maximum)
+        public static TSize Between(int min, int max)
         {
             var range = new TSize();
-            range.Initialize(minimum, maximum);
+            range.Initialize(min, max);
             return range;
         }
 

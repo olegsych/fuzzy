@@ -28,9 +28,11 @@ namespace Fuzzy
 
             [Fact]
             public void ThrowsDescriptiveExceptionWhenMaxIsLessThanMin() {
-                var e = Assert.Throws<ArgumentException>(() => TestSize.Between(min, min - 1));
-                Assert.Contains(min.ToString(), e.Message);
-                Assert.Contains((min - 1).ToString(), e.Message);
+                var thrown = Assert.Throws<ArgumentException>(() => TestSize.Between(min, min - 1));
+                Method method = typeof(TestSize).Method(nameof(TestSize.Between));
+                Assert.Equal(method.Parameter<int>("max").Name, thrown.ParamName);
+                Assert.Contains(min.ToString(), thrown.Message);
+                Assert.Contains((min - 1).ToString(), thrown.Message);
             }
 
             [Fact]
