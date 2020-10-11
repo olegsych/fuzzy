@@ -91,13 +91,9 @@ namespace Fuzzy
 
             [Fact]
             public void ReturnsFuzzyInt32WithGivenMinimumAndMaximum() {
-                int expected = random.Next();
-                Expression<Predicate<FuzzyRange<int>>> fuzzyUInt32 = v => v.Minimum == sut.Minimum && v.Maximum == sut.Maximum;
-                ConfiguredCall arrange = fuzzy.Build(Arg.Is(fuzzyUInt32)).Returns(expected);
-
-                int actual = sut.New(fuzzy);
-
-                Assert.Equal(expected, actual);
+                FuzzyRange<int> actual = sut.New(fuzzy);
+                Assert.Equal(sut.Minimum, actual.Minimum);
+                Assert.Equal(sut.Maximum, actual.Maximum);
             }
         }
 
