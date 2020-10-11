@@ -4,6 +4,10 @@ namespace Fuzzy
 {
     public abstract class Size<TSize> where TSize : Size<TSize>, new()
     {
+        const int defaultMinimum = 8;
+        const int defaultRange = 5;
+        const int defaultMaximum = defaultMinimum + defaultRange;
+
         int? maximum;
         int? minimum;
 
@@ -45,9 +49,22 @@ namespace Fuzzy
         public FuzzyRange<int> New(IFuzz fuzzy) {
             if(fuzzy == null)
                 throw new ArgumentNullException(nameof(fuzzy));
-            int minimum = this.minimum ?? 0;
-            int maximum = this.maximum ?? int.MaxValue;
-            return fuzzy.Int32().Between(minimum, maximum);
+            return fuzzy.Int32().Between(Minimum(), Maximum());
         }
+
+        int Maximum() {
+            if(maximum.HasValue)
+                return maximum.Value;
+            int minimum = Minimum();
+            return minimum >= defaultMaximum
+                ? minimum + defaultRange
+                : defaultMaximum;
+        }
+
+        int Minimum() => minimum ?? (
+            maximum >= defaultMinimum ? defaultMinimum :
+            maximum >= 2 ? 2 :
+            maximum ??
+            defaultMinimum);
     }
 }

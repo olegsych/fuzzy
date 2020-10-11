@@ -81,21 +81,60 @@ namespace Fuzzy
 
         public class New: SizeTest
         {
-            readonly Size<TestSize> sut;
-
-            public New() => sut = TestSize.Between(minimum, maximum);
+            Size<TestSize> sut;
 
             [Fact]
             public void ThrowsDescriptiveExceptionWhenFuzzIsNull() {
+                sut = new TestSize();
+
                 var thrown = Assert.Throws<ArgumentNullException>(() => sut.New(null));
+
                 Assert.Equal(sut.Method(nameof(sut.New)).Parameter<IFuzz>().Name, thrown.ParamName);
             }
 
             [Fact]
             public void ReturnsFuzzyInt32WithGivenMinimumAndMaximum() {
+                sut = TestSize.Between(minimum, maximum);
+
                 FuzzyRange<int> actual = sut.New(fuzzy);
+
                 Assert.Equal(minimum, actual.Minimum);
                 Assert.Equal(maximum, actual.Maximum);
+            }
+
+            [Fact]
+            public void ReturnsFuzzyInt32WithDefaultMinimumAndMaximum() {
+                sut = new TestSize();
+
+                FuzzyRange<int> actual = sut.New(fuzzy);
+
+                Assert.Equal(8, actual.Minimum);
+                Assert.Equal(13, actual.Maximum);
+            }
+
+            [Theory]
+            [InlineData(7, 2)]
+            [InlineData(1, 1)]
+            [InlineData(0, 0)]
+            public void ReturnsFuzzyInt32WhenMaximumIsLessThanDefaultMinimum(int maximum, int expectedMinimum) {
+                sut = TestSize.Max(maximum);
+
+                FuzzyRange<int> actual = sut.New(fuzzy);
+
+                Assert.Equal(expectedMinimum, actual.Minimum);
+                Assert.Equal(maximum, actual.Maximum);
+            }
+
+            [Theory]
+            [InlineData(13, 18)]
+            [InlineData(14, 19)]
+            public void ReturnsFuzzyInt32WhenMinimumIsMoreThanDefaultMaximum(int minimum, int expectedMaximum) {
+                sut = TestSize.Min(minimum);
+
+                FuzzyRange<int> actual = sut.New(fuzzy);
+
+                Assert.Equal(expectedMaximum, actual.Maximum);
+                Assert.Equal(minimum, actual.Minimum);
             }
         }
 
