@@ -11,6 +11,11 @@ namespace Fuzzy
         int? maximum;
         int? minimum;
 
+        public override bool Equals(object other) =>
+            other is Size<TSize> otherSize
+                && otherSize.minimum.Equals(minimum)
+                && otherSize.maximum.Equals(maximum);
+
         protected virtual void Initialize(int? min, int? max)
         {
             if(min < 0)

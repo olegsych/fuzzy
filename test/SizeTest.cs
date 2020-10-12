@@ -43,6 +43,35 @@ namespace Fuzzy
                 Assert.Throws<ArgumentOutOfRangeException>(() => TestSize.Between(-1, maximum));
         }
 
+        public new class Equals: SizeTest
+        {
+            [Theory]
+            [InlineData(null, null, true)]
+            [InlineData(42, 42, true)]
+            [InlineData(null, 42, false)]
+            [InlineData(42, null, false)]
+            public void ReturnsValueBasedOnMinimum(int? firstMinimum, int? secondMinimum, bool expected) {
+                var firstSize = new TestSize(firstMinimum, null);
+                var secondSize = new TestSize(secondMinimum, null);
+                Assert.Equal(expected, firstSize.Equals(secondSize));
+            }
+
+            [Theory]
+            [InlineData(null, null, true)]
+            [InlineData(42, 42, true)]
+            [InlineData(null, 42, false)]
+            [InlineData(42, null, false)]
+            public void ReturnsValueBasedOnMaximum(int? firstMaximum, int? secondMaximum, bool expected) {
+                var firstSize = new TestSize(null, firstMaximum);
+                var secondSize = new TestSize(null, secondMaximum);
+                Assert.Equal(expected, firstSize.Equals(secondSize));
+            }
+
+            [Fact]
+            public void ReturnsFalseWhenOtherIsNotSize() =>
+                Assert.NotEqual(new TestSize(), new object());
+        }
+
         public class Max: SizeTest
         {
             [Fact]
@@ -138,6 +167,10 @@ namespace Fuzzy
             }
         }
 
-        sealed class TestSize: Size<TestSize> { }
+        sealed class TestSize: Size<TestSize>
+        {
+            public TestSize() { }
+            public TestSize(int? minimum, int? maximum) => base.Initialize(minimum, maximum);
+        }
     }
 }
