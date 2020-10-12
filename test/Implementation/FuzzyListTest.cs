@@ -9,9 +9,9 @@ using Xunit;
 
 namespace Fuzzy.Implementation
 {
-    public class FuzzyIEnumerableTest
+    public class FuzzyListTest
     {
-        readonly Fuzzy<IEnumerable<TestItem>> sut;
+        readonly Fuzzy<List<TestItem>> sut;
 
         // Constructor parameters
         readonly IFuzz fuzzy = Substitute.For<IFuzz>();
@@ -23,45 +23,45 @@ namespace Fuzzy.Implementation
         readonly int minCount;
         readonly int maxCount;
 
-        FuzzyIEnumerableTest() {
+        FuzzyListTest() {
             minCount = 1 + random.Next() % 10;
             maxCount = minCount + 1 + random.Next() % 10;
             itemCount = Count.Between(minCount, maxCount);
-            sut = new FuzzyIEnumerable<TestItem>(fuzzy, itemFactory, itemCount);
+            sut = new FuzzyList<TestItem>(fuzzy, itemFactory, itemCount);
         }
 
-        public class Constructor: FuzzyIEnumerableTest
+        public class Constructor: FuzzyListTest
         {
             [Fact]
             public void ThrowsDescriptiveExceptionWhenFuzzIsNull() {
-                var thrown = Assert.Throws<ArgumentNullException>(() => new FuzzyIEnumerable<TestItem>(null, itemFactory, itemCount));
+                var thrown = Assert.Throws<ArgumentNullException>(() => new FuzzyList<TestItem>(null, itemFactory, itemCount));
                 Assert.Equal(sut.Constructor().Parameter<IFuzz>().Name, thrown.ParamName);
             }
 
             [Fact]
             public void ThrowsDescriptiveExceptionWhenItemFactoryIsNull() {
-                var thrown = Assert.Throws<ArgumentNullException>(() => new FuzzyIEnumerable<TestItem>(fuzzy, null, itemCount));
+                var thrown = Assert.Throws<ArgumentNullException>(() => new FuzzyList<TestItem>(fuzzy, null, itemCount));
                 Assert.Equal(sut.Constructor().Parameter<Func<TestItem>>().Name, thrown.ParamName);
             }
 
             [Fact]
             public void ThrowsDescriptiveExceptionWhenItemCountIsNull() {
-                var thrown = Assert.Throws<ArgumentNullException>(() => new FuzzyIEnumerable<TestItem>(fuzzy, itemFactory, null));
+                var thrown = Assert.Throws<ArgumentNullException>(() => new FuzzyList<TestItem>(fuzzy, itemFactory, null));
                 Assert.Equal(sut.Constructor().Parameter<Count>().Name, thrown.ParamName);
             }
         }
 
-        public class New: FuzzyIEnumerableTest
+        public class New: FuzzyListTest
         {
             [Fact]
-            public void ReturnsIEnumerableWithGivenCountOfItemsCreatedByFactory() {
+            public void ReturnsListWithGivenCountOfItemsCreatedByFactory() {
                 int expectedCount = 2 + random.Next() % 10;
                 Expression<Predicate<FuzzyRange<int>>> fuzzyCount = f => f.Minimum == minCount && f.Maximum == maxCount;
                 ConfiguredCall arrange = fuzzy.Build(Arg.Is(fuzzyCount)).Returns(expectedCount);
-                IEnumerable<TestItem> expectedItems = Enumerable.Range(0, expectedCount).Select(i => new TestItem()).ToArray();
+                List<TestItem> expectedItems = Enumerable.Range(0, expectedCount).Select(i => new TestItem()).ToList();
                 arrange = itemFactory.Invoke().Returns(expectedItems.First(), expectedItems.Skip(1).ToArray());
 
-                IEnumerable<TestItem> actualItems = sut.New();
+                List<TestItem> actualItems = sut.New();
 
                 Assert.Equal(expectedItems, actualItems);
             }
