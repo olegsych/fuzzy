@@ -14,8 +14,8 @@ namespace Fuzzy
         }
 
         [Fact]
-        public void CreateListOfFuzzyElementsWithLengthSpecification() {
-            List<int> values = fuzzy.List(fuzzy.Int32, Length.Between(41, 43));
+        public void CreateListOfFuzzyElementsWithCountSpecification() {
+            List<int> values = fuzzy.List(fuzzy.Int32, Count.Between(41, 43));
         }
 
         [Fact]
@@ -25,9 +25,9 @@ namespace Fuzzy
         }
 
         [Fact]
-        public void CreateListOfExistingElementsWithLengthConstraints() {
+        public void CreateListOfExistingElementsWithCountConstraints() {
             IEnumerable<int> existing = new[] { 41, 42, 43, 44, 45 };
-            List<int> selected = fuzzy.List(existing, Length.Between(2, 4));
+            List<int> selected = fuzzy.List(existing, Count.Between(2, 4));
 
         }
 
@@ -37,17 +37,17 @@ namespace Fuzzy
         }
 
         [Fact]
-        public void CreateListOfCustomElementsWithLengthConstraints() {
-            List<int> values = fuzzy.List(() => Environment.TickCount, Length.Between(42, 43));
+        public void CreateListOfCustomElementsWithCountConstraints() {
+            List<int> values = fuzzy.List(() => Environment.TickCount, Count.Between(42, 43));
         }
 
         [Fact]
-        public void ControlListLength() {
+        public void ControlListCount() {
             List<int> values;
-            values = fuzzy.List(fuzzy.Int32, Length.Exactly(42));
-            values = fuzzy.List(fuzzy.Int32, Length.Between(41, 43));
-            values = fuzzy.List(fuzzy.Int32, Length.Max(43));
-            values = fuzzy.List(fuzzy.Int32, Length.Min(5));
+            values = fuzzy.List(fuzzy.Int32, Count.Exactly(42));
+            values = fuzzy.List(fuzzy.Int32, Count.Between(41, 43));
+            values = fuzzy.List(fuzzy.Int32, Count.Max(43));
+            values = fuzzy.List(fuzzy.Int32, Count.Min(5));
         }
     }
 }
