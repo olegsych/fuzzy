@@ -9,10 +9,11 @@ namespace Fuzzy
         public static Fuzzy<List<T>> List<T>(this IFuzz fuzzy, Func<T> createElement, Count count = default) =>
             new FuzzyList<T>(fuzzy, createElement, count ?? new Count());
 
-        public static Fuzzy<List<T>> List<T>(this IFuzz fuzzy, Func<Fuzzy<T>> createElement, Count count = default) => throw new NotImplementedException();
+        public static Fuzzy<List<T>> List<T>(this IFuzz fuzzy, Func<Fuzzy<T>> createElement, Count count = default) =>
+            fuzzy.List(() => (T)createElement(), count);
 
         public static Fuzzy<List<T>> List<T>(this IFuzz fuzzy, Func<FuzzyRange<T>> createElement, Count count = default) where T: struct, IComparable<T> =>
-            fuzzy.List(() => (T)createElement(), count);
+            fuzzy.List((Func<Fuzzy<T>>)createElement, count);
 
         public static Fuzzy<List<T>> List<T>(this IFuzz fuzzy, IEnumerable<T> elements, Count count = default) => throw new NotImplementedException();
     }

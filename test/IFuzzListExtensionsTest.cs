@@ -41,6 +41,40 @@ namespace Fuzzy
                 Assert.Same(createElement, fuzzyList.Field<Func<TestStruct>>().Value);
         }
 
+        public class ListFuncOfFuzzyT: IFuzzListExtensionsTest
+        {
+            // Method parameters
+            readonly Func<Fuzzy<TestStruct>> createElement = Substitute.For<Func<Fuzzy<TestStruct>>>();
+            readonly Count count = new Count();
+
+            [Fact]
+            public void ReturnsFuzzyListWithGivenFuzzFactoryAndCount() {
+                Fuzzy<List<TestStruct>> actual = fuzzy.List(createElement, count);
+
+                AssertExpectedFuzzyList(actual);
+                Assert.Same(count, actual.Field<Count>().Value);
+            }
+
+            [Fact]
+            public void ReturnsFuzzyListWithDefaultCount() {
+                Fuzzy<List<TestStruct>> actual = fuzzy.List(createElement);
+
+                AssertExpectedFuzzyList(actual);
+                Assert.Equal(new Count(), actual.Field<Count>().Value);
+            }
+
+            protected override void AssertExpectedFuzzyElementFactory(Fuzzy<List<TestStruct>> fuzzyList) {
+                var fuzzyElement = Substitute.ForPartsOf<Fuzzy<TestStruct>>(fuzzy);
+                ConfiguredCall arrange1 = createElement().Returns(fuzzyElement);
+                var expected = new TestStruct(random.Next());
+                ConfiguredCall arrange2 = fuzzy.Build(fuzzyElement).Returns(expected);
+
+                TestStruct actual = fuzzyList.Field<Func<TestStruct>>().Value();
+
+                Assert.Equal(expected, actual);
+            }
+        }
+
         public class ListFuncOfFuzzyRange: IFuzzListExtensionsTest
         {
             // Method parameters
@@ -66,10 +100,10 @@ namespace Fuzzy
             protected override void AssertExpectedFuzzyElementFactory(Fuzzy<List<TestStruct>> fuzzyList) {
                 var min = new TestStruct(random.Next() % 1000);
                 var max = new TestStruct(min.Value + random.Next() % 1000);
-                var fuzzyRange = Substitute.ForPartsOf<FuzzyRange<TestStruct>>(fuzzy, min, max);
-                ConfiguredCall arrange1 = createElement().Returns(fuzzyRange);
+                var fuzzyElement = Substitute.ForPartsOf<FuzzyRange<TestStruct>>(fuzzy, min, max);
+                ConfiguredCall arrange1 = createElement().Returns(fuzzyElement);
                 var expected = new TestStruct(random.Next());
-                ConfiguredCall arrange2 = fuzzy.Build(fuzzyRange).Returns(expected);
+                ConfiguredCall arrange2 = fuzzy.Build(fuzzyElement).Returns(expected);
 
                 TestStruct actual = fuzzyList.Field<Func<TestStruct>>().Value();
 
