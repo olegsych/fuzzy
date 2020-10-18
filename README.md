@@ -103,3 +103,13 @@ CustomType value = fuzzy.CustomType();
 ```
 
 And, if you need fuzzy values of one of the .NET framework types, consider [contributing](./CONTRIBUTING.md) it to `Fuzzy`.
+
+# debug
+
+Sometimes fuzzy test inputs can produce test results that are hard to understand or repeat. This is a sign that either
+your tests or your system aren't handling a particular input correctly. You will need to correct this by making your
+tests handle this input specifically and possibly adjust your system code. In the meantime, you can replace the `RandomFuzz`
+with the `SequentialFuzz` to make fuzzy values more predictable.
+```C#
+IFuzz fuzzy = new SequentialFuzz();
+```
