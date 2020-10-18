@@ -4,16 +4,18 @@ namespace Fuzzy
 {
     public abstract class Fuzzy<T>
     {
+        readonly Lazy<T> lazy;
         protected readonly IFuzz fuzzy;
 
-        public Fuzzy(IFuzz fuzzy) =>
+        public Fuzzy(IFuzz fuzzy) {
             this.fuzzy = fuzzy ?? throw new ArgumentNullException(nameof(fuzzy));
+            lazy = new Lazy<T>(() => fuzzy.Build(this)); // Call IFuzz.Build for testability
+        }
+
+        public T Value => lazy.Value;
 
         public abstract T New();
 
-        public static implicit operator T(Fuzzy<T> fuzzy) => fuzzy.Build();
-
-        // Call virtual IFuzz.Build<T>() for testability
-        T Build() => fuzzy.Build(this);
+        public static implicit operator T(Fuzzy<T> fuzzy) => fuzzy.Value;
     }
 }

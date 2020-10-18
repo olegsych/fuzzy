@@ -35,14 +35,28 @@ namespace Fuzzy
         public class ImplicitTypeConversionOperator : FuzzyTest
         {
             [Fact]
-            public void ReturnsVaueBuiltFromSut()
+            public void ReturnsVaueBuiltFromSutOnce()
             {
                 var expected = new TestClass();
-                ConfiguredCall arrange = fuzz.Build(sut).Returns(expected);
+                ConfiguredCall arrange = fuzz.Build(sut).Returns(expected, new TestClass());
 
-                TestClass actual = sut;
+                TestClass actual1 = sut;
+                TestClass actual2 = sut;
 
-                Assert.Same(expected, actual);
+                Assert.Same(expected, actual1);
+                Assert.Same(expected, actual2);
+            }
+        }
+
+        public class Value: FuzzyTest
+        {
+            [Fact]
+            public void ReturnsVaueBuiltFromSutOnce() {
+                var expected = new TestClass();
+                ConfiguredCall arrange = fuzz.Build(sut).Returns(expected, new TestClass());
+
+                Assert.Same(expected, sut.Value);
+                Assert.Same(expected, sut.Value);
             }
         }
 
