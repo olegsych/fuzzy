@@ -1,3 +1,6 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using Fuzzy.Implementation;
 using Inspector;
 using NSubstitute;
@@ -86,6 +89,18 @@ namespace Fuzzy
                 Fuzzy<TestEnum> actual = fuzzy.Enum<TestEnum>();
                 Assert.IsType<FuzzyEnum<TestEnum>>(actual);
                 Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
+            }
+        }
+
+        public class Index: IFuzzExtensionsTest
+        {
+            [Fact]
+            public void ReturnsFuzzyIndex() {
+                var elements = new TestStruct[0];
+                Fuzzy<int> actual = fuzzy.Index(elements);
+                Assert.Equal(typeof(FuzzyIndex<TestStruct>), actual.GetType());
+                Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
+                Assert.Same(elements, actual.Field<IEnumerable<TestStruct>>().Value);
             }
         }
 

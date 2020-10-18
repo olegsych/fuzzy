@@ -22,6 +22,8 @@ namespace Fuzzy
 
         public static Fuzzy<T> Enum<T>(this IFuzz fuzzy) where T : Enum => new FuzzyEnum<T>(fuzzy);
 
+        public static Fuzzy<int> Index<T>(this IFuzz fuzzy, IEnumerable<T> elements) => new FuzzyIndex<T>(fuzzy, elements);
+
         public static FuzzyRange<short> Int16(this IFuzz fuzzy) => new FuzzyInt16(fuzzy);
 
         public static FuzzyRange<int> Int32(this IFuzz fuzzy) => new FuzzyInt32(fuzzy);
