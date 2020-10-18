@@ -111,9 +111,10 @@ namespace Fuzzy
             }
         }
 
-        void AssertExpectedFuzzyList(Fuzzy<List<TestStruct>> actual) {
-            Assert.Equal(typeof(FuzzyList<TestStruct>), actual.GetType());
-            Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
+        void AssertExpectedFuzzyList(Fuzzy<List<TestStruct>> fuzzyList) {
+            Assert.Equal(typeof(FuzzyList<TestStruct>), fuzzyList.GetType());
+            Assert.Same(fuzzy, fuzzyList.Field<IFuzz>().Value);
+            AssertExpectedFuzzyElementFactory(fuzzyList);
         }
 
         protected abstract void AssertExpectedFuzzyElementFactory(Fuzzy<List<TestStruct>> fuzzyList);
