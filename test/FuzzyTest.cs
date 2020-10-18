@@ -15,6 +15,9 @@ namespace Fuzzy
         // Constructor parameters
         readonly IFuzz fuzz = Substitute.For<IFuzz>();
 
+        // Test fixture
+        readonly Random random = new Random();
+
         public FuzzyTest() => sut = Substitute.ForPartsOf<Fuzzy<TestClass>>(fuzz);
 
         public class Constructor : FuzzyTest
@@ -45,6 +48,18 @@ namespace Fuzzy
 
                 Assert.Same(expected, actual1);
                 Assert.Same(expected, actual2);
+            }
+        }
+
+        public new class ToString: FuzzyTest
+        {
+            [Fact]
+            public void BuildsFuzzyValueOnceAndReturnsItsToStringResult() {
+                int expected = random.Next();
+                var actual = Substitute.ForPartsOf<Fuzzy<int>>(fuzz);
+                ConfiguredCall arrange = fuzz.Build(actual).Returns(expected, random.Next());
+                Assert.Equal(expected.ToString(), actual.ToString());
+                Assert.Equal(expected.ToString(), actual.ToString());
             }
         }
 
