@@ -202,5 +202,15 @@ namespace Fuzzy
                 Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
             }
         }
+
+        public class Uri: IFuzzExtensionsTest
+        {
+            [Fact]
+            public void ReturnsFuzzyUri() {
+                Fuzzy<System.Uri> returned = fuzzy.Uri();
+                var actual = Assert.IsType<FuzzyUri>(returned);
+                Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
+            }
+        }
     }
 }
