@@ -8,7 +8,7 @@ namespace Fuzzy
     {
         static readonly IFuzz fuzzy = new SequentialFuzz();
 
-        [Fact]
+        [Fact(Skip = Reason.NotImplemented)]
         public void CreateDictionaryOfFuzzyElements() {
             Dictionary<int, string> values = fuzzy.Dictionary(fuzzy.Int32, fuzzy.String);
         }
