@@ -21,7 +21,7 @@ Pull requests are automatically validated by [AppVeyor](https://ci.appveyor.com/
 
 # continuous integration
 The [AppVeyor build](https://ci.appveyor.com/project/olegsych/fuzzy) is automatically triggered for the master branch.
-Build settings are defined in [appveyor.yml](.\appveyor.yml).
+Build settings are defined in [appveyor.yml](./appveyor.yml).
 NuGet and symbol packages produced by builds are immediately available from the [AppVeyor package feed](https://ci.appveyor.com/nuget/fuzzy).
 
 # release
