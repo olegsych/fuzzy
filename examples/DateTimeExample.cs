@@ -5,7 +5,7 @@ namespace Fuzzy
 {
     public class DateTimeExample
     {
-        static readonly IFuzz fuzzy = new SequentialFuzz();
+        static readonly IFuzz fuzzy = new RandomFuzz();
 
         [Fact]
         public void GetFuzzyValue() {

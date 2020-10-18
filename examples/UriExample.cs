@@ -5,7 +5,7 @@ namespace Fuzzy
 {
     public class UriExample
     {
-        static readonly IFuzz fuzzy = new SequentialFuzz();
+        static readonly IFuzz fuzzy = new RandomFuzz();
 
         [Fact]
         public void GetFuzzyValue() {

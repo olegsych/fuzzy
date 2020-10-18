@@ -6,7 +6,7 @@ namespace Fuzzy
 {
     public class ArrayExample
     {
-        static readonly IFuzz fuzzy = new SequentialFuzz();
+        static readonly IFuzz fuzzy = new RandomFuzz();
 
         [Fact]
         public void CreateArrayOfFuzzyElements() {

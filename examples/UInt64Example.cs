@@ -4,7 +4,7 @@ namespace Fuzzy
 {
     public class UInt64Example
     {
-        static readonly IFuzz fuzzy = new SequentialFuzz();
+        static readonly IFuzz fuzzy = new RandomFuzz();
 
         [Fact]
         public void GetFuzzyValue() {

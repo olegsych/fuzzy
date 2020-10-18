@@ -6,7 +6,7 @@ namespace Fuzzy
 {
     public class DictionaryExample
     {
-        static readonly IFuzz fuzzy = new SequentialFuzz();
+        static readonly IFuzz fuzzy = new RandomFuzz();
 
         [Fact(Skip = Reason.NotImplemented)]
         public void CreateDictionaryOfFuzzyElements() {
