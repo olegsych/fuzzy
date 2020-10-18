@@ -72,6 +72,20 @@ namespace Fuzzy
                 Assert.NotEqual(new TestSize(), new object());
         }
 
+        public new class GetHashCode: SizeTest
+        {
+            [Theory]
+            [InlineData(null, null)]
+            [InlineData(null, 42)]
+            [InlineData(42, null)]
+            [InlineData(42, 42)]
+            public void ReturnsValueBasedOnMinimumAndMaximum(int? minimum, int? maximum) {
+                var actual = new TestSize(minimum, maximum);
+                (int? minimum, int? maximum) expected = (minimum, maximum);
+                Assert.Equal(expected.GetHashCode(), actual.GetHashCode());
+            }
+        }
+
         public class Max: SizeTest
         {
             [Fact]

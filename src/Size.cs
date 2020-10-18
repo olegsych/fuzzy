@@ -12,9 +12,12 @@ namespace Fuzzy
         int? minimum;
 
         public override bool Equals(object other) =>
-            other is Size<TSize> otherSize
-                && otherSize.minimum.Equals(minimum)
-                && otherSize.maximum.Equals(maximum);
+            other is Size<TSize> otherSize &&
+            otherSize.minimum.Equals(minimum) &&
+            otherSize.maximum.Equals(maximum);
+
+        public override int GetHashCode() =>
+            (minimum, maximum).GetHashCode();
 
         protected virtual void Initialize(int? min, int? max)
         {
