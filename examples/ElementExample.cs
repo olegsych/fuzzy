@@ -9,8 +9,8 @@ namespace Fuzzy
 
         [Fact]
         public void GetFuzzyValue() {
-            IEnumerable<int> candidates = new[] { 41, 42, 43 };
-            int value = fuzzy.Element(candidates);
+            IEnumerable<string> candidates = new[] { "foo", "bar", "baz" };
+            string value = fuzzy.Element(candidates);
         }
     }
 }
