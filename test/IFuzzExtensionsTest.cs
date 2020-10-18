@@ -76,9 +76,11 @@ namespace Fuzzy
         {
             [Fact]
             public void ReturnsFuzzyElement() {
-                Fuzzy<TestStruct> actual = fuzzy.Element(new[] { new TestStruct(default) });
-                Assert.IsType<FuzzyElement<TestStruct>>(actual);
+                var elements = new TestStruct[0];
+                Fuzzy<TestStruct> actual = fuzzy.Element(elements);
+                Assert.Equal(typeof(FuzzyElement<TestStruct>), actual.GetType());
                 Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
+                Assert.Same(elements, actual.Field<IEnumerable<TestStruct>>().Value);
             }
         }
 

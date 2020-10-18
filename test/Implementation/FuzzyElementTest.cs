@@ -42,8 +42,8 @@ namespace Fuzzy.Implementation
             [Fact]
             public void ReturnsElementAtFuzzyIndex() {
                 int expectedIndex = random.Next() % candidates.Count();
-                Expression<Predicate<FuzzyRange<int>>> fuzzyInt = v => v.Minimum == 0 && v.Maximum == candidates.Count() - 1;
-                ConfiguredCall arrange = fuzzy.Build(Arg.Is(fuzzyInt)).Returns(expectedIndex);
+                Expression<Predicate<FuzzyIndex<TestStruct>>> fuzzyIndex = f => ReferenceEquals(candidates, f.Field<IEnumerable<TestStruct>>().Value);
+                ConfiguredCall arrange = fuzzy.Build(Arg.Is(fuzzyIndex)).Returns(expectedIndex);
 
                 TestStruct actual = sut.New();
 
