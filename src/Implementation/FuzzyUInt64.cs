@@ -4,7 +4,7 @@ namespace Fuzzy.Implementation
     {
         public FuzzyUInt64(IFuzz fuzzy) : base(fuzzy, ulong.MinValue, ulong.MaxValue) { }
 
-        public override ulong New() {
+        protected internal override ulong Build() {
             uint low = fuzzy.UInt32();
             uint high = fuzzy.UInt32();
             ulong sample = (ulong)high << 32 | low;

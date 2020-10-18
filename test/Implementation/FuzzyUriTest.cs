@@ -12,14 +12,14 @@ namespace Fuzzy.Implementation
         public FuzzyUriTest() =>
             sut = new FuzzyUri(fuzzy);
 
-        public class New: FuzzyUriTest
+        public class Build: FuzzyUriTest
         {
             [Fact]
             public void ReturnsUriBasedOnNextFuzzyValue() {
                 int next = random.Next();
                 ConfiguredCall arrange = fuzzy.Next().Returns(next);
 
-                Uri actual = sut.New();
+                Uri actual = sut.Build();
 
                 Assert.Equal($"https://fuzzy{next}/", actual.ToString());
             }

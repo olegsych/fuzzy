@@ -4,6 +4,6 @@ namespace Fuzzy.Implementation
     {
         public abstract int Next();
 
-        T IFuzz.Build<T>(Fuzzy<T> fuzzy) => fuzzy.New();
+        T IFuzz.Build<T>(Fuzzy<T> fuzzy) => fuzzy.Build();
     }
 }

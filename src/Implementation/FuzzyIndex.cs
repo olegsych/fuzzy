@@ -10,7 +10,7 @@ namespace Fuzzy.Implementation
         public FuzzyIndex(IFuzz fuzzy, IEnumerable<T> elements): base(fuzzy) =>
             this.elements = elements ?? throw new System.ArgumentNullException(nameof(elements));
 
-        public override int New() =>
+        protected internal override int Build() =>
             fuzzy.Int32().Between(0, elements.Count() - 1);
     }
 }

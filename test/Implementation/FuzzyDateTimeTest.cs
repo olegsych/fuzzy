@@ -24,7 +24,7 @@ namespace Fuzzy.Implementation
             }
         }
 
-        public class New: FuzzyDateTimeTest
+        public class Build: FuzzyDateTimeTest
         {
             [Fact]
             public void ReturnsDateTimeCreatedFromFuzzyLongAndDateTimeKindValues() {
@@ -36,7 +36,7 @@ namespace Fuzzy.Implementation
                 var expectedKind = (DateTimeKind)(random.Next() % ((int)DateTimeKind.Local + 1));
                 arrange = fuzzy.Build(Arg.Any<FuzzyEnum<DateTimeKind>>()).Returns(expectedKind);
 
-                DateTime actual = sut.New();
+                DateTime actual = sut.Build();
 
                 Assert.Equal(expectedTicks, actual.Ticks);
                 Assert.Equal(expectedKind, actual.Kind);

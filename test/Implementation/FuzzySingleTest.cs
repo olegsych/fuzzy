@@ -11,7 +11,7 @@ namespace Fuzzy.Implementation
 
         public FuzzySingleTest() => sut = new FuzzySingle(fuzzy);
 
-        public class New: FuzzySingleTest
+        public class Build: FuzzySingleTest
         {
             [Theory]
             [InlineData(true, 1, -150, 1 / float.PositiveInfinity)] // Positive 0
@@ -27,7 +27,7 @@ namespace Fuzzy.Implementation
                 arrange = fuzzy.Build(Arg.Is<FuzzyRange<uint>>(x => x.Minimum == 1 && x.Maximum == Math.Pow(2, 24) - 1)).Returns(mantissa);
                 arrange = fuzzy.Build(Arg.Is<FuzzyRange<short>>(x => x.Minimum == -150 && x.Maximum == 105)).Returns(exponent);
 
-                float actual = sut.New();
+                float actual = sut.Build();
 
                 Assert.Equal(expected, actual);
             }

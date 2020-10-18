@@ -22,7 +22,7 @@ namespace Fuzzy.Implementation
                 Assert.Same(fuzzy, sut.Field<IFuzz>().Value);
         }
 
-        public class New: FuzzyEnumTest
+        public class Build: FuzzyEnumTest
         {
             [Fact]
             public void ReturnsFuzzyElementOfEnumValues() {
@@ -32,7 +32,7 @@ namespace Fuzzy.Implementation
                         .SequenceEqual(f.Field<IEnumerable<TestEnum>>().Value);
                 ConfiguredCall arrange = fuzzy.Build(Arg.Is(fuzzyEnumElement)).Returns(expected);
 
-                TestEnum actual = sut.New();
+                TestEnum actual = sut.Build();
 
                 Assert.Equal(expected, actual);
             }

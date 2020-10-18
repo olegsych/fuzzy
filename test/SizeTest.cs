@@ -122,7 +122,7 @@ namespace Fuzzy
             }
         }
 
-        public class New: SizeTest
+        public class Build: SizeTest
         {
             Size<TestSize> sut;
 

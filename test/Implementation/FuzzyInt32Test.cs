@@ -24,7 +24,7 @@ namespace Fuzzy.Implementation
             }
         }
 
-        public class New: FuzzyInt32Test
+        public class Build: FuzzyInt32Test
         {
             [Theory]
             [InlineData(-5, 5, 0, -5)]
@@ -38,7 +38,7 @@ namespace Fuzzy.Implementation
                 Expression<Predicate<FuzzyRange<uint>>> unlimitedUInt32 = f => f.Minimum == uint.MinValue && f.Maximum == uint.MaxValue;
                 ConfiguredCall arrange = fuzzy.Build(Arg.Is(unlimitedUInt32)).Returns(sample);
 
-                int actual = sut.New();
+                int actual = sut.Build();
 
                 Assert.Equal(expected, actual);
             }

@@ -24,7 +24,7 @@ namespace Fuzzy.Implementation
             }
         }
 
-        public class New: FuzzySByteTest
+        public class Build: FuzzySByteTest
         {
             [Fact]
             public void ReturnsFuzzyInt16ValueConvertedToSByte() {
@@ -34,7 +34,7 @@ namespace Fuzzy.Implementation
                 Expression<Predicate<FuzzyRange<short>>> fuzzyInt16 = v => v.Minimum == sut.Minimum && v.Maximum == sut.Maximum;
                 ConfiguredCall arrange = fuzzy.Build(Arg.Is(fuzzyInt16)).Returns(expected);
 
-                sbyte actual = sut.New();
+                sbyte actual = sut.Build();
 
                 Assert.Equal(expected, actual);
             }

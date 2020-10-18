@@ -37,7 +37,7 @@ namespace Fuzzy.Implementation
             }
         }
 
-        public class New: FuzzyElementTest
+        public class Build: FuzzyElementTest
         {
             [Fact]
             public void ReturnsElementAtFuzzyIndex() {
@@ -45,7 +45,7 @@ namespace Fuzzy.Implementation
                 Expression<Predicate<FuzzyIndex<TestStruct>>> fuzzyIndex = f => ReferenceEquals(candidates, f.Field<IEnumerable<TestStruct>>().Value);
                 ConfiguredCall arrange = fuzzy.Build(Arg.Is(fuzzyIndex)).Returns(expectedIndex);
 
-                TestStruct actual = sut.New();
+                TestStruct actual = sut.Build();
 
                 Assert.Equal(candidates.ElementAt(expectedIndex), actual);
             }

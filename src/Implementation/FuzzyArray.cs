@@ -12,7 +12,7 @@ namespace Fuzzy.Implementation
             this.length = length ?? throw new ArgumentNullException(nameof(length));
         }
 
-        public override T[] New()
+        protected internal override T[] Build()
         {
             var result = new T[length.New(fuzzy)];
             for(int i = 0; i < result.Length; i++)

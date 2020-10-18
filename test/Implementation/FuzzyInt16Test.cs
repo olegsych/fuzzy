@@ -23,7 +23,7 @@ namespace Fuzzy.Implementation
             }
         }
 
-        public class New: FuzzyInt16Test
+        public class Build: FuzzyInt16Test
         {
             [Theory]
             [InlineData(-5, 5, 0, -5)]
@@ -37,7 +37,7 @@ namespace Fuzzy.Implementation
                 sut.Maximum = maximum;
                 ConfiguredCall arrange = fuzzy.Next().Returns(next);
 
-                short actual = sut.New();
+                short actual = sut.Build();
 
                 Assert.Equal(expected, actual);
             }

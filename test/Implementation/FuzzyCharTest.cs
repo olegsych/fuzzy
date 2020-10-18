@@ -24,7 +24,7 @@ namespace Fuzzy.Implementation
             }
         }
 
-        public class New: FuzzyCharTest
+        public class Build: FuzzyCharTest
         {
             [Fact]
             public void ReturnsFuzzyUInt16ValueConvertedToChar() {
@@ -34,7 +34,7 @@ namespace Fuzzy.Implementation
                 Expression<Predicate<FuzzyRange<ushort>>> fuzzyUInt16 = v => v.Minimum == sut.Minimum && v.Maximum == sut.Maximum;
                 ConfiguredCall arrange = fuzzy.Build(Arg.Is(fuzzyUInt16)).Returns(expected);
 
-                char actual = sut.New();
+                char actual = sut.Build();
 
                 Assert.Equal(expected, actual);
             }

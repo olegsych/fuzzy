@@ -13,7 +13,7 @@ namespace Fuzzy.Implementation
             this.itemCount = itemCount ?? throw new ArgumentNullException(nameof(itemCount));
         }
 
-        public override List<T> New()
+        protected internal override List<T> Build()
         {
             var result = new List<T>(itemCount.New(fuzzy));
             for(int i = 0; i < result.Capacity; i++)

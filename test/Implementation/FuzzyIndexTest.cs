@@ -37,7 +37,7 @@ namespace Fuzzy.Implementation
             }
         }
 
-        public class New: FuzzyIndexTest
+        public class Build: FuzzyIndexTest
         {
             [Fact]
             public void ReturnsIndexWithinBoundsOfCollection() {
@@ -45,7 +45,7 @@ namespace Fuzzy.Implementation
                 Expression<Predicate<FuzzyRange<int>>> fuzzyInt = v => v.Minimum == 0 && v.Maximum == elements.Count() - 1;
                 ConfiguredCall arrange = fuzzy.Build(Arg.Is(fuzzyInt)).Returns(expected);
 
-                int actual = sut.New();
+                int actual = sut.Build();
 
                 Assert.Equal(expected, actual);
             }

@@ -17,7 +17,7 @@ namespace Fuzzy.Implementation
             [Fact]
             public void MyTestMethod() {
                 var expected = new TestClass();
-                ConfiguredCall arrange = fuzzy.New().Returns(expected);
+                ConfiguredCall arrange = fuzzy.Build().Returns(expected);
 
                 TestClass actual = sut.Build(fuzzy);
 

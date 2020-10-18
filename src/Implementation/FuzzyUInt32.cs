@@ -4,7 +4,7 @@ namespace Fuzzy.Implementation
     {
         public FuzzyUInt32(IFuzz fuzzy) : base(fuzzy, uint.MinValue, uint.MaxValue) { }
 
-        public override uint New() {
+        protected internal override uint Build() {
             ushort low = fuzzy.UInt16();
             ushort high = fuzzy.UInt16();
             long sample = high << 16 | low;

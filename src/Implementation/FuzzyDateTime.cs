@@ -6,7 +6,7 @@ namespace Fuzzy.Implementation
     {
         public FuzzyDateTime(IFuzz fuzzy): base(fuzzy, DateTime.MinValue, DateTime.MaxValue) { }
 
-        public override DateTime New() {
+        protected internal override DateTime Build() {
             long ticks = fuzzy.Int64().Between(Minimum.Ticks, Maximum.Ticks);
             var kind = fuzzy.Enum<DateTimeKind>();
             return new DateTime(ticks, kind);

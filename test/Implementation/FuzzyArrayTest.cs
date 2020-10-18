@@ -50,7 +50,7 @@ namespace Fuzzy.Implementation
             }
         }
 
-        public class New: FuzzyArrayTest
+        public class Build: FuzzyArrayTest
         {
             [Fact]
             public void ReturnsArrayWithGivenLengthAndItemsCreatedByFactory() {
@@ -60,7 +60,7 @@ namespace Fuzzy.Implementation
                 TestStruct[] expectedItems = Enumerable.Range(0, expectedLength).Select(i => new TestStruct()).ToArray();
                 arrange = itemFactory.Invoke().Returns(expectedItems.First(), expectedItems.Skip(1).ToArray());
 
-                TestStruct[] actualItems = sut.New();
+                TestStruct[] actualItems = sut.Build();
 
                 Assert.Equal(expectedItems, actualItems);
             }

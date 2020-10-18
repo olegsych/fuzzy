@@ -12,7 +12,7 @@ namespace Fuzzy.Implementation
 
         public FuzzyDouble(IFuzz fuzzy) : base(fuzzy) { }
 
-        public override double New() {
+        protected internal override double Build() {
             bool positive = fuzzy.Boolean();
             int sign = positive ? 1 : -1;
             ulong mantissa = fuzzy.UInt64().Between(minMantissa, maxMantissa);

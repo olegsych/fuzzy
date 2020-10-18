@@ -14,7 +14,7 @@ namespace Fuzzy
 
         public T Value => lazy.Value;
 
-        public abstract T New();
+        protected internal abstract T Build();
 
         public static implicit operator T(Fuzzy<T> fuzzy) => fuzzy.Value;
     }

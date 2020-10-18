@@ -25,7 +25,7 @@ namespace Fuzzy.Implementation
             }
         }
 
-        public class New: FuzzyDateTimeOffsetTest
+        public class Build: FuzzyDateTimeOffsetTest
         {
             [Theory, MemberData(nameof(GetData))]
             public void ReturnsDateTimeOffsetCreatedFromFuzzyTicksAndOffsetValues(DateTimeOffset minimum, DateTimeOffset maximum, DateTime fuzzyDate, TimeSpan fuzzyOffset, DateTimeOffset expected) {
@@ -35,7 +35,7 @@ namespace Fuzzy.Implementation
                 var maxOffset = TimeSpan.FromMinutes(14 * 60);
                 arrange = fuzzy.Build(Arg.Is<FuzzyRange<int>>(v => v.Minimum == -maxOffset.TotalMinutes && v.Maximum == maxOffset.TotalMinutes)).Returns((int)fuzzyOffset.TotalMinutes);
 
-                DateTimeOffset actual = sut.New();
+                DateTimeOffset actual = sut.Build();
 
                 Assert.True(minimum <= actual && actual <= maximum, $"Value {actual.UtcDateTime:o} is out of the expected range [{minimum.UtcDateTime:o}..{maximum.UtcDateTime:o}]");
                 Assert.Equal(expected, actual);

@@ -11,18 +11,18 @@ namespace Fuzzy.Implementation
         public FuzzyBooleanTest() =>
             sut = new FuzzyBoolean(fuzzy);
 
-        public class New: FuzzyBooleanTest
+        public class Build: FuzzyBooleanTest
         {
             [Fact]
             public void ReturnsTrueWhenNextFuzzyValueIsOdd() {
                 ConfiguredCall arrange = fuzzy.Next().Returns(OddNumber());
-                Assert.True(sut.New());
+                Assert.True(sut.Build());
             }
 
             [Fact]
             public void ReturnsFalseWhenNextFuzzyValueIsEven() {
                 ConfiguredCall arrange = fuzzy.Next().Returns(EvenNumber());
-                Assert.False(sut.New());
+                Assert.False(sut.Build());
             }
         }
     }

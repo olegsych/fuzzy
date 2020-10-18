@@ -6,7 +6,7 @@ namespace Fuzzy.Implementation
     {
         public FuzzyInt16(IFuzz fuzzy) : base(fuzzy, short.MinValue, short.MaxValue) { }
 
-        public override short New() {
+        protected internal override short Build() {
             int sample = Math.Abs(fuzzy.Next());
             var range = (ushort)(Maximum - Minimum);
             var increment = (ushort)(sample % (range + 1));

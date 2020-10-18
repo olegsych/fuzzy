@@ -24,7 +24,7 @@ namespace Fuzzy.Implementation
             }
         }
 
-        public class New: FuzzyTimeSpanTest
+        public class Build: FuzzyTimeSpanTest
         {
             [Fact]
             public void ReturnsTimeSpanCreatedFromInt64() {
@@ -34,7 +34,7 @@ namespace Fuzzy.Implementation
                 Expression<Predicate<FuzzyRange<long>>> fuzzyInt64 = v => v.Minimum == sut.Minimum.Ticks && v.Maximum == sut.Maximum.Ticks;
                 ConfiguredCall arrange = fuzzy.Build(Arg.Is(fuzzyInt64)).Returns(expected.Ticks);
 
-                TimeSpan actual = sut.New();
+                TimeSpan actual = sut.Build();
 
                 Assert.Equal(expected, actual);
             }

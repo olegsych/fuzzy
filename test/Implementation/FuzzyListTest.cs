@@ -51,7 +51,7 @@ namespace Fuzzy.Implementation
             }
         }
 
-        public class New: FuzzyListTest
+        public class Build: FuzzyListTest
         {
             [Fact]
             public void ReturnsListWithGivenCountOfItemsCreatedByFactory() {
@@ -61,7 +61,7 @@ namespace Fuzzy.Implementation
                 List<TestItem> expectedItems = Enumerable.Range(0, expectedCount).Select(i => new TestItem()).ToList();
                 arrange = itemFactory.Invoke().Returns(expectedItems.First(), expectedItems.Skip(1).ToArray());
 
-                List<TestItem> actualItems = sut.New();
+                List<TestItem> actualItems = sut.Build();
 
                 Assert.Equal(expectedItems, actualItems);
             }

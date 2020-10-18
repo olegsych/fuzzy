@@ -6,7 +6,7 @@ namespace Fuzzy.Implementation
     {
         public FuzzyDateTimeOffset(IFuzz fuzzy): base(fuzzy, DateTimeOffset.MinValue, DateTimeOffset.MaxValue) { }
 
-        public override DateTimeOffset New() {
+        protected internal override DateTimeOffset Build() {
             const int maxOffsetMinutes = 14 * 60;
             var offset = TimeSpan.FromMinutes(fuzzy.Int32().Between(-maxOffsetMinutes, maxOffsetMinutes));
 
