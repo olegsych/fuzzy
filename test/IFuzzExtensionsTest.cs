@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Fuzzy.Implementation;
 using Inspector;
@@ -10,6 +11,9 @@ namespace Fuzzy
     {
         // Common method parameters
         readonly IFuzz fuzzy = Substitute.For<IFuzz>();
+
+        // Test fixture
+        readonly Random random = new Random();
 
         public class Boolean: IFuzzExtensionsTest
         {
@@ -44,9 +48,20 @@ namespace Fuzzy
         {
             [Fact]
             public void ReturnsFuzzyDateTime() {
-                FuzzyRange<System.DateTime> actual = fuzzy.DateTime();
-                Assert.IsType<FuzzyDateTime>(actual);
+                FuzzyRange<System.DateTime> returned = fuzzy.DateTime();
+                var actual = Assert.IsType<FuzzyDateTime>(returned);
                 Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
+            }
+
+            [Fact]
+            public void ReturnsFuzzyDateTimeOfGivenKind() {
+                var expected = (DateTimeKind)(random.Next() % ((int)DateTimeKind.Local + 1));
+
+                FuzzyRange<System.DateTime> returned = fuzzy.DateTime(expected);
+
+                var actual = Assert.IsType<FuzzyDateTime>(returned);
+                Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
+                Assert.Equal(expected, actual.Field<DateTimeKind?>().Value);
             }
         }
 

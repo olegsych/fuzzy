@@ -11,8 +11,11 @@ namespace Fuzzy.Implementation
     {
         readonly FuzzyRange<DateTime> sut;
 
+        // Constructor parameters
+        readonly DateTimeKind? kind = null;
+
         public FuzzyDateTimeTest() =>
-            sut = new FuzzyDateTime(fuzzy);
+            sut = new FuzzyDateTime(fuzzy, kind);
 
         public class Constructor: FuzzyDateTimeTest
         {
@@ -40,6 +43,24 @@ namespace Fuzzy.Implementation
 
                 Assert.Equal(expectedTicks, actual.Ticks);
                 Assert.Equal(expectedKind, actual.Kind);
+            }
+
+
+            [Fact]
+            public void ReturnsDateTimeCreatedFromFuzzyLongAndGivenDateTimeKindValues() {
+                var expectedKind = (DateTimeKind)(random.Next() % ((int)DateTimeKind.Local + 1));
+                var sut = new FuzzyDateTime(fuzzy, expectedKind);
+                sut.Minimum = new DateTime(random.Next());
+                sut.Maximum = new DateTime(sut.Minimum.Ticks + random.Next());
+                long expectedTicks = random.Next();
+                Expression<Predicate<FuzzyRange<long>>> fuzzyTicks = v => v.Minimum == sut.Minimum.Ticks && v.Maximum == sut.Maximum.Ticks;
+                ConfiguredCall arrange = fuzzy.Build(Arg.Is(fuzzyTicks)).Returns(expectedTicks);
+
+                DateTime actual = sut.Build();
+
+                Assert.Equal(expectedTicks, actual.Ticks);
+                Assert.Equal(expectedKind, actual.Kind);
+                DateTimeKind assert = fuzzy.DidNotReceive().Build(Arg.Any<FuzzyEnum<DateTimeKind>>());
             }
         }
     }
