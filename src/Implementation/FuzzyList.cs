@@ -15,7 +15,7 @@ namespace Fuzzy.Implementation
 
         protected internal override List<T> Build()
         {
-            var result = new List<T>(itemCount.New(fuzzy));
+            var result = new List<T>(itemCount.Build(fuzzy));
             for(int i = 0; i < result.Capacity; i++)
                 result.Add(itemFactory());
             return result;

@@ -55,7 +55,7 @@ namespace Fuzzy
             return range;
         }
 
-        public FuzzyRange<int> New(IFuzz fuzzy) {
+        public FuzzyRange<int> Build(IFuzz fuzzy) {
             if(fuzzy == null)
                 throw new ArgumentNullException(nameof(fuzzy));
             return fuzzy.Int32().Between(Minimum(), Maximum());

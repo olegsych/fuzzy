@@ -14,7 +14,7 @@ namespace Fuzzy.Implementation
 
         protected internal override T[] Build()
         {
-            var result = new T[length.New(fuzzy)];
+            var result = new T[length.Build(fuzzy)];
             for(int i = 0; i < result.Length; i++)
                 result[i] = itemFactory();
             return result;

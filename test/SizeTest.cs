@@ -24,7 +24,7 @@ namespace Fuzzy
             public void ReturnsRangeInitializedWithGivenMinimumAndMaximumValues() {
                 var sut = TestSize.Between(minimum, maximum);
 
-                FuzzyRange<int> actual = sut.New(fuzzy);
+                FuzzyRange<int> actual = sut.Build(fuzzy);
                 Assert.Equal(minimum, actual.Minimum);
                 Assert.Equal(maximum, actual.Maximum);
             }
@@ -80,7 +80,7 @@ namespace Fuzzy
 
                 var sut = TestSize.Exactly(expected);
 
-                FuzzyRange<int> actual = sut.New(fuzzy);
+                FuzzyRange<int> actual = sut.Build(fuzzy);
                 Assert.Equal(expected, actual.Maximum);
                 Assert.Equal(expected, actual.Minimum);
             }
@@ -106,7 +106,7 @@ namespace Fuzzy
             public void ReturnsRangeInitializedWithGivenMaximumValue() {
                 var sut = TestSize.Max(maximum);
 
-                FuzzyRange<int> actual = sut.New(fuzzy);
+                FuzzyRange<int> actual = sut.Build(fuzzy);
                 Assert.Equal(maximum, actual.Maximum);
             }
 
@@ -124,7 +124,7 @@ namespace Fuzzy
             public void ReturnsRangeInitializedWithGivenMinimumValueAndNoMaximum() {
                 var sut = TestSize.Min(minimum);
 
-                FuzzyRange<int> actual = sut.New(fuzzy);
+                FuzzyRange<int> actual = sut.Build(fuzzy);
                 Assert.Equal(minimum, actual.Minimum);
             }
 
@@ -144,16 +144,16 @@ namespace Fuzzy
             public void ThrowsDescriptiveExceptionWhenFuzzIsNull() {
                 sut = new TestSize();
 
-                var thrown = Assert.Throws<ArgumentNullException>(() => sut.New(null));
+                var thrown = Assert.Throws<ArgumentNullException>(() => sut.Build(null));
 
-                Assert.Equal(sut.Method(nameof(sut.New)).Parameter<IFuzz>().Name, thrown.ParamName);
+                Assert.Equal(sut.Method(nameof(sut.Build)).Parameter<IFuzz>().Name, thrown.ParamName);
             }
 
             [Fact]
             public void ReturnsFuzzyInt32WithGivenMinimumAndMaximum() {
                 sut = TestSize.Between(minimum, maximum);
 
-                FuzzyRange<int> actual = sut.New(fuzzy);
+                FuzzyRange<int> actual = sut.Build(fuzzy);
 
                 Assert.Equal(minimum, actual.Minimum);
                 Assert.Equal(maximum, actual.Maximum);
@@ -163,7 +163,7 @@ namespace Fuzzy
             public void ReturnsFuzzyInt32WithDefaultMinimumAndMaximum() {
                 sut = new TestSize();
 
-                FuzzyRange<int> actual = sut.New(fuzzy);
+                FuzzyRange<int> actual = sut.Build(fuzzy);
 
                 Assert.Equal(8, actual.Minimum);
                 Assert.Equal(13, actual.Maximum);
@@ -176,7 +176,7 @@ namespace Fuzzy
             public void ReturnsFuzzyInt32WhenMaximumIsLessThanDefaultMinimum(int maximum, int expectedMinimum) {
                 sut = TestSize.Max(maximum);
 
-                FuzzyRange<int> actual = sut.New(fuzzy);
+                FuzzyRange<int> actual = sut.Build(fuzzy);
 
                 Assert.Equal(expectedMinimum, actual.Minimum);
                 Assert.Equal(maximum, actual.Maximum);
@@ -188,7 +188,7 @@ namespace Fuzzy
             public void ReturnsFuzzyInt32WhenMinimumIsMoreThanDefaultMaximum(int minimum, int expectedMaximum) {
                 sut = TestSize.Min(minimum);
 
-                FuzzyRange<int> actual = sut.New(fuzzy);
+                FuzzyRange<int> actual = sut.Build(fuzzy);
 
                 Assert.Equal(expectedMaximum, actual.Maximum);
                 Assert.Equal(minimum, actual.Minimum);
