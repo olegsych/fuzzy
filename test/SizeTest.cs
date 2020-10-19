@@ -72,6 +72,20 @@ namespace Fuzzy
                 Assert.NotEqual(new TestSize(), new object());
         }
 
+        public class Exactly: SizeTest
+        {
+            [Fact]
+            public void ReturnsRangeInitializedWithGivenValueValue() {
+                int expected = random.Next();
+
+                var sut = TestSize.Exactly(expected);
+
+                FuzzyRange<int> actual = sut.New(fuzzy);
+                Assert.Equal(expected, actual.Maximum);
+                Assert.Equal(expected, actual.Minimum);
+            }
+        }
+
         public new class GetHashCode: SizeTest
         {
             [Theory]

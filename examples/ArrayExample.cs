@@ -44,6 +44,7 @@ namespace Fuzzy
         [Fact]
         public void ControlArrayLength() {
             DateTimeOffset[] dates;
+            dates = fuzzy.Array(fuzzy.DateTimeOffset, Length.Exactly(42));
             dates = fuzzy.Array(fuzzy.DateTimeOffset, Length.Between(41, 43));
             dates = fuzzy.Array(fuzzy.DateTimeOffset, Length.Max(43));
             dates = fuzzy.Array(fuzzy.DateTimeOffset, Length.Min(5));

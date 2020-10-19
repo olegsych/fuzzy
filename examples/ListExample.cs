@@ -44,6 +44,7 @@ namespace Fuzzy
         [Fact]
         public void ControlListCount() {
             List<int> values;
+            values = fuzzy.List(fuzzy.Int32, Count.Exactly(42));
             values = fuzzy.List(fuzzy.Int32, Count.Between(41, 43));
             values = fuzzy.List(fuzzy.Int32, Count.Max(43));
             values = fuzzy.List(fuzzy.Int32, Count.Min(5));

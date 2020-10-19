@@ -38,7 +38,8 @@ namespace Fuzzy
             return range;
         }
 
-        public static TSize Exactly(int value) => throw new NotImplementedException();
+        public static TSize Exactly(int value) =>
+            Between(value, value);
 
         public static TSize Min(int min)
         {
