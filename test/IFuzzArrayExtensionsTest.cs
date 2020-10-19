@@ -24,7 +24,7 @@ namespace Fuzzy
 
             [Fact]
             public void ReturnsFuzzyArrayWithGivenFuzzFactoryAndLength() {
-                Fuzzy<TestStruct[]> actual = fuzzy.Array(createElement, length);
+                FuzzyArray<TestStruct> actual = fuzzy.Array(createElement, length);
 
                 AssertExpectedFuzzyArray(actual);
                 Assert.Same(length, actual.Field<Length>().Value);
@@ -32,13 +32,13 @@ namespace Fuzzy
 
             [Fact]
             public void ReturnsFuzzyArrayWithDefaultLength() {
-                Fuzzy<TestStruct[]> actual = fuzzy.Array(createElement);
+                FuzzyArray<TestStruct> actual = fuzzy.Array(createElement);
 
                 AssertExpectedFuzzyArray(actual);
                 Assert.Equal(new Length(), actual.Field<Length>().Value);
             }
 
-            protected override void AssertExpectedFuzzyElementFactory(Fuzzy<TestStruct[]> fuzzyArray) =>
+            protected override void AssertExpectedFuzzyElementFactory(FuzzyArray<TestStruct> fuzzyArray) =>
                 Assert.Same(createElement, fuzzyArray.Field<Func<TestStruct>>().Value);
         }
 
@@ -50,7 +50,7 @@ namespace Fuzzy
 
             [Fact]
             public void ReturnsFuzzyArrayWithGivenFuzzFactoryAndLength() {
-                Fuzzy<TestStruct[]> actual = fuzzy.Array(createElement, length);
+                FuzzyArray<TestStruct> actual = fuzzy.Array(createElement, length);
 
                 AssertExpectedFuzzyArray(actual);
                 Assert.Same(length, actual.Field<Length>().Value);
@@ -58,13 +58,13 @@ namespace Fuzzy
 
             [Fact]
             public void ReturnsFuzzyArrayWithDefaultLength() {
-                Fuzzy<TestStruct[]> actual = fuzzy.Array(createElement);
+                FuzzyArray<TestStruct> actual = fuzzy.Array(createElement);
 
                 AssertExpectedFuzzyArray(actual);
                 Assert.Equal(new Length(), actual.Field<Length>().Value);
             }
 
-            protected override void AssertExpectedFuzzyElementFactory(Fuzzy<TestStruct[]> fuzzyArray) {
+            protected override void AssertExpectedFuzzyElementFactory(FuzzyArray<TestStruct> fuzzyArray) {
                 var fuzzyElement = Substitute.ForPartsOf<Fuzzy<TestStruct>>(fuzzy);
                 ConfiguredCall arrange1 = createElement().Returns(fuzzyElement);
                 var expected = new TestStruct(random.Next());
@@ -84,7 +84,7 @@ namespace Fuzzy
 
             [Fact]
             public void ReturnsFuzzyArrayWithGivenFuzzFactoryAndLength() {
-                Fuzzy<TestStruct[]> actual = fuzzy.Array(createElement, length);
+                FuzzyArray<TestStruct> actual = fuzzy.Array(createElement, length);
 
                 AssertExpectedFuzzyArray(actual);
                 Assert.Same(length, actual.Field<Length>().Value);
@@ -92,13 +92,13 @@ namespace Fuzzy
 
             [Fact]
             public void ReturnsFuzzyArrayWithDefaultLength() {
-                Fuzzy<TestStruct[]> actual = fuzzy.Array(createElement);
+                FuzzyArray<TestStruct> actual = fuzzy.Array(createElement);
 
                 AssertExpectedFuzzyArray(actual);
                 Assert.Equal(new Length(), actual.Field<Length>().Value);
             }
 
-            protected override void AssertExpectedFuzzyElementFactory(Fuzzy<TestStruct[]> fuzzyArray) {
+            protected override void AssertExpectedFuzzyElementFactory(FuzzyArray<TestStruct> fuzzyArray) {
                 var min = new TestStruct(random.Next() % 1000);
                 var max = new TestStruct(min.Value + random.Next() % 1000);
                 var fuzzyElement = Substitute.ForPartsOf<FuzzyRange<TestStruct>>(fuzzy, min, max);
@@ -120,7 +120,7 @@ namespace Fuzzy
 
             [Fact]
             public void ReturnsFuzzyArrayWithGivenFuzzFactoryAndLength() {
-                Fuzzy<TestStruct[]> actual = fuzzy.Array(elements, length);
+                FuzzyArray<TestStruct> actual = fuzzy.Array(elements, length);
 
                 AssertExpectedFuzzyArray(actual);
                 Assert.Same(length, actual.Field<Length>().Value);
@@ -128,13 +128,13 @@ namespace Fuzzy
 
             [Fact]
             public void ReturnsFuzzyArrayWithDefaultLength() {
-                Fuzzy<TestStruct[]> actual = fuzzy.Array(elements);
+                FuzzyArray<TestStruct> actual = fuzzy.Array(elements);
 
                 AssertExpectedFuzzyArray(actual);
                 Assert.Equal(new Length(), actual.Field<Length>().Value);
             }
 
-            protected override void AssertExpectedFuzzyElementFactory(Fuzzy<TestStruct[]> fuzzyArray) {
+            protected override void AssertExpectedFuzzyElementFactory(FuzzyArray<TestStruct> fuzzyArray) {
                 var expected = new TestStruct(random.Next());
                 Expression<Predicate<FuzzyElement<TestStruct>>> fuzzyElement = f => ReferenceEquals(elements, f.Field<IEnumerable<TestStruct>>().Value);
                 ConfiguredCall arrange = fuzzy.Build(Arg.Is(fuzzyElement)).Returns(expected);
@@ -145,12 +145,11 @@ namespace Fuzzy
             }
         }
 
-        void AssertExpectedFuzzyArray(Fuzzy<TestStruct[]> fuzzyArray) {
-            Assert.Equal(typeof(FuzzyArray<TestStruct>), fuzzyArray.GetType());
+        void AssertExpectedFuzzyArray(FuzzyArray<TestStruct> fuzzyArray) {
             Assert.Same(fuzzy, fuzzyArray.Field<IFuzz>().Value);
             AssertExpectedFuzzyElementFactory(fuzzyArray);
         }
 
-        protected abstract void AssertExpectedFuzzyElementFactory(Fuzzy<TestStruct[]> fuzzyArray);
+        protected abstract void AssertExpectedFuzzyElementFactory(FuzzyArray<TestStruct> fuzzyArray);
     }
 }

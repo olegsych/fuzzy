@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Fuzzy.Implementation
 {
-    sealed class FuzzyList<T> : Fuzzy<List<T>>
+    public sealed class FuzzyList<T> : FuzzyCollection<List<T>, T>
     {
         readonly Func<T> itemFactory;
         readonly Count itemCount;

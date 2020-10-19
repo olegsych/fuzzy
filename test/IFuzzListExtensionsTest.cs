@@ -24,7 +24,7 @@ namespace Fuzzy
 
             [Fact]
             public void ReturnsFuzzyListWithGivenFuzzFactoryAndCount() {
-                Fuzzy<List<TestStruct>> actual = fuzzy.List(createElement, count);
+                FuzzyList<TestStruct> actual = fuzzy.List(createElement, count);
 
                 AssertExpectedFuzzyList(actual);
                 Assert.Same(count, actual.Field<Count>().Value);
@@ -32,13 +32,13 @@ namespace Fuzzy
 
             [Fact]
             public void ReturnsFuzzyListWithDefaultCount() {
-                Fuzzy<List<TestStruct>> actual = fuzzy.List(createElement);
+                FuzzyList<TestStruct> actual = fuzzy.List(createElement);
 
                 AssertExpectedFuzzyList(actual);
                 Assert.Equal(new Count(), actual.Field<Count>().Value);
             }
 
-            protected override void AssertExpectedFuzzyElementFactory(Fuzzy<List<TestStruct>> fuzzyList) =>
+            protected override void AssertExpectedFuzzyElementFactory(FuzzyList<TestStruct> fuzzyList) =>
                 Assert.Same(createElement, fuzzyList.Field<Func<TestStruct>>().Value);
         }
 
@@ -50,7 +50,7 @@ namespace Fuzzy
 
             [Fact]
             public void ReturnsFuzzyListWithGivenFuzzFactoryAndCount() {
-                Fuzzy<List<TestStruct>> actual = fuzzy.List(createElement, count);
+                FuzzyList<TestStruct> actual = fuzzy.List(createElement, count);
 
                 AssertExpectedFuzzyList(actual);
                 Assert.Same(count, actual.Field<Count>().Value);
@@ -58,13 +58,13 @@ namespace Fuzzy
 
             [Fact]
             public void ReturnsFuzzyListWithDefaultCount() {
-                Fuzzy<List<TestStruct>> actual = fuzzy.List(createElement);
+                FuzzyList<TestStruct> actual = fuzzy.List(createElement);
 
                 AssertExpectedFuzzyList(actual);
                 Assert.Equal(new Count(), actual.Field<Count>().Value);
             }
 
-            protected override void AssertExpectedFuzzyElementFactory(Fuzzy<List<TestStruct>> fuzzyList) {
+            protected override void AssertExpectedFuzzyElementFactory(FuzzyList<TestStruct> fuzzyList) {
                 var fuzzyElement = Substitute.ForPartsOf<Fuzzy<TestStruct>>(fuzzy);
                 ConfiguredCall arrange1 = createElement().Returns(fuzzyElement);
                 var expected = new TestStruct(random.Next());
@@ -84,7 +84,7 @@ namespace Fuzzy
 
             [Fact]
             public void ReturnsFuzzyListWithGivenFuzzFactoryAndCount() {
-                Fuzzy<List<TestStruct>> actual = fuzzy.List(createElement, count);
+                FuzzyList<TestStruct> actual = fuzzy.List(createElement, count);
 
                 AssertExpectedFuzzyList(actual);
                 Assert.Same(count, actual.Field<Count>().Value);
@@ -92,13 +92,13 @@ namespace Fuzzy
 
             [Fact]
             public void ReturnsFuzzyListWithDefaultCount() {
-                Fuzzy<List<TestStruct>> actual = fuzzy.List(createElement);
+                FuzzyList<TestStruct> actual = fuzzy.List(createElement);
 
                 AssertExpectedFuzzyList(actual);
                 Assert.Equal(new Count(), actual.Field<Count>().Value);
             }
 
-            protected override void AssertExpectedFuzzyElementFactory(Fuzzy<List<TestStruct>> fuzzyList) {
+            protected override void AssertExpectedFuzzyElementFactory(FuzzyList<TestStruct> fuzzyList) {
                 var min = new TestStruct(random.Next() % 1000);
                 var max = new TestStruct(min.Value + random.Next() % 1000);
                 var fuzzyElement = Substitute.ForPartsOf<FuzzyRange<TestStruct>>(fuzzy, min, max);
@@ -120,7 +120,7 @@ namespace Fuzzy
 
             [Fact]
             public void ReturnsFuzzyListWithGivenFuzzFactoryAndCount() {
-                Fuzzy<List<TestStruct>> actual = fuzzy.List(elements, count);
+                FuzzyList<TestStruct> actual = fuzzy.List(elements, count);
 
                 AssertExpectedFuzzyList(actual);
                 Assert.Same(count, actual.Field<Count>().Value);
@@ -128,13 +128,13 @@ namespace Fuzzy
 
             [Fact]
             public void ReturnsFuzzyListWithDefaultCount() {
-                Fuzzy<List<TestStruct>> actual = fuzzy.List(elements);
+                FuzzyList<TestStruct> actual = fuzzy.List(elements);
 
                 AssertExpectedFuzzyList(actual);
                 Assert.Equal(new Count(), actual.Field<Count>().Value);
             }
 
-            protected override void AssertExpectedFuzzyElementFactory(Fuzzy<List<TestStruct>> fuzzyList) {
+            protected override void AssertExpectedFuzzyElementFactory(FuzzyList<TestStruct> fuzzyList) {
                 var expected = new TestStruct(random.Next());
                 Expression<Predicate<FuzzyElement<TestStruct>>> fuzzyElement = f => ReferenceEquals(elements, f.Field<IEnumerable<TestStruct>>().Value);
                 ConfiguredCall arrange = fuzzy.Build(Arg.Is(fuzzyElement)).Returns(expected);
@@ -145,12 +145,12 @@ namespace Fuzzy
             }
         }
 
-        void AssertExpectedFuzzyList(Fuzzy<List<TestStruct>> fuzzyList) {
+        void AssertExpectedFuzzyList(FuzzyList<TestStruct> fuzzyList) {
             Assert.Equal(typeof(FuzzyList<TestStruct>), fuzzyList.GetType());
             Assert.Same(fuzzy, fuzzyList.Field<IFuzz>().Value);
             AssertExpectedFuzzyElementFactory(fuzzyList);
         }
 
-        protected abstract void AssertExpectedFuzzyElementFactory(Fuzzy<List<TestStruct>> fuzzyList);
+        protected abstract void AssertExpectedFuzzyElementFactory(FuzzyList<TestStruct> fuzzyList);
     }
 }

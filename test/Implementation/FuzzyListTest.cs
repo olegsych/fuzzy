@@ -11,7 +11,7 @@ namespace Fuzzy.Implementation
 {
     public class FuzzyListTest
     {
-        readonly Fuzzy<List<TestItem>> sut;
+        readonly FuzzyCollection<List<TestItem>, TestItem> sut;
 
         // Constructor parameters
         readonly IFuzz fuzzy = Substitute.For<IFuzz>();
