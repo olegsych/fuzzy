@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Fuzzy.Implementation;
 using Inspector;
 using NSubstitute;
+using NSubstitute.Core;
 using Xunit;
 
 namespace Fuzzy
@@ -10,7 +11,7 @@ namespace Fuzzy
     public class IFuzzExtensionsTest
     {
         // Common method parameters
-        readonly IFuzz fuzzy = Substitute.ForPartsOf<Fuzz>();
+        readonly IFuzz fuzzy = Substitute.For<IFuzz>();
 
         // Test fixture
         readonly Random random = new Random();
@@ -89,11 +90,16 @@ namespace Fuzzy
         {
             [Fact]
             public void ReturnsValueBuiltByFuzzyElement() {
-                var elements = new[] { new TestStruct(random.Next()) };
-                TestStruct value = fuzzy.Element(elements);
-                FuzzyElement<TestStruct> actual = FuzzyContext.Get<TestStruct, FuzzyElement<TestStruct>>(value);
-                Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
-                Assert.Same(elements, actual.Field<IEnumerable<TestStruct>>().Value);
+                FuzzyElement<TestStruct> actualSpec = null;
+                var expectedValue = new TestStruct(random.Next());
+                ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzyElement<TestStruct>>(spec => actualSpec = spec)).Returns(expectedValue);
+                var elements = new TestStruct[0];
+
+                TestStruct actualValue = fuzzy.Element(elements);
+
+                Assert.Equal(expectedValue, actualValue);
+                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
+                Assert.Same(elements, actualSpec.Field<IEnumerable<TestStruct>>().Value);
             }
         }
 
@@ -101,21 +107,31 @@ namespace Fuzzy
         {
             [Fact]
             public void ReturnsValueBuiltByFuzzyEnum() {
-                TestEnum value = fuzzy.Enum<TestEnum>();
-                FuzzyEnum<TestEnum> actual = FuzzyContext.Get<TestEnum, FuzzyEnum<TestEnum>>(value);
-                Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
+                FuzzyEnum<TestEnum> actualSpec = null;
+                var expectedValue = (TestEnum)random.Next();
+                ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzyEnum<TestEnum>>(spec => actualSpec = spec)).Returns(expectedValue);
+
+                TestEnum actualValue = fuzzy.Enum<TestEnum>();
+
+                Assert.Equal(expectedValue, actualValue);
+                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
             }
         }
 
         public class Index: IFuzzExtensionsTest
         {
             [Fact]
-            public void ReturnsFuzzyIndex() {
-                TestStruct[] elements = new[] { new TestStruct(), new TestStruct() };
-                int value = fuzzy.Index(elements);
-                FuzzyIndex<TestStruct> actual = FuzzyContext.Get<int, FuzzyIndex<TestStruct>>(value);
-                Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
-                Assert.Same(elements, actual.Field<IEnumerable<TestStruct>>().Value);
+            public void ReturnsValueBuiltByFuzzyIndex() {
+                FuzzyIndex<TestStruct> actualSpec = null;
+                int expectedValue = random.Next();
+                ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzyIndex<TestStruct>>(spec => actualSpec = spec)).Returns(expectedValue);
+                var elements = new TestStruct[0];
+
+                int actualValue = fuzzy.Index(elements);
+
+                Assert.Equal(expectedValue, actualValue);
+                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
+                Assert.Same(elements, actualSpec.Field<IEnumerable<TestStruct>>().Value);
             }
         }
 
