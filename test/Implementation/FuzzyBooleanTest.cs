@@ -25,5 +25,15 @@ namespace Fuzzy.Implementation
                 Assert.False(sut.Build());
             }
         }
+
+        int EvenNumber() {
+            int value = random.Next();
+            return value % 2 == 0 ? value : value + 1;
+        }
+
+        int OddNumber() {
+            int value = random.Next();
+            return value % 2 == 1 ? value : value + 1;
+        }
     }
 }
