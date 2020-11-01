@@ -178,10 +178,15 @@ namespace Fuzzy
         public class Single: IFuzzExtensionsTest
         {
             [Fact]
-            public void ReturnsFuzzySingle() {
-                Fuzzy<float> actual = fuzzy.Single();
-                Assert.IsType<FuzzySingle>(actual);
-                Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
+            public void ReturnsValueBuiltByFuzzySingle() {
+                Fuzzy<float> actualSpec = null;
+                float expectedValue = random.Next();
+                ConfiguredCall arrange = fuzzy.Build(Arg.Do<Fuzzy<float>>(spec => actualSpec = spec)).Returns(expectedValue);
+
+                float actualValue = fuzzy.Single();
+
+                Assert.Equal(expectedValue, actualValue);
+                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
             }
         }
 
