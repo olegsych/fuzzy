@@ -184,9 +184,9 @@ namespace Fuzzy
         {
             [Fact]
             public void ReturnsValueBuiltByFuzzySingle() {
-                Fuzzy<float> actualSpec = null;
+                FuzzySingle actualSpec = null;
                 float expectedValue = random.Next();
-                ConfiguredCall arrange = fuzzy.Build(Arg.Do<Fuzzy<float>>(spec => actualSpec = spec)).Returns(expectedValue);
+                ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzySingle>(spec => actualSpec = spec)).Returns(expectedValue);
 
                 float actualValue = fuzzy.Single();
 
