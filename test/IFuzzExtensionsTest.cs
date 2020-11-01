@@ -246,10 +246,15 @@ namespace Fuzzy
         public class Uri: IFuzzExtensionsTest
         {
             [Fact]
-            public void ReturnsFuzzyUri() {
-                Fuzzy<System.Uri> returned = fuzzy.Uri();
-                var actual = Assert.IsType<FuzzyUri>(returned);
-                Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
+            public void ReturnsValueBuiltByFuzzyUri() {
+                FuzzyUri actualSpec = null;
+                var expectedValue = new System.Uri($"file://{random.Next()}");
+                ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzyUri>(spec => actualSpec = spec)).Returns(expectedValue);
+
+                System.Uri actualValue = fuzzy.Uri();
+
+                Assert.Same(expectedValue, actualValue);
+                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
             }
         }
     }

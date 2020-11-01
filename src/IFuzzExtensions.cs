@@ -46,6 +46,6 @@ namespace Fuzzy
 
         public static FuzzyRange<ulong> UInt64(this IFuzz fuzzy) => new FuzzyUInt64(fuzzy);
 
-        public static Fuzzy<Uri> Uri(this IFuzz fuzzy) => new FuzzyUri(fuzzy);
+        public static Uri Uri(this IFuzz fuzzy) => new FuzzyUri(fuzzy);
     }
 }
