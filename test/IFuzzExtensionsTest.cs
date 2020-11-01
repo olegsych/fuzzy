@@ -8,14 +8,8 @@ using Xunit;
 
 namespace Fuzzy
 {
-    public class IFuzzExtensionsTest
+    public class IFuzzExtensionsTest: TestFixture
     {
-        // Common method parameters
-        readonly IFuzz fuzzy = Substitute.For<IFuzz>();
-
-        // Test fixture
-        readonly Random random = new Random();
-
         public class Boolean: IFuzzExtensionsTest
         {
             [Theory, InlineData(true), InlineData(false)]
