@@ -37,10 +37,15 @@ namespace Fuzzy
         public class Char: IFuzzExtensionsTest
         {
             [Fact]
-            public void ReturnsFuzzyChar() {
-                FuzzyRange<char> actual = fuzzy.Char();
-                Assert.IsType<FuzzyChar>(actual);
-                Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
+            public void ReturnsValueBuiltByFuzzyChar() {
+                FuzzyChar actualSpec = null;
+                var expectedValue = (char)(random.Next() % char.MaxValue);
+                ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzyChar>(spec => actualSpec = spec)).Returns(expectedValue);
+
+                char actualValue = fuzzy.Char();
+
+                Assert.Equal(expectedValue, actualValue);
+                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
             }
         }
 

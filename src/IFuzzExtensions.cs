@@ -10,7 +10,7 @@ namespace Fuzzy
 
         public static FuzzyRange<byte> Byte(this IFuzz fuzzy) => new FuzzyByte(fuzzy);
 
-        public static FuzzyRange<char> Char(this IFuzz fuzzy) => new FuzzyChar(fuzzy);
+        public static char Char(this IFuzz fuzzy) => new FuzzyChar(fuzzy);
 
         public static FuzzyRange<DateTime> DateTime(this IFuzz fuzzy, DateTimeKind? kind = null) => new FuzzyDateTime(fuzzy, kind);
 
