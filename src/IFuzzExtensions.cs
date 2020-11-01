@@ -16,7 +16,7 @@ namespace Fuzzy
 
         public static FuzzyRange<DateTimeOffset> DateTimeOffset(this IFuzz fuzzy) => new FuzzyDateTimeOffset(fuzzy);
 
-        public static Fuzzy<double> Double(this IFuzz fuzzy) => new FuzzyDouble(fuzzy);
+        public static double Double(this IFuzz fuzzy) => new FuzzyDouble(fuzzy);
 
         public static T Element<T>(this IFuzz fuzzy, IEnumerable<T> candidates) => new FuzzyElement<T>(fuzzy, candidates);
 

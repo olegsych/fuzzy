@@ -79,10 +79,15 @@ namespace Fuzzy
         public class Double: IFuzzExtensionsTest
         {
             [Fact]
-            public void ReturnsFuzzyDouble() {
-                Fuzzy<double> actual = fuzzy.Double();
-                Assert.IsType<FuzzyDouble>(actual);
-                Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
+            public void ReturnsValueBuiltByFuzzyDouble() {
+                FuzzyDouble actualSpec = null;
+                double expectedValue = random.Next();
+                ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzyDouble>(spec => actualSpec = spec)).Returns(expectedValue);
+
+                double actualValue = fuzzy.Double();
+
+                Assert.Equal(expectedValue, actualValue);
+                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
             }
         }
 
