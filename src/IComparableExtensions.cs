@@ -1,18 +1,27 @@
-﻿using System;
+using System;
+using Fuzzy.Implementation;
 
 namespace Fuzzy
 {
     public static class IComparableExtensions {
-        public static Fuzzy<T> Between<T>(this Fuzzy<T> fuzzy, T min, T max) where T : IComparable<T>
-            => throw new NotImplementedException();
 
-        public static Fuzzy<T> GreaterThan<T>(this Fuzzy<T> fuzzy, T min) where T : IComparable<T>
-            => throw new NotImplementedException();
+        public static T Between<T>(this T value, T minimum, T maximum) where T : struct, IComparable<T> {
+            FuzzyRange<T> spec = FuzzyContext.Get<T, FuzzyRange<T>>(value);
+            spec.Minimum = minimum;
+            spec.Maximum = maximum;
+            return spec;
+        }
 
-        public static Fuzzy<T> LessThan<T>(this Fuzzy<T> fuzzy, T max) where T : IComparable<T>
-            => throw new NotImplementedException();
+        public static T Minimum<T>(this T value, T min) where T : struct, IComparable<T> {
+            FuzzyRange<T> spec = FuzzyContext.Get<T, FuzzyRange<T>>(value);
+            spec.Minimum = min;
+            return spec;
+        }
 
-        public static Fuzzy<T> Not<T>(this Fuzzy<T> fuzzy, T unexpected) where T : IComparable<T>
-            => throw new NotImplementedException();
+        public static T Maximum<T>(this T value, T maximum) where T : struct, IComparable<T> {
+            FuzzyRange<T> spec = FuzzyContext.Get<T, FuzzyRange<T>>(value);
+            spec.Maximum = maximum;
+            return spec;
+        }
     }
 }
