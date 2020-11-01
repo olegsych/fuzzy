@@ -182,10 +182,15 @@ namespace Fuzzy
         public class SByte: IFuzzExtensionsTest
         {
             [Fact]
-            public void ReturnsFuzzySByte() {
-                FuzzyRange<sbyte> actual = fuzzy.SByte();
-                Assert.IsType<FuzzySByte>(actual);
-                Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
+            public void ReturnsValueBuiltByFuzzySByte() {
+                FuzzySByte actualSpec = null;
+                var expectedValue = (sbyte)(random.Next() % sbyte.MaxValue);
+                ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzySByte>(spec => actualSpec = spec)).Returns(expectedValue);
+
+                sbyte actualValue = fuzzy.SByte();
+
+                Assert.Equal(expectedValue, actualValue);
+                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
             }
         }
 
