@@ -6,7 +6,7 @@ namespace Fuzzy
 {
     public static class IFuzzExtensions
     {
-        public static Fuzzy<bool> Boolean(this IFuzz fuzzy) => new FuzzyBoolean(fuzzy);
+        public static bool Boolean(this IFuzz fuzzy) => new FuzzyBoolean(fuzzy);
 
         public static FuzzyRange<byte> Byte(this IFuzz fuzzy) => new FuzzyByte(fuzzy);
 

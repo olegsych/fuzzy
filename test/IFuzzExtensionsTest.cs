@@ -18,10 +18,15 @@ namespace Fuzzy
 
         public class Boolean: IFuzzExtensionsTest
         {
-            [Fact]
-            public void ReturnsFuzzyBoolean() {
-                var actual = Assert.IsType<FuzzyBoolean>(fuzzy.Boolean());
-                Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
+            [Theory, InlineData(true), InlineData(false)]
+            public void ReturnsValueBuiltByFuzzyBoolean(bool expectedValue) {
+                FuzzyBoolean actualSpec = null;
+                ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzyBoolean>(spec => actualSpec = spec)).Returns(expectedValue);
+
+                bool actualValue = fuzzy.Boolean();
+
+                Assert.Equal(expectedValue, actualValue);
+                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
             }
         }
 
