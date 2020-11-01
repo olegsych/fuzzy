@@ -111,9 +111,9 @@ namespace Fuzzy
         {
             [Fact]
             public void ReturnsFuzzyIndex() {
-                var elements = new TestStruct[0];
-                Fuzzy<int> actual = fuzzy.Index(elements);
-                Assert.Equal(typeof(FuzzyIndex<TestStruct>), actual.GetType());
+                TestStruct[] elements = new[] { new TestStruct(), new TestStruct() };
+                int value = fuzzy.Index(elements);
+                FuzzyIndex<TestStruct> actual = FuzzyContext.Get<int, FuzzyIndex<TestStruct>>(value);
                 Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
                 Assert.Same(elements, actual.Field<IEnumerable<TestStruct>>().Value);
             }
