@@ -3,6 +3,6 @@
     public interface IFuzz
     {
         int Next();
-        T Build<T>(Fuzzy<T> fuzzy);
+        T Build<T>(Fuzzy<T> spec);
     }
 }
