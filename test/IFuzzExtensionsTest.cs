@@ -10,7 +10,7 @@ namespace Fuzzy
     public class IFuzzExtensionsTest
     {
         // Common method parameters
-        readonly IFuzz fuzzy = Substitute.For<IFuzz>();
+        readonly IFuzz fuzzy = Substitute.ForPartsOf<Fuzz>();
 
         // Test fixture
         readonly Random random = new Random();
@@ -100,9 +100,9 @@ namespace Fuzzy
         public class Enum: IFuzzExtensionsTest
         {
             [Fact]
-            public void ReturnsFuzzyEnum() {
-                Fuzzy<TestEnum> actual = fuzzy.Enum<TestEnum>();
-                Assert.IsType<FuzzyEnum<TestEnum>>(actual);
+            public void ReturnsValueBuiltByFuzzyEnum() {
+                TestEnum value = fuzzy.Enum<TestEnum>();
+                FuzzyEnum<TestEnum> actual = FuzzyContext.Get<TestEnum, FuzzyEnum<TestEnum>>(value);
                 Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
             }
         }
