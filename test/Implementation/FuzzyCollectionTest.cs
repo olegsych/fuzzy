@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Fuzzy.Implementation
 {
-    public class FuzzyCollectionTest: FuzzyTestFixture
+    public class FuzzyCollectionTest: TestFixture
     {
         public class TestClass { }
         public interface ITestCollection:

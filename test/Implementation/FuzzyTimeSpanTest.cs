@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Fuzzy.Implementation
 {
-    public class FuzzyTimeSpanTest: FuzzyTestFixture
+    public class FuzzyTimeSpanTest: TestFixture
     {
         readonly FuzzyRange<TimeSpan> sut;
 

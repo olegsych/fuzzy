@@ -1,4 +1,3 @@
-using System;
 using Fuzzy.Implementation;
 using NSubstitute;
 using NSubstitute.Core;
@@ -6,7 +5,7 @@ using Xunit;
 
 namespace Fuzzy
 {
-    public class IComparableExtensionsTest: FuzzyTestFixture
+    public class IComparableExtensionsTest: TestFixture
     {
         // Method parameters
         readonly TestStruct value;

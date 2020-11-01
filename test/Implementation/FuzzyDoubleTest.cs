@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Fuzzy.Implementation
 {
-    public class FuzzyDoubleTest: FuzzyTestFixture
+    public class FuzzyDoubleTest: TestFixture
     {
         readonly Fuzzy<double> sut;
 

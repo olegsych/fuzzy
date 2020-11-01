@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Fuzzy.Implementation
 {
-    public class FuzzyCharTest: FuzzyTestFixture
+    public class FuzzyCharTest: TestFixture
     {
         readonly FuzzyRange<char> sut;
 

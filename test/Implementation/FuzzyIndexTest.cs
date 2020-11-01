@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Fuzzy.Implementation
 {
-    public class FuzzyIndexTest: FuzzyTestFixture
+    public class FuzzyIndexTest: TestFixture
     {
         readonly Fuzzy<int> sut;
 

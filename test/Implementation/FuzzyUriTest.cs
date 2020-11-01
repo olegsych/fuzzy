@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Fuzzy.Implementation
 {
-    public class FuzzyUriTest: FuzzyTestFixture
+    public class FuzzyUriTest: TestFixture
     {
         readonly Fuzzy<Uri> sut;
 

@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Fuzzy.Implementation
 {
-    public class FuzzyBooleanTest: FuzzyTestFixture
+    public class FuzzyBooleanTest: TestFixture
     {
         readonly Fuzzy<bool> sut;
 

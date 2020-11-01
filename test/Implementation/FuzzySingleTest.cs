@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Fuzzy.Implementation
 {
-    public class FuzzySingleTest: FuzzyTestFixture
+    public class FuzzySingleTest: TestFixture
     {
         readonly Fuzzy<float> sut;
 

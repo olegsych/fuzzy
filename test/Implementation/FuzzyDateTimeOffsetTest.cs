@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Fuzzy.Implementation
 {
-    public class FuzzyDateTimeOffsetTest: FuzzyTestFixture
+    public class FuzzyDateTimeOffsetTest: TestFixture
     {
         readonly FuzzyRange<DateTimeOffset> sut;
 

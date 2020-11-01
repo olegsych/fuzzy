@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Fuzzy.Implementation
 {
-    public class FuzzyContextTest: FuzzyTestFixture
+    public class FuzzyContextTest: TestFixture
     {
         // Method parameters
         readonly TestStruct value;
