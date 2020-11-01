@@ -1,70 +1,59 @@
-using System;
+using Fuzzy.Implementation;
 using NSubstitute;
+using NSubstitute.Core;
 using Xunit;
 
 namespace Fuzzy
 {
-    public class ByteExtensionsTest
+    public class ByteExtensionsTest: TestFixture
     {
         // Method parameters
-        readonly FuzzyRange<byte> value;
+        readonly byte value = (byte)(random.Next() % byte.MaxValue);
         readonly byte minimum = (byte)(byte.MinValue + random.Next() % sbyte.MaxValue);
         readonly byte maximum = (byte)(byte.MaxValue - random.Next() % sbyte.MaxValue);
 
-        // Shared test fixture
-        static readonly Random random = new Random();
-        readonly FuzzyRange<byte> @null = null;
-        readonly IFuzz fuzzy = Substitute.For<IFuzz>();
+        // Test fixture
+        readonly FuzzyRange<byte> spec;
+        readonly byte newValue = (byte)(random.Next() % byte.MaxValue);
 
-        public ByteExtensionsTest() =>
-            value = Substitute.ForPartsOf<FuzzyRange<byte>>(fuzzy, byte.MinValue, byte.MaxValue);
+        public ByteExtensionsTest() {
+            spec = Substitute.ForPartsOf<FuzzyRange<byte>>(fuzzy, byte.MinValue, byte.MaxValue);
+
+            FuzzyContext.Set(value, spec);
+            ConfiguredCall arrange = fuzzy.Build(spec).Returns(newValue);
+        }
 
         public class Between: ByteExtensionsTest
         {
             [Fact]
-            public void ThrowsDescriptiveExceptionWhenValueIsNull() {
-                var thrown = Assert.Throws<ArgumentNullException>(() => @null.Between(minimum, maximum));
-                Assert.Equal("value", thrown.ParamName);
-            }
-
-            [Fact]
             public void ReturnsValueWithMinimumAndMaximumPropertiesSet() {
-                FuzzyRange<byte> returned = value.Between(minimum, maximum);
-                Assert.Same(value, returned);
-                Assert.Equal(minimum, returned.Minimum);
-                Assert.Equal(maximum, returned.Maximum);
+                byte returned = value.Between(minimum, maximum);
+
+                Assert.Equal(newValue, returned);
+                Assert.Equal(minimum, spec.Minimum);
+                Assert.Equal(maximum, spec.Maximum);
             }
         }
 
         public class Maximum: ByteExtensionsTest
         {
             [Fact]
-            public void ThrowsDescriptiveExceptionWhenValueIsNull() {
-                var thrown = Assert.Throws<ArgumentNullException>(() => @null.Maximum(maximum));
-                Assert.Equal("value", thrown.ParamName);
-            }
-
-            [Fact]
             public void ReturnsValueWithMaximumPropertySet() {
-                FuzzyRange<byte> returned = value.Maximum(maximum);
-                Assert.Same(value, returned);
-                Assert.Equal(maximum, returned.Maximum);
+                byte returned = value.Maximum(maximum);
+
+                Assert.Equal(newValue, returned);
+                Assert.Equal(maximum, spec.Maximum);
             }
         }
 
         public class Minimum: ByteExtensionsTest
         {
             [Fact]
-            public void ThrowsDescriptiveExceptionWhenValueIsNull() {
-                var thrown = Assert.Throws<ArgumentNullException>(() => @null.Minimum(maximum));
-                Assert.Equal("value", thrown.ParamName);
-            }
-
-            [Fact]
             public void ReturnsValueWithMinimumPropertySet() {
-                FuzzyRange<byte> returned = value.Minimum(minimum);
-                Assert.Same(value, returned);
-                Assert.Equal(minimum, returned.Minimum);
+                byte returned = value.Minimum(minimum);
+
+                Assert.Equal(newValue, returned);
+                Assert.Equal(minimum, spec.Minimum);
             }
         }
     }
