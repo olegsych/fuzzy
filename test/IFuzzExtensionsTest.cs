@@ -88,10 +88,10 @@ namespace Fuzzy
         public class Element: IFuzzExtensionsTest
         {
             [Fact]
-            public void ReturnsFuzzyElement() {
-                var elements = new TestStruct[0];
-                Fuzzy<TestStruct> actual = fuzzy.Element(elements);
-                Assert.Equal(typeof(FuzzyElement<TestStruct>), actual.GetType());
+            public void ReturnsValueBuiltByFuzzyElement() {
+                var elements = new[] { new TestStruct(random.Next()) };
+                TestStruct value = fuzzy.Element(elements);
+                FuzzyElement<TestStruct> actual = FuzzyContext.Get<TestStruct, FuzzyElement<TestStruct>>(value);
                 Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
                 Assert.Same(elements, actual.Field<IEnumerable<TestStruct>>().Value);
             }

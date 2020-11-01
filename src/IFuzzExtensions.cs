@@ -18,7 +18,7 @@ namespace Fuzzy
 
         public static Fuzzy<double> Double(this IFuzz fuzzy) => new FuzzyDouble(fuzzy);
 
-        public static Fuzzy<T> Element<T>(this IFuzz fuzzy, IEnumerable<T> candidates) => new FuzzyElement<T>(fuzzy, candidates);
+        public static T Element<T>(this IFuzz fuzzy, IEnumerable<T> candidates) => new FuzzyElement<T>(fuzzy, candidates);
 
         public static T Enum<T>(this IFuzz fuzzy) where T : Enum => new FuzzyEnum<T>(fuzzy);
 
