@@ -8,7 +8,7 @@ namespace Fuzzy
     {
         public static bool Boolean(this IFuzz fuzzy) => new FuzzyBoolean(fuzzy);
 
-        public static FuzzyRange<byte> Byte(this IFuzz fuzzy) => new FuzzyByte(fuzzy);
+        public static byte Byte(this IFuzz fuzzy) => new FuzzyByte(fuzzy);
 
         public static char Char(this IFuzz fuzzy) => new FuzzyChar(fuzzy);
 

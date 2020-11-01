@@ -27,10 +27,15 @@ namespace Fuzzy
         public class Byte: IFuzzExtensionsTest
         {
             [Fact]
-            public void ReturnsFuzzyByte() {
-                FuzzyRange<byte> actual = fuzzy.Byte();
-                Assert.IsType<FuzzyByte>(actual);
-                Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
+            public void ReturnsValueBuiltByFuzzyByte() {
+                FuzzyByte actualSpec = null;
+                var expectedValue = (byte)(random.Next() % byte.MaxValue);
+                ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzyByte>(spec => actualSpec = spec)).Returns(expectedValue);
+
+                byte actualValue = fuzzy.Byte();
+
+                Assert.Equal(expectedValue, actualValue);
+                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
             }
         }
 
