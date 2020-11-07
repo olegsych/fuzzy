@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+using System;
 using System.Reflection;
 using Inspector;
 using NSubstitute;
@@ -14,9 +13,6 @@ namespace Fuzzy
 
         // Constructor parameters
         readonly IFuzz fuzz = Substitute.For<IFuzz>();
-
-        // Test fixture
-        readonly Random random = new Random();
 
         public FuzzyTest() => sut = Substitute.ForPartsOf<Fuzzy<TestClass>>(fuzz);
 
@@ -38,40 +34,17 @@ namespace Fuzzy
         public class ImplicitTypeConversionOperator : FuzzyTest
         {
             [Fact]
-            public void ReturnsVaueBuiltFromSutOnce()
+            public void ReturnsNewValueBuiltFromSut()
             {
-                var expected = new TestClass();
-                ConfiguredCall arrange = fuzz.Build(sut).Returns(expected, new TestClass());
+                var expected1 = new TestClass();
+                var expected2 = new TestClass();
+                ConfiguredCall arrange = fuzz.Build(sut).Returns(expected1, expected2);
 
                 TestClass actual1 = sut;
                 TestClass actual2 = sut;
 
-                Assert.Same(expected, actual1);
-                Assert.Same(expected, actual2);
-            }
-        }
-
-        public new class ToString: FuzzyTest
-        {
-            [Fact]
-            public void BuildsFuzzyValueOnceAndReturnsItsToStringResult() {
-                int expected = random.Next();
-                var actual = Substitute.ForPartsOf<Fuzzy<int>>(fuzz);
-                ConfiguredCall arrange = fuzz.Build(actual).Returns(expected, random.Next());
-                Assert.Equal(expected.ToString(), actual.ToString());
-                Assert.Equal(expected.ToString(), actual.ToString());
-            }
-        }
-
-        public class Value: FuzzyTest
-        {
-            [Fact]
-            public void ReturnsVaueBuiltFromSutOnce() {
-                var expected = new TestClass();
-                ConfiguredCall arrange = fuzz.Build(sut).Returns(expected, new TestClass());
-
-                Assert.Same(expected, sut.Value);
-                Assert.Same(expected, sut.Value);
+                Assert.Same(expected1, actual1);
+                Assert.Same(expected2, actual2);
             }
         }
 
