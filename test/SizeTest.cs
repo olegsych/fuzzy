@@ -12,7 +12,7 @@ namespace Fuzzy
         static readonly Random random = new Random();
 
         // Common method parameters
-        readonly int minimum = random.Next() % 1000;
+        readonly int minimum = 2 + random.Next() % 1000;
         readonly int maximum;
         readonly IFuzz fuzzy = Substitute.For<IFuzz>();
 
