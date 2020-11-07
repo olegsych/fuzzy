@@ -54,7 +54,7 @@ namespace Fuzzy
         {
             [Fact]
             public void ReturnsValueWithMinimumPropertySet() {
-                TestStruct returned = spec.Minimum(minimum);
+                TestStruct returned = value.Minimum(minimum);
 
                 Assert.Equal(newValue, returned);
                 Assert.Equal(minimum, spec.Minimum);

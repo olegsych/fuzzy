@@ -12,9 +12,9 @@ namespace Fuzzy
             return spec;
         }
 
-        public static T Minimum<T>(this T value, T min) where T : struct, IComparable<T> {
+        public static T Minimum<T>(this T value, T minimum) where T : struct, IComparable<T> {
             FuzzyRange<T> spec = FuzzyContext.Get<T, FuzzyRange<T>>(value);
-            spec.Minimum = min;
+            spec.Minimum = minimum;
             return spec;
         }
 
