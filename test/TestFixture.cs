@@ -13,6 +13,7 @@ namespace Fuzzy
         protected void ArrangeBuildOfFuzzyInt16() => ArrangeBuildOfFuzzyRange(() => (short)(random.Next() % short.MaxValue));
         protected void ArrangeBuildOfFuzzyInt64() => ArrangeBuildOfFuzzyRange(() => (long)random.Next());
         protected void ArrangeBuildOfFuzzyUInt16() => ArrangeBuildOfFuzzyRange(() => (ushort)(random.Next() % ushort.MaxValue));
+        protected void ArrangeBuildOfFuzzyUInt32() => ArrangeBuildOfFuzzyRange(() => (uint)random.Next());
         protected void ArrangeBuildOfFuzzyUInt64() => ArrangeBuildOfFuzzyRange(() => (ulong)random.Next());
 
         void ArrangeBuildOfFuzzyRange<T>(Func<T> generate) where T: struct, IComparable<T> {
