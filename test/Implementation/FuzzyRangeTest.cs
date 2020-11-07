@@ -4,7 +4,7 @@ using Inspector;
 using NSubstitute;
 using Xunit;
 
-namespace Fuzzy
+namespace Fuzzy.Implementation
 {
     public class FuzzyRangeTest
     {

@@ -1,4 +1,5 @@
 using System;
+using Fuzzy.Implementation;
 using Inspector;
 using NSubstitute;
 using NSubstitute.Core;

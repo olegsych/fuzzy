@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace Fuzzy
+namespace Fuzzy.Implementation
 {
     public abstract class Fuzzy<T>
     {

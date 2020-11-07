@@ -5,7 +5,7 @@ using NSubstitute;
 using NSubstitute.Core;
 using Xunit;
 
-namespace Fuzzy
+namespace Fuzzy.Implementation
 {
     public class FuzzyTest
     {

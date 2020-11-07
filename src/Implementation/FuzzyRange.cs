@@ -1,6 +1,6 @@
 using System;
 
-namespace Fuzzy
+namespace Fuzzy.Implementation
 {
     public abstract class FuzzyRange<T>: Fuzzy<T> where T : struct, IComparable<T>
     {

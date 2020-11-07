@@ -1,4 +1,6 @@
-﻿namespace Fuzzy
+using Fuzzy.Implementation;
+
+namespace Fuzzy
 {
     public interface IFuzz
     {
