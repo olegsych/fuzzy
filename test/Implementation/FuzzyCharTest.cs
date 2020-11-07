@@ -28,12 +28,21 @@ namespace Fuzzy.Implementation
         {
             [Fact]
             public void ReturnsFuzzyUInt16ValueConvertedToChar() {
+                // Arrange
                 sut.Minimum = (char)(random.Next() % byte.MaxValue);
                 sut.Maximum = (char)(sut.Minimum + random.Next() % byte.MaxValue);
-                ushort expected = (ushort)(random.Next() % ushort.MaxValue);
-                Expression<Predicate<FuzzyRange<ushort>>> fuzzyUInt16 = v => v.Minimum == sut.Minimum && v.Maximum == sut.Maximum;
-                ConfiguredCall arrange = fuzzy.Build(Arg.Is(fuzzyUInt16)).Returns(expected);
 
+                ConfiguredCall arrange = fuzzy.Build(Arg.Is<FuzzyRange<ushort>>(s => s.Minimum == ushort.MinValue && s.Maximum == ushort.MaxValue))
+                    .Returns(call => {
+                        var initial = (ushort)(random.Next() % byte.MaxValue);
+                        FuzzyContext.Set(initial, (FuzzyRange<ushort>)call[0]);
+                        return initial;
+                    });
+
+                ushort expected = (ushort)(random.Next() % ushort.MaxValue);
+                arrange = fuzzy.Build(Arg.Is<FuzzyRange<ushort>>(s => s.Minimum == sut.Minimum && s.Maximum == sut.Maximum)).Returns(expected);
+
+                // Act
                 char actual = sut.Build();
 
                 Assert.Equal(expected, actual);

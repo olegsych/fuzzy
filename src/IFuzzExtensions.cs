@@ -40,7 +40,7 @@ namespace Fuzzy
 
         public static TimeSpan TimeSpan(this IFuzz fuzzy) => new FuzzyTimeSpan(fuzzy);
 
-        public static FuzzyRange<ushort> UInt16(this IFuzz fuzzy) => new FuzzyUInt16(fuzzy);
+        public static ushort UInt16(this IFuzz fuzzy) => new FuzzyUInt16(fuzzy);
 
         public static uint UInt32(this IFuzz fuzzy) => new FuzzyUInt32(fuzzy);
 
