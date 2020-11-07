@@ -8,17 +8,15 @@ using Xunit;
 
 namespace Fuzzy.Implementation
 {
-    public class FuzzyArrayTest
+    public class FuzzyArrayTest: TestFixture
     {
         readonly Fuzzy<TestStruct[]> sut;
 
         // Constructor parameters
-        readonly IFuzz fuzzy = Substitute.For<IFuzz>();
         readonly Func<TestStruct> itemFactory = Substitute.For<Func<TestStruct>>();
         readonly Length length;
 
         // Test fixture
-        static readonly Random random = new Random();
         readonly int minLength;
         readonly int maxLength;
 
@@ -52,6 +50,8 @@ namespace Fuzzy.Implementation
 
         public class Build: FuzzyArrayTest
         {
+            public Build() => ArrangeBuildOfFuzzyInt32();
+
             [Fact]
             public void ReturnsArrayWithGivenLengthAndItemsCreatedByFactory() {
                 int expectedLength = 2 + random.Next() % 10;

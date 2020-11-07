@@ -26,7 +26,10 @@ namespace Fuzzy.Implementation
 
         public class Build: FuzzyDateTimeOffsetTest
         {
-            public Build() => ArrangeBuildOfFuzzyInt64();
+            public Build() {
+                ArrangeBuildOfFuzzyInt64();
+                ArrangeBuildOfFuzzyInt32();
+            }
 
             [Theory, MemberData(nameof(GetData))]
             public void ReturnsDateTimeOffsetCreatedFromFuzzyTicksAndOffsetValues(DateTimeOffset minimum, DateTimeOffset maximum, DateTime fuzzyDate, TimeSpan fuzzyOffset, DateTimeOffset expected) {

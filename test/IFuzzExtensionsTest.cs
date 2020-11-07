@@ -177,10 +177,15 @@ namespace Fuzzy
         public class Int32: IFuzzExtensionsTest
         {
             [Fact]
-            public void ReturnsFuzzyInt32() {
-                FuzzyRange<int> actual = fuzzy.Int32();
-                Assert.IsType<FuzzyInt32>(actual);
-                Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
+            public void ReturnsValueBuiltByFuzzyInt32() {
+                FuzzyInt32 actualSpec = null;
+                var expectedValue = (int)random.Next();
+                ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzyInt32>(spec => actualSpec = spec)).Returns(expectedValue);
+
+                int actualValue = fuzzy.Int32();
+
+                Assert.Equal(expectedValue, actualValue);
+                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
             }
         }
 
@@ -232,9 +237,15 @@ namespace Fuzzy
         public class String: IFuzzExtensionsTest
         {
             [Fact]
-            public void ReturnsFuzzyString() {
-                var actual = Assert.IsType<FuzzyString>(fuzzy.String());
-                Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
+            public void ReturnsValueBuiltByFuzzyString() {
+                FuzzyString actualSpec = null;
+                string expectedValue = "generated";
+                ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzyString>(spec => actualSpec = spec)).Returns(expectedValue);
+
+                string actualValue = fuzzy.String();
+
+                Assert.Same(expectedValue, actualValue);
+                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
             }
         }
 

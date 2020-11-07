@@ -9,17 +9,15 @@ using Xunit;
 
 namespace Fuzzy.Implementation
 {
-    public class FuzzyListTest
+    public class FuzzyListTest: TestFixture
     {
         readonly Fuzzy<List<TestItem>> sut;
 
         // Constructor parameters
-        readonly IFuzz fuzzy = Substitute.For<IFuzz>();
         readonly Func<TestItem> itemFactory = Substitute.For<Func<TestItem>>();
         readonly Count itemCount;
 
         // Test fixture
-        static readonly Random random = new Random();
         readonly int minCount;
         readonly int maxCount;
 
@@ -53,6 +51,8 @@ namespace Fuzzy.Implementation
 
         public class Build: FuzzyListTest
         {
+            public Build() => ArrangeBuildOfFuzzyInt32();
+
             [Fact]
             public void ReturnsListWithGivenCountOfItemsCreatedByFactory() {
                 int expectedCount = 2 + random.Next() % 10;

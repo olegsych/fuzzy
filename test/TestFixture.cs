@@ -11,6 +11,7 @@ namespace Fuzzy
         protected readonly IFuzz fuzzy = Substitute.For<IFuzz>();
 
         protected void ArrangeBuildOfFuzzyInt16() => ArrangeBuildOfFuzzyRange(() => (short)(random.Next() % short.MaxValue));
+        protected void ArrangeBuildOfFuzzyInt32() => ArrangeBuildOfFuzzyRange(() => random.Next());
         protected void ArrangeBuildOfFuzzyInt64() => ArrangeBuildOfFuzzyRange(() => (long)random.Next());
         protected void ArrangeBuildOfFuzzyUInt16() => ArrangeBuildOfFuzzyRange(() => (ushort)(random.Next() % ushort.MaxValue));
         protected void ArrangeBuildOfFuzzyUInt32() => ArrangeBuildOfFuzzyRange(() => (uint)random.Next());

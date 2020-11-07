@@ -13,23 +13,22 @@ namespace Fuzzy
         readonly int maximum;
 
         // Shared test fixture
-        FuzzyRange<int> buildSpec;
         readonly int builtValue = random.Next();
 
         public SizeTest() {
             maximum = minimum + random.Next() % 10;
-            ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzyRange<int>>(spec => buildSpec = spec)).Returns(builtValue);
+            ArrangeBuildOfFuzzyInt32();
         }
 
         public class Between: SizeTest
         {
             [Fact]
             public void ReturnsRangeInitializedWithGivenMinimumAndMaximumValues() {
+                ConfiguredCall arrange = fuzzy.Build(Arg.Is<FuzzyRange<int>>(s => s.Minimum == minimum && s.Maximum == maximum)).Returns(builtValue);
+
                 var sut = TestSize.Between(minimum, maximum);
 
                 Assert.Equal(builtValue, sut.Build(fuzzy));
-                Assert.Equal(minimum, buildSpec.Minimum);
-                Assert.Equal(maximum, buildSpec.Maximum);
             }
 
             [Fact]
@@ -80,12 +79,11 @@ namespace Fuzzy
             [Fact]
             public void ReturnsRangeInitializedWithGivenValueValue() {
                 int expected = random.Next();
+                ConfiguredCall arrange = fuzzy.Build(Arg.Is<FuzzyRange<int>>(s => s.Minimum == expected && s.Maximum == expected)).Returns(builtValue);
 
                 var sut = TestSize.Exactly(expected);
 
                 Assert.Equal(builtValue, sut.Build(fuzzy));
-                Assert.Equal(expected, buildSpec.Maximum);
-                Assert.Equal(expected, buildSpec.Minimum);
             }
         }
 
@@ -107,10 +105,11 @@ namespace Fuzzy
         {
             [Fact]
             public void ReturnsRangeInitializedWithGivenMaximumValue() {
+                ConfiguredCall arrange = fuzzy.Build(Arg.Is<FuzzyRange<int>>(s => s.Maximum == maximum)).Returns(builtValue);
+
                 var sut = TestSize.Max(maximum);
 
                 Assert.Equal(builtValue, sut.Build(fuzzy));
-                Assert.Equal(maximum, buildSpec.Maximum);
             }
 
             [Fact]
@@ -125,10 +124,11 @@ namespace Fuzzy
         {
             [Fact]
             public void ReturnsRangeInitializedWithGivenMinimumValueAndNoMaximum() {
+                ConfiguredCall arrange = fuzzy.Build(Arg.Is<FuzzyRange<int>>(s => s.Minimum == minimum)).Returns(builtValue);
+
                 var sut = TestSize.Min(minimum);
 
                 Assert.Equal(builtValue, sut.Build(fuzzy));
-                Assert.Equal(minimum, buildSpec.Minimum);
             }
 
             [Fact]
@@ -154,24 +154,22 @@ namespace Fuzzy
 
             [Fact]
             public void ReturnsFuzzyInt32WithGivenMinimumAndMaximum() {
+                ConfiguredCall arrange = fuzzy.Build(Arg.Is<FuzzyRange<int>>(s => s.Minimum == minimum && s.Maximum == maximum)).Returns(builtValue);
                 sut = TestSize.Between(minimum, maximum);
 
                 int actual = sut.Build(fuzzy);
 
                 Assert.Equal(builtValue, actual);
-                Assert.Equal(minimum, buildSpec.Minimum);
-                Assert.Equal(maximum, buildSpec.Maximum);
             }
 
             [Fact]
             public void ReturnsFuzzyInt32WithDefaultMinimumAndMaximum() {
+                ConfiguredCall arrange = fuzzy.Build(Arg.Is<FuzzyRange<int>>(s => s.Minimum == 8 && s.Maximum == 13)).Returns(builtValue);
                 sut = new TestSize();
 
                 int actual = sut.Build(fuzzy);
 
                 Assert.Equal(builtValue, actual);
-                Assert.Equal(8, buildSpec.Minimum);
-                Assert.Equal(13, buildSpec.Maximum);
             }
 
             [Theory]
@@ -179,26 +177,24 @@ namespace Fuzzy
             [InlineData(1, 1)]
             [InlineData(0, 0)]
             public void ReturnsFuzzyInt32WhenMaximumIsLessThanDefaultMinimum(int maximum, int expectedMinimum) {
+                ConfiguredCall arrange = fuzzy.Build(Arg.Is<FuzzyRange<int>>(s => s.Minimum == expectedMinimum && s.Maximum == maximum)).Returns(builtValue);
                 sut = TestSize.Max(maximum);
 
                 int actual = sut.Build(fuzzy);
 
                 Assert.Equal(builtValue, actual);
-                Assert.Equal(expectedMinimum, buildSpec.Minimum);
-                Assert.Equal(maximum, buildSpec.Maximum);
             }
 
             [Theory]
             [InlineData(13, 18)]
             [InlineData(14, 19)]
             public void ReturnsFuzzyInt32WhenMinimumIsMoreThanDefaultMaximum(int minimum, int expectedMaximum) {
+                ConfiguredCall arrange = fuzzy.Build(Arg.Is<FuzzyRange<int>>(s => s.Minimum == minimum && s.Maximum == expectedMaximum)).Returns(builtValue);
                 sut = TestSize.Min(minimum);
 
                 int actual = sut.Build(fuzzy);
 
                 Assert.Equal(builtValue, actual);
-                Assert.Equal(expectedMaximum, buildSpec.Maximum);
-                Assert.Equal(minimum, buildSpec.Minimum);
             }
         }
 

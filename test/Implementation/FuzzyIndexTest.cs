@@ -39,6 +39,8 @@ namespace Fuzzy.Implementation
 
         public class Build: FuzzyIndexTest
         {
+            public Build() => ArrangeBuildOfFuzzyInt32();
+
             [Fact]
             public void ReturnsIndexWithinBoundsOfCollection() {
                 int expected = random.Next() % elements.Count();

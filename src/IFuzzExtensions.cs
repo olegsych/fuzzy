@@ -26,7 +26,7 @@ namespace Fuzzy
 
         public static short Int16(this IFuzz fuzzy) => new FuzzyInt16(fuzzy);
 
-        public static FuzzyRange<int> Int32(this IFuzz fuzzy) => new FuzzyInt32(fuzzy);
+        public static int Int32(this IFuzz fuzzy) => new FuzzyInt32(fuzzy);
 
         public static long Int64(this IFuzz fuzzy) => new FuzzyInt64(fuzzy);
 
@@ -34,9 +34,9 @@ namespace Fuzzy
 
         public static float Single(this IFuzz fuzzy) => new FuzzySingle(fuzzy);
 
-        public static Fuzzy<string> String(this IFuzz fuzzy) => new FuzzyString(fuzzy);
-        public static Fuzzy<string> String(this IFuzz fuzzy, Length length) => throw new NotImplementedException();
-        public static Fuzzy<string> Format(this Fuzzy<string> s, string format) => throw new NotImplementedException();
+        public static string String(this IFuzz fuzzy) => new FuzzyString(fuzzy);
+        public static string String(this IFuzz fuzzy, Length length) => throw new NotImplementedException();
+        public static string Format(this string s, string format) => throw new NotImplementedException();
 
         public static TimeSpan TimeSpan(this IFuzz fuzzy) => new FuzzyTimeSpan(fuzzy);
 
