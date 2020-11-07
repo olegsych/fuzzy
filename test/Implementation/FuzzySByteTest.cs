@@ -26,6 +26,8 @@ namespace Fuzzy.Implementation
 
         public class Build: FuzzySByteTest
         {
+            public Build() => ArrangeBuildOfFuzzyInt16();
+
             [Fact]
             public void ReturnsFuzzyInt16ValueConvertedToSByte() {
                 sut.Minimum = (sbyte)(random.Next() % 64);

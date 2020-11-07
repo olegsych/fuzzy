@@ -13,6 +13,8 @@ namespace Fuzzy.Implementation
 
         public class Build: FuzzyDoubleTest
         {
+            public Build() => ArrangeBuildOfFuzzyInt16();
+
             [Theory]
             [InlineData(true, 1, -1076, 1 / double.PositiveInfinity)] // Positive 0
             [InlineData(true, 1, -1075, double.Epsilon)]

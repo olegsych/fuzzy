@@ -1,70 +1,59 @@
-using System;
+using Fuzzy.Implementation;
 using NSubstitute;
+using NSubstitute.Core;
 using Xunit;
 
 namespace Fuzzy
 {
-    public class Int16ExtensionsTest
+    public class Int16ExtensionsTest: TestFixture
     {
         // Method parameters
-        readonly FuzzyRange<short> value;
+        readonly short value = (short)(random.Next() % 64);
         readonly short minimum = (short)(short.MinValue + random.Next() % byte.MaxValue);
         readonly short maximum = (short)(short.MaxValue - random.Next() % byte.MaxValue);
 
-        // Shared test fixture
-        static readonly Random random = new Random();
-        readonly FuzzyRange<short> @null = null;
-        readonly IFuzz fuzzy = Substitute.For<IFuzz>();
+        // Test fixture
+        readonly FuzzyRange<short> spec;
+        readonly short newValue = (short)(random.Next() % short.MaxValue);
 
-        public Int16ExtensionsTest() =>
-            value = Substitute.ForPartsOf<FuzzyRange<short>>(fuzzy, short.MinValue, short.MaxValue);
+        public Int16ExtensionsTest() {
+            spec = Substitute.ForPartsOf<FuzzyRange<short>>(fuzzy, short.MinValue, short.MaxValue);
+
+            FuzzyContext.Set(value, spec);
+            ConfiguredCall arrange = fuzzy.Build(spec).Returns(newValue);
+        }
 
         public class Between: Int16ExtensionsTest
         {
             [Fact]
-            public void ThrowsDescriptiveExceptionWhenValueIsNull() {
-                var thrown = Assert.Throws<ArgumentNullException>(() => @null.Between(minimum, maximum));
-                Assert.Equal("value", thrown.ParamName);
-            }
-
-            [Fact]
             public void ReturnsValueWithMinimumAndMaximumPropertiesSet() {
-                FuzzyRange<short> returned = value.Between(minimum, maximum);
-                Assert.Same(value, returned);
-                Assert.Equal(minimum, returned.Minimum);
-                Assert.Equal(maximum, returned.Maximum);
+                short returned = value.Between(minimum, maximum);
+
+                Assert.Equal(newValue, returned);
+                Assert.Equal(minimum, spec.Minimum);
+                Assert.Equal(maximum, spec.Maximum);
             }
         }
 
         public class Maximum: Int16ExtensionsTest
         {
             [Fact]
-            public void ThrowsDescriptiveExceptionWhenValueIsNull() {
-                var thrown = Assert.Throws<ArgumentNullException>(() => @null.Maximum(maximum));
-                Assert.Equal("value", thrown.ParamName);
-            }
-
-            [Fact]
             public void ReturnsValueWithMaximumPropertySet() {
-                FuzzyRange<short> returned = value.Maximum(maximum);
-                Assert.Same(value, returned);
-                Assert.Equal(maximum, returned.Maximum);
+                short returned = value.Maximum(maximum);
+
+                Assert.Equal(newValue, returned);
+                Assert.Equal(maximum, spec.Maximum);
             }
         }
 
         public class Minimum: Int16ExtensionsTest
         {
             [Fact]
-            public void ThrowsDescriptiveExceptionWhenValueIsNull() {
-                var thrown = Assert.Throws<ArgumentNullException>(() => @null.Minimum(maximum));
-                Assert.Equal("value", thrown.ParamName);
-            }
-
-            [Fact]
             public void ReturnsValueWithMinimumPropertySet() {
-                FuzzyRange<short> returned = value.Minimum(minimum);
-                Assert.Same(value, returned);
-                Assert.Equal(minimum, returned.Minimum);
+                short returned = value.Minimum(minimum);
+
+                Assert.Equal(newValue, returned);
+                Assert.Equal(minimum, spec.Minimum);
             }
         }
     }

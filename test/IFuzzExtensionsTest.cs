@@ -162,10 +162,15 @@ namespace Fuzzy
         public class Int16: IFuzzExtensionsTest
         {
             [Fact]
-            public void ReturnsFuzzyInt16() {
-                FuzzyRange<short> actual = fuzzy.Int16();
-                Assert.IsType<FuzzyInt16>(actual);
-                Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
+            public void ReturnsValueBuiltByFuzzyInt16() {
+                FuzzyInt16 actualSpec = null;
+                var expectedValue = (short)(random.Next() % short.MaxValue);
+                ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzyInt16>(spec => actualSpec = spec)).Returns(expectedValue);
+
+                short actualValue = fuzzy.Int16();
+
+                Assert.Equal(expectedValue, actualValue);
+                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
             }
         }
 

@@ -18,5 +18,14 @@ namespace Fuzzy
                     return initial;
                 });
         }
+
+        protected void ArrangeBuildOfFuzzyInt16() {
+            ConfiguredCall arrange = fuzzy.Build(Arg.Any<FuzzyRange<short>>())
+                .Returns(call => {
+                    var initial = (short)(random.Next() % short.MaxValue);
+                    FuzzyContext.Set(initial, (FuzzyRange<short>)call[0]);
+                    return initial;
+                });
+        }
     }
 }
