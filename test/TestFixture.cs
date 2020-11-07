@@ -10,9 +10,10 @@ namespace Fuzzy
         protected static readonly Random random = new Random();
         protected readonly IFuzz fuzzy = Substitute.For<IFuzz>();
 
-        protected void ArrangeBuildOfFuzzyInt64() => ArrangeBuildOfFuzzyRange(() => (long)random.Next());
         protected void ArrangeBuildOfFuzzyInt16() => ArrangeBuildOfFuzzyRange(() => (short)(random.Next() % short.MaxValue));
+        protected void ArrangeBuildOfFuzzyInt64() => ArrangeBuildOfFuzzyRange(() => (long)random.Next());
         protected void ArrangeBuildOfFuzzyUInt16() => ArrangeBuildOfFuzzyRange(() => (ushort)(random.Next() % ushort.MaxValue));
+        protected void ArrangeBuildOfFuzzyUInt64() => ArrangeBuildOfFuzzyRange(() => (ulong)random.Next());
 
         void ArrangeBuildOfFuzzyRange<T>(Func<T> generate) where T: struct, IComparable<T> {
             ConfiguredCall arrange = fuzzy.Build(Arg.Any<FuzzyRange<T>>())
