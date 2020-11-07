@@ -1,38 +1,38 @@
 using System;
+using Fuzzy.Implementation;
 using NSubstitute;
+using NSubstitute.Core;
 using Xunit;
 
 namespace Fuzzy
 {
-    public class DateTimeExtensionsTest
+    public class DateTimeExtensionsTest: TestFixture
     {
         // Method parameters
-        readonly FuzzyRange<DateTime> value;
+        readonly DateTime value = new DateTime(random.Next());
         readonly DateTime minimum = new DateTime(DateTime.MinValue.Ticks + random.Next());
         readonly TimeSpan timeSpan = new TimeSpan(random.Next());
 
-        // Shared test fixture
-        static readonly Random random = new Random();
-        readonly FuzzyRange<DateTime> @null = null;
-        readonly IFuzz fuzzy = Substitute.For<IFuzz>();
+        // Test fixture
+        readonly FuzzyRange<DateTime> spec;
+        readonly DateTime newValue = new DateTime(DateTime.MinValue.Ticks + random.Next());
 
-        public DateTimeExtensionsTest() =>
-            value = Substitute.ForPartsOf<FuzzyRange<DateTime>>(fuzzy, DateTime.MinValue, DateTime.MaxValue);
+        public DateTimeExtensionsTest() {
+            spec = Substitute.ForPartsOf<FuzzyRange<DateTime>>(fuzzy, DateTime.MinValue, DateTime.MaxValue);
+
+            FuzzyContext.Set(value, spec);
+            ConfiguredCall arrange = fuzzy.Build(spec).Returns(newValue);
+        }
 
         public class Between: DateTimeExtensionsTest
         {
             [Fact]
-            public void ThrowsDescriptiveExceptionWhenValueIsNull() {
-                var thrown = Assert.Throws<ArgumentNullException>(() => @null.Between(minimum, timeSpan));
-                Assert.Equal("value", thrown.ParamName);
-            }
-
-            [Fact]
             public void ReturnsValueWithMinimumAndMaximumPropertiesSet() {
-                FuzzyRange<DateTime> returned = value.Between(minimum, timeSpan);
-                Assert.Same(value, returned);
-                Assert.Equal(minimum, returned.Minimum);
-                Assert.Equal(minimum + timeSpan, returned.Maximum);
+                DateTime returned = value.Between(minimum, timeSpan);
+
+                Assert.Equal(newValue, returned);
+                Assert.Equal(minimum, spec.Minimum);
+                Assert.Equal(minimum + timeSpan, spec.Maximum);
             }
         }
     }

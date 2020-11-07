@@ -57,21 +57,26 @@ namespace Fuzzy
         public class DateTime: IFuzzExtensionsTest
         {
             [Fact]
-            public void ReturnsFuzzyDateTime() {
-                FuzzyRange<System.DateTime> returned = fuzzy.DateTime();
-                var actual = Assert.IsType<FuzzyDateTime>(returned);
-                Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
+            public void ReturnsValueBuiltByFuzzyDateTime() {
+                FuzzyDateTime actualSpec = null;
+                var expectedValue = new System.DateTime(random.Next());
+                ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzyDateTime>(spec => actualSpec = spec)).Returns(expectedValue);
+
+                System.DateTime actualValue = fuzzy.DateTime();
+
+                Assert.Equal(expectedValue, actualValue);
+                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
             }
 
-            [Fact]
-            public void ReturnsFuzzyDateTimeOfGivenKind() {
-                var expected = (DateTimeKind)(random.Next() % ((int)DateTimeKind.Local + 1));
+            [Theory, InlineData(DateTimeKind.Unspecified), InlineData(DateTimeKind.Local), InlineData(DateTimeKind.Utc)]
+            public void ReturnsValueBuiltByFuzzyDateTimeWithGivenKind(DateTimeKind expectedKind) {
+                FuzzyDateTime actualSpec = null;
+                var arrange = fuzzy.Build(Arg.Do<FuzzyDateTime>(spec => actualSpec = spec));
 
-                FuzzyRange<System.DateTime> returned = fuzzy.DateTime(expected);
+                System.DateTime verifiedByAnotherTest = fuzzy.DateTime(expectedKind);
 
-                var actual = Assert.IsType<FuzzyDateTime>(returned);
-                Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
-                Assert.Equal(expected, actual.Field<DateTimeKind?>().Value);
+                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
+                Assert.Equal(expectedKind, actualSpec.Field<DateTimeKind?>().Value);
             }
         }
 

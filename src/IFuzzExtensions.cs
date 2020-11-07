@@ -12,7 +12,7 @@ namespace Fuzzy
 
         public static char Char(this IFuzz fuzzy) => new FuzzyChar(fuzzy);
 
-        public static FuzzyRange<DateTime> DateTime(this IFuzz fuzzy, DateTimeKind? kind = null) => new FuzzyDateTime(fuzzy, kind);
+        public static DateTime DateTime(this IFuzz fuzzy, DateTimeKind? kind = null) => new FuzzyDateTime(fuzzy, kind);
 
         public static FuzzyRange<DateTimeOffset> DateTimeOffset(this IFuzz fuzzy) => new FuzzyDateTimeOffset(fuzzy);
 
