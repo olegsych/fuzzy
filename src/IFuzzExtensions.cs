@@ -14,7 +14,7 @@ namespace Fuzzy
 
         public static DateTime DateTime(this IFuzz fuzzy, DateTimeKind? kind = null) => new FuzzyDateTime(fuzzy, kind);
 
-        public static FuzzyRange<DateTimeOffset> DateTimeOffset(this IFuzz fuzzy) => new FuzzyDateTimeOffset(fuzzy);
+        public static DateTimeOffset DateTimeOffset(this IFuzz fuzzy) => new FuzzyDateTimeOffset(fuzzy);
 
         public static double Double(this IFuzz fuzzy) => new FuzzyDouble(fuzzy);
 

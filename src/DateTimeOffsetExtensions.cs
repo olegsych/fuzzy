@@ -2,14 +2,8 @@
 
 namespace Fuzzy
 {
-    public static class DateTimeOffsetExtensions
+    public static class DateTimeOffsetOffsetExtensions
     {
-        public static FuzzyRange<DateTimeOffset> Between(this FuzzyRange<DateTimeOffset> value, DateTimeOffset minimum, TimeSpan timeSpan) {
-            if(value is null)
-                throw new ArgumentNullException(nameof(value));
-            value.Minimum = minimum;
-            value.Maximum = minimum + timeSpan;
-            return value;
-        }
+        public static DateTimeOffset Between(this DateTimeOffset value, DateTimeOffset minimum, TimeSpan timeSpan) => IComparableExtensions.Between(value, minimum, minimum + timeSpan);
     }
 }

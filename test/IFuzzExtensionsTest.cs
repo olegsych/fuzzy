@@ -83,10 +83,15 @@ namespace Fuzzy
         public class DateTimeOffset: IFuzzExtensionsTest
         {
             [Fact]
-            public void ReturnsFuzzyDateTimeOffset() {
-                FuzzyRange<System.DateTimeOffset> actual = fuzzy.DateTimeOffset();
-                Assert.IsType<FuzzyDateTimeOffset>(actual);
-                Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
+            public void ReturnsValueBuiltByFuzzyDateTimeOffset() {
+                FuzzyDateTimeOffset actualSpec = null;
+                var expectedValue = new System.DateTimeOffset(random.Next(), System.TimeSpan.Zero);
+                ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzyDateTimeOffset>(spec => actualSpec = spec)).Returns(expectedValue);
+
+                System.DateTimeOffset actualValue = fuzzy.DateTimeOffset();
+
+                Assert.Equal(expectedValue, actualValue);
+                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
             }
         }
 
