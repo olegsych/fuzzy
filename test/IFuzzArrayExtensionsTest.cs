@@ -9,12 +9,15 @@ using Xunit;
 
 namespace Fuzzy
 {
-    public abstract class IFuzzArrayExtensionsTest
+    public abstract class IFuzzArrayExtensionsTest: TestFixture
     {
-        static readonly Random random = new Random();
+        // Test fixture
+        readonly TestStruct[] expected = new TestStruct[0];
+        FuzzyArray<TestStruct> spec;
 
-        // Common method parameters
-        readonly IFuzz fuzzy = Substitute.For<IFuzz>();
+        public IFuzzArrayExtensionsTest() {
+            ConfiguredCall unused = fuzzy.Build(Arg.Do<FuzzyArray<TestStruct>>(s => spec = s)).Returns(expected);
+        }
 
         public class ArrayFuncOfT: IFuzzArrayExtensionsTest
         {
@@ -24,22 +27,22 @@ namespace Fuzzy
 
             [Fact]
             public void ReturnsFuzzyArrayWithGivenFuzzFactoryAndLength() {
-                FuzzyArray<TestStruct> actual = fuzzy.Array(createElement, length);
+                TestStruct[] actual = fuzzy.Array(createElement, length);
 
                 AssertExpectedFuzzyArray(actual);
-                Assert.Same(length, actual.Field<Length>().Value);
+                Assert.Same(length, spec.Field<Length>().Value);
             }
 
             [Fact]
             public void ReturnsFuzzyArrayWithDefaultLength() {
-                FuzzyArray<TestStruct> actual = fuzzy.Array(createElement);
+                TestStruct[] actual = fuzzy.Array(createElement);
 
                 AssertExpectedFuzzyArray(actual);
-                Assert.Equal(new Length(), actual.Field<Length>().Value);
+                Assert.Equal(new Length(), spec.Field<Length>().Value);
             }
 
-            protected override void AssertExpectedFuzzyElementFactory(FuzzyArray<TestStruct> fuzzyArray) =>
-                Assert.Same(createElement, fuzzyArray.Field<Func<TestStruct>>().Value);
+            protected override void AssertExpectedFuzzyElementFactory() =>
+                Assert.Same(createElement, spec.Field<Func<TestStruct>>().Value);
         }
 
         public class ArrayIEnumerableT: IFuzzArrayExtensionsTest
@@ -50,36 +53,37 @@ namespace Fuzzy
 
             [Fact]
             public void ReturnsFuzzyArrayWithGivenFuzzFactoryAndLength() {
-                FuzzyArray<TestStruct> actual = fuzzy.Array(elements, length);
+                TestStruct[] actual = fuzzy.Array(elements, length);
 
                 AssertExpectedFuzzyArray(actual);
-                Assert.Same(length, actual.Field<Length>().Value);
+                Assert.Same(length, spec.Field<Length>().Value);
             }
 
             [Fact]
             public void ReturnsFuzzyArrayWithDefaultLength() {
-                FuzzyArray<TestStruct> actual = fuzzy.Array(elements);
+                TestStruct[] actual = fuzzy.Array(elements);
 
                 AssertExpectedFuzzyArray(actual);
-                Assert.Equal(new Length(), actual.Field<Length>().Value);
+                Assert.Equal(new Length(), spec.Field<Length>().Value);
             }
 
-            protected override void AssertExpectedFuzzyElementFactory(FuzzyArray<TestStruct> fuzzyArray) {
+            protected override void AssertExpectedFuzzyElementFactory() {
                 var expected = new TestStruct(random.Next());
                 Expression<Predicate<FuzzyElement<TestStruct>>> fuzzyElement = f => ReferenceEquals(elements, f.Field<IEnumerable<TestStruct>>().Value);
                 ConfiguredCall arrange = fuzzy.Build(Arg.Is(fuzzyElement)).Returns(expected);
 
-                TestStruct actual = fuzzyArray.Field<Func<TestStruct>>().Value();
+                TestStruct actual = spec.Field<Func<TestStruct>>().Value();
 
                 Assert.Equal(expected, actual);
             }
         }
 
-        void AssertExpectedFuzzyArray(FuzzyArray<TestStruct> fuzzyArray) {
-            Assert.Same(fuzzy, fuzzyArray.Field<IFuzz>().Value);
-            AssertExpectedFuzzyElementFactory(fuzzyArray);
+        void AssertExpectedFuzzyArray(TestStruct[] actual) {
+            Assert.Same(expected, actual);
+            Assert.Same(fuzzy, spec.Field<IFuzz>().Value);
+            AssertExpectedFuzzyElementFactory();
         }
 
-        protected abstract void AssertExpectedFuzzyElementFactory(FuzzyArray<TestStruct> fuzzyArray);
+        protected abstract void AssertExpectedFuzzyElementFactory();
     }
 }
