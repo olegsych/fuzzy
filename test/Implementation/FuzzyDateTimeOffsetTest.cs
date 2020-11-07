@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using Inspector;
 using NSubstitute;
 using NSubstitute.Core;
@@ -27,6 +26,8 @@ namespace Fuzzy.Implementation
 
         public class Build: FuzzyDateTimeOffsetTest
         {
+            public Build() => ArrangeBuildOfFuzzyInt64();
+
             [Theory, MemberData(nameof(GetData))]
             public void ReturnsDateTimeOffsetCreatedFromFuzzyTicksAndOffsetValues(DateTimeOffset minimum, DateTimeOffset maximum, DateTime fuzzyDate, TimeSpan fuzzyOffset, DateTimeOffset expected) {
                 sut.Minimum = minimum;

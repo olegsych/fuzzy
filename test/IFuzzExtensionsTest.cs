@@ -182,10 +182,15 @@ namespace Fuzzy
         public class Int64: IFuzzExtensionsTest
         {
             [Fact]
-            public void ReturnsFuzzyInt64() {
-                FuzzyRange<long> actual = fuzzy.Int64();
-                Assert.IsType<FuzzyInt64>(actual);
-                Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
+            public void ReturnsValueBuiltByFuzzyInt64() {
+                FuzzyInt64 actualSpec = null;
+                var expectedValue = (long)random.Next();
+                ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzyInt64>(spec => actualSpec = spec)).Returns(expectedValue);
+
+                long actualValue = fuzzy.Int64();
+
+                Assert.Equal(expectedValue, actualValue);
+                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
             }
         }
 

@@ -29,6 +29,8 @@ namespace Fuzzy.Implementation
 
         public class Build: FuzzyDateTimeTest
         {
+            public Build() => ArrangeBuildOfFuzzyInt64();
+
             [Fact]
             public void ReturnsDateTimeCreatedFromFuzzyLongAndDateTimeKindValues() {
                 sut.Minimum = new DateTime(random.Next());

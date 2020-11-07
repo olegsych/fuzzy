@@ -26,6 +26,8 @@ namespace Fuzzy.Implementation
 
         public class Build: FuzzyTimeSpanTest
         {
+            public Build() => ArrangeBuildOfFuzzyInt64();
+
             [Fact]
             public void ReturnsTimeSpanCreatedFromInt64() {
                 sut.Minimum = new TimeSpan(long.MinValue + random.Next());
