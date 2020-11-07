@@ -2,7 +2,7 @@ using System;
 
 namespace Fuzzy.Implementation
 {
-    public sealed class FuzzyArray<T> : FuzzyCollection<T[], T>
+    public sealed class FuzzyArray<T> : Fuzzy<T[]>
     {
         readonly Func<T> itemFactory;
         readonly Length length;

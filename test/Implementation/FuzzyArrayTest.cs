@@ -10,7 +10,7 @@ namespace Fuzzy.Implementation
 {
     public class FuzzyArrayTest
     {
-        readonly FuzzyCollection<TestStruct[], TestStruct> sut;
+        readonly Fuzzy<TestStruct[]> sut;
 
         // Constructor parameters
         readonly IFuzz fuzzy = Substitute.For<IFuzz>();
