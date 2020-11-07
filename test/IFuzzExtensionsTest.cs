@@ -256,10 +256,15 @@ namespace Fuzzy
         public class UInt32: IFuzzExtensionsTest
         {
             [Fact]
-            public void ReturnsFuzzyUInt32() {
-                FuzzyRange<uint> actual = fuzzy.UInt32();
-                Assert.IsType<FuzzyUInt32>(actual);
-                Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
+            public void ReturnsValueBuiltByFuzzyUInt32() {
+                FuzzyUInt32 actualSpec = null;
+                var expectedValue = (uint)random.Next();
+                ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzyUInt32>(spec => actualSpec = spec)).Returns(expectedValue);
+
+                uint actualValue = fuzzy.UInt32();
+
+                Assert.Equal(expectedValue, actualValue);
+                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
             }
         }
 

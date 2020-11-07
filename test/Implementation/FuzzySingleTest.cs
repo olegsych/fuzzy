@@ -24,6 +24,12 @@ namespace Fuzzy.Implementation
             [InlineData(false, 0xFFFFFF, 105, float.NegativeInfinity)]
             public void ReturnsSingleValueComputedFromFuzzySignMantissaAndExponent(bool positive, uint mantissa, short exponent, float expected) {
                 ConfiguredCall arrange = fuzzy.Build(Arg.Any<Fuzzy<bool>>()).Returns(positive);
+                arrange = fuzzy.Build(Arg.Is<FuzzyRange<uint>>(x => x.Minimum == uint.MinValue && x.Maximum == uint.MaxValue))
+                    .Returns(call => {
+                        var initial = (uint)random.Next();
+                        FuzzyContext.Set(initial, (FuzzyRange<uint>)call[0]);
+                        return initial;
+                    });
                 arrange = fuzzy.Build(Arg.Is<FuzzyRange<uint>>(x => x.Minimum == 1 && x.Maximum == Math.Pow(2, 24) - 1)).Returns(mantissa);
                 arrange = fuzzy.Build(Arg.Is<FuzzyRange<short>>(x => x.Minimum == -150 && x.Maximum == 105)).Returns(exponent);
 
