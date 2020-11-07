@@ -4,40 +4,22 @@ namespace Fuzzy
 {
     public static class TimeSpanExtensions
     {
-        public static FuzzyRange<TimeSpan> Ticks(this FuzzyRange<TimeSpan> value) {
-            value.Minimum = new TimeSpan(1);
-            value.Maximum = new TimeSpan(TimeSpan.TicksPerMillisecond - 1);
-            return value;
-        }
+        public static TimeSpan Ticks(this TimeSpan value)
+            => value.Between(new TimeSpan(1), new TimeSpan(TimeSpan.TicksPerMillisecond - 1));
 
-        public static FuzzyRange<TimeSpan> Milliseconds(this FuzzyRange<TimeSpan> value) {
-            value.Minimum = new TimeSpan(TimeSpan.TicksPerMillisecond);
-            value.Maximum = new TimeSpan(TimeSpan.TicksPerSecond - 1);
-            return value;
-        }
+        public static TimeSpan Milliseconds(this TimeSpan value)
+            => value.Between(new TimeSpan(TimeSpan.TicksPerMillisecond), new TimeSpan(TimeSpan.TicksPerSecond - 1));
 
-        public static FuzzyRange<TimeSpan> Seconds(this FuzzyRange<TimeSpan> value) {
-            value.Minimum = new TimeSpan(TimeSpan.TicksPerSecond);
-            value.Maximum = new TimeSpan(TimeSpan.TicksPerMinute - 1);
-            return value;
-        }
+        public static TimeSpan Seconds(this TimeSpan value)
+            => value.Between(new TimeSpan(TimeSpan.TicksPerSecond), new TimeSpan(TimeSpan.TicksPerMinute - 1));
 
-        public static FuzzyRange<TimeSpan> Minutes(this FuzzyRange<TimeSpan> value) {
-            value.Minimum = new TimeSpan(TimeSpan.TicksPerMinute);
-            value.Maximum = new TimeSpan(TimeSpan.TicksPerHour - 1);
-            return value;
-        }
+        public static TimeSpan Minutes(this TimeSpan value)
+            => value.Between(new TimeSpan(TimeSpan.TicksPerMinute), new TimeSpan(TimeSpan.TicksPerHour - 1));
 
-        public static FuzzyRange<TimeSpan> Hours(this FuzzyRange<TimeSpan> value) {
-            value.Minimum = new TimeSpan(TimeSpan.TicksPerHour);
-            value.Maximum = new TimeSpan(TimeSpan.TicksPerDay - 1);
-            return value;
-        }
+        public static TimeSpan Hours(this TimeSpan value)
+            => value.Between(new TimeSpan(TimeSpan.TicksPerHour), new TimeSpan(TimeSpan.TicksPerDay - 1));
 
-        public static FuzzyRange<TimeSpan> Days(this FuzzyRange<TimeSpan> value) {
-            value.Minimum = new TimeSpan(TimeSpan.TicksPerDay);
-            value.Maximum = new TimeSpan(TimeSpan.TicksPerDay * 7 - 1);
-            return value;
-        }
+        public static TimeSpan Days(this TimeSpan value)
+            => value.Between(new TimeSpan(TimeSpan.TicksPerDay), new TimeSpan(TimeSpan.TicksPerDay * 7 - 1));
     }
 }

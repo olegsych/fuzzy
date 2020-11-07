@@ -1,27 +1,36 @@
 using System;
+using Fuzzy.Implementation;
 using NSubstitute;
+using NSubstitute.Core;
 using Xunit;
 
 namespace Fuzzy
 {
-    public class TimeSpanExtensionsTest
+    public class TimeSpanExtensionsTest: TestFixture
     {
         // Method parameters
-        readonly FuzzyRange<TimeSpan> value;
+        readonly TimeSpan value = new TimeSpan(random.Next());
 
-        // Shared test fixture
-        readonly IFuzz fuzzy = Substitute.For<IFuzz>();
+        // Test fixture
+        readonly FuzzyRange<TimeSpan> spec;
+        readonly TimeSpan newValue = new TimeSpan(random.Next());
 
-        public TimeSpanExtensionsTest() =>
-            value = Substitute.ForPartsOf<FuzzyRange<TimeSpan>>(fuzzy, TimeSpan.MinValue, TimeSpan.MaxValue);
+        public TimeSpanExtensionsTest() {
+            spec = Substitute.ForPartsOf<FuzzyRange<TimeSpan>>(fuzzy, TimeSpan.MinValue, TimeSpan.MaxValue);
+
+            FuzzyContext.Set(value, spec);
+            ConfiguredCall arrange = fuzzy.Build(spec).Returns(newValue);
+        }
 
         public class Ticks: TimeSpanExtensionsTest
         {
             [Fact]
             public void ReturnsFuzzyTimeSpanConstrainedToTicks() {
-                FuzzyRange<TimeSpan> actual = value.Ticks();
-                Assert.Equal(new TimeSpan(1), actual.Minimum);
-                Assert.Equal(new TimeSpan(TimeSpan.TicksPerMillisecond - 1), actual.Maximum);
+                TimeSpan returned = value.Ticks();
+
+                Assert.Equal(newValue, returned);
+                Assert.Equal(new TimeSpan(1), spec.Minimum);
+                Assert.Equal(new TimeSpan(TimeSpan.TicksPerMillisecond - 1), spec.Maximum);
             }
         }
 
@@ -29,9 +38,11 @@ namespace Fuzzy
         {
             [Fact]
             public void ReturnsFuzzyTimeSpanConstrainedToMilliseconds() {
-                FuzzyRange<TimeSpan> actual = value.Milliseconds();
-                Assert.Equal(new TimeSpan(TimeSpan.TicksPerMillisecond), actual.Minimum);
-                Assert.Equal(new TimeSpan(TimeSpan.TicksPerSecond - 1), actual.Maximum);
+                TimeSpan returned = value.Milliseconds();
+
+                Assert.Equal(newValue, returned);
+                Assert.Equal(new TimeSpan(TimeSpan.TicksPerMillisecond), spec.Minimum);
+                Assert.Equal(new TimeSpan(TimeSpan.TicksPerSecond - 1), spec.Maximum);
             }
         }
 
@@ -39,9 +50,11 @@ namespace Fuzzy
         {
             [Fact]
             public void ReturnsFuzzyTimeSpanConstrainedToSeconds() {
-                FuzzyRange<TimeSpan> actual = value.Seconds();
-                Assert.Equal(new TimeSpan(TimeSpan.TicksPerSecond), actual.Minimum);
-                Assert.Equal(new TimeSpan(TimeSpan.TicksPerMinute - 1), actual.Maximum);
+                TimeSpan returned = value.Seconds();
+
+                Assert.Equal(newValue, returned);
+                Assert.Equal(new TimeSpan(TimeSpan.TicksPerSecond), spec.Minimum);
+                Assert.Equal(new TimeSpan(TimeSpan.TicksPerMinute - 1), spec.Maximum);
             }
         }
 
@@ -49,9 +62,11 @@ namespace Fuzzy
         {
             [Fact]
             public void ReturnsFuzzyTimeSpanConstrainedToMinutes() {
-                FuzzyRange<TimeSpan> actual = value.Minutes();
-                Assert.Equal(new TimeSpan(TimeSpan.TicksPerMinute), actual.Minimum);
-                Assert.Equal(new TimeSpan(TimeSpan.TicksPerHour - 1), actual.Maximum);
+                TimeSpan returned = value.Minutes();
+
+                Assert.Equal(newValue, returned);
+                Assert.Equal(new TimeSpan(TimeSpan.TicksPerMinute), spec.Minimum);
+                Assert.Equal(new TimeSpan(TimeSpan.TicksPerHour - 1), spec.Maximum);
             }
         }
 
@@ -59,9 +74,11 @@ namespace Fuzzy
         {
             [Fact]
             public void ReturnsFuzzyTimeSpanConstrainedToHours() {
-                FuzzyRange<TimeSpan> actual = value.Hours();
-                Assert.Equal(new TimeSpan(TimeSpan.TicksPerHour), actual.Minimum);
-                Assert.Equal(new TimeSpan(TimeSpan.TicksPerDay - 1), actual.Maximum);
+                TimeSpan returned = value.Hours();
+
+                Assert.Equal(newValue, returned);
+                Assert.Equal(new TimeSpan(TimeSpan.TicksPerHour), spec.Minimum);
+                Assert.Equal(new TimeSpan(TimeSpan.TicksPerDay - 1), spec.Maximum);
             }
         }
 
@@ -69,9 +86,11 @@ namespace Fuzzy
         {
             [Fact]
             public void ReturnsFuzzyTimeSpanConstrainedToDays() {
-                FuzzyRange<TimeSpan> actual = value.Days();
-                Assert.Equal(new TimeSpan(TimeSpan.TicksPerDay), actual.Minimum);
-                Assert.Equal(new TimeSpan(TimeSpan.TicksPerDay * 7 - 1), actual.Maximum);
+                TimeSpan returned = value.Days();
+
+                Assert.Equal(newValue, returned);
+                Assert.Equal(new TimeSpan(TimeSpan.TicksPerDay), spec.Minimum);
+                Assert.Equal(new TimeSpan(TimeSpan.TicksPerDay * 7 - 1), spec.Maximum);
             }
         }
     }

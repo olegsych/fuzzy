@@ -231,10 +231,15 @@ namespace Fuzzy
         public class TimeSpan: IFuzzExtensionsTest
         {
             [Fact]
-            public void ReturnsFuzzyTimeSpan() {
-                FuzzyRange<System.TimeSpan> actual = fuzzy.TimeSpan();
-                Assert.IsType<FuzzyTimeSpan>(actual);
-                Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
+            public void ReturnsValueBuiltByFuzzyTimeSpan() {
+                FuzzyTimeSpan actualSpec = null;
+                var expectedValue = new System.TimeSpan(random.Next());
+                ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzyTimeSpan>(spec => actualSpec = spec)).Returns(expectedValue);
+
+                System.TimeSpan actualValue = fuzzy.TimeSpan();
+
+                Assert.Equal(expectedValue, actualValue);
+                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
             }
         }
 
