@@ -9,12 +9,15 @@ using Xunit;
 
 namespace Fuzzy
 {
-    public abstract class IFuzzListExtensionsTest
+    public abstract class IFuzzListExtensionsTest: TestFixture
     {
-        static readonly Random random = new Random();
+        // Test fixture
+        readonly List<TestStruct> expected = new List<TestStruct>();
+        FuzzyList<TestStruct> spec;
 
-        // Common method parameters
-        readonly IFuzz fuzzy = Substitute.For<IFuzz>();
+        public IFuzzListExtensionsTest() {
+            ConfiguredCall unused = fuzzy.Build(Arg.Do<FuzzyList<TestStruct>>(s => spec = s)).Returns(expected);
+        }
 
         public class ListFuncOfT: IFuzzListExtensionsTest
         {
@@ -24,22 +27,22 @@ namespace Fuzzy
 
             [Fact]
             public void ReturnsFuzzyListWithGivenFuzzFactoryAndCount() {
-                FuzzyList<TestStruct> actual = fuzzy.List(createElement, count);
+                List<TestStruct> actual = fuzzy.List(createElement, count);
 
                 AssertExpectedFuzzyList(actual);
-                Assert.Same(count, actual.Field<Count>().Value);
+                Assert.Same(count, spec.Field<Count>().Value);
             }
 
             [Fact]
             public void ReturnsFuzzyListWithDefaultCount() {
-                FuzzyList<TestStruct> actual = fuzzy.List(createElement);
+                List<TestStruct> actual = fuzzy.List(createElement);
 
                 AssertExpectedFuzzyList(actual);
-                Assert.Equal(new Count(), actual.Field<Count>().Value);
+                Assert.Equal(new Count(), spec.Field<Count>().Value);
             }
 
-            protected override void AssertExpectedFuzzyElementFactory(FuzzyList<TestStruct> fuzzyList) =>
-                Assert.Same(createElement, fuzzyList.Field<Func<TestStruct>>().Value);
+            protected override void AssertExpectedFuzzyElementFactory() =>
+                Assert.Same(createElement, spec.Field<Func<TestStruct>>().Value);
         }
 
         public class ListIEnumerableT: IFuzzListExtensionsTest
@@ -50,37 +53,38 @@ namespace Fuzzy
 
             [Fact]
             public void ReturnsFuzzyListWithGivenFuzzFactoryAndCount() {
-                FuzzyList<TestStruct> actual = fuzzy.List(elements, count);
+                List<TestStruct> actual = fuzzy.List(elements, count);
 
                 AssertExpectedFuzzyList(actual);
-                Assert.Same(count, actual.Field<Count>().Value);
+                Assert.Same(count, spec.Field<Count>().Value);
             }
 
             [Fact]
             public void ReturnsFuzzyListWithDefaultCount() {
-                FuzzyList<TestStruct> actual = fuzzy.List(elements);
+                List<TestStruct> actual = fuzzy.List(elements);
 
                 AssertExpectedFuzzyList(actual);
-                Assert.Equal(new Count(), actual.Field<Count>().Value);
+                Assert.Equal(new Count(), spec.Field<Count>().Value);
             }
 
-            protected override void AssertExpectedFuzzyElementFactory(FuzzyList<TestStruct> fuzzyList) {
+            protected override void AssertExpectedFuzzyElementFactory() {
                 var expected = new TestStruct(random.Next());
                 Expression<Predicate<FuzzyElement<TestStruct>>> fuzzyElement = f => ReferenceEquals(elements, f.Field<IEnumerable<TestStruct>>().Value);
                 ConfiguredCall arrange = fuzzy.Build(Arg.Is(fuzzyElement)).Returns(expected);
 
-                TestStruct actual = fuzzyList.Field<Func<TestStruct>>().Value();
+                TestStruct actual = spec.Field<Func<TestStruct>>().Value();
 
                 Assert.Equal(expected, actual);
             }
         }
 
-        void AssertExpectedFuzzyList(FuzzyList<TestStruct> fuzzyList) {
-            Assert.Equal(typeof(FuzzyList<TestStruct>), fuzzyList.GetType());
-            Assert.Same(fuzzy, fuzzyList.Field<IFuzz>().Value);
-            AssertExpectedFuzzyElementFactory(fuzzyList);
+        void AssertExpectedFuzzyList(List<TestStruct> actual) {
+            Assert.Same(expected, actual);
+            Assert.Equal(typeof(FuzzyList<TestStruct>), spec.GetType());
+            Assert.Same(fuzzy, spec.Field<IFuzz>().Value);
+            AssertExpectedFuzzyElementFactory();
         }
 
-        protected abstract void AssertExpectedFuzzyElementFactory(FuzzyList<TestStruct> fuzzyList);
+        protected abstract void AssertExpectedFuzzyElementFactory();
     }
 }
