@@ -266,10 +266,15 @@ namespace Fuzzy
         public class UInt64: IFuzzExtensionsTest
         {
             [Fact]
-            public void ReturnsFuzzyUInt64() {
-                FuzzyRange<ulong> actual = fuzzy.UInt64();
-                Assert.IsType<FuzzyUInt64>(actual);
-                Assert.Same(fuzzy, actual.Field<IFuzz>().Value);
+            public void ReturnsValueBuiltByFuzzyUInt64() {
+                FuzzyUInt64 actualSpec = null;
+                var expectedValue = (ulong)random.Next();
+                ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzyUInt64>(spec => actualSpec = spec)).Returns(expectedValue);
+
+                ulong actualValue = fuzzy.UInt64();
+
+                Assert.Equal(expectedValue, actualValue);
+                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
             }
         }
 

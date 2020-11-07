@@ -24,6 +24,12 @@ namespace Fuzzy.Implementation
             [InlineData(false, 0x1FFFFFFFFFFFFF, 972, double.NegativeInfinity)]
             public void ReturnsDoubleValueComputedFromFuzzySignMantissaAndExponent(bool positive, ulong mantissa, short exponent, double expected) {
                 ConfiguredCall arrange = fuzzy.Build(Arg.Any<Fuzzy<bool>>()).Returns(positive);
+                arrange = fuzzy.Build(Arg.Is<FuzzyRange<ulong>>(x => x.Minimum == ulong.MinValue && x.Maximum == ulong.MaxValue))
+                    .Returns(call => {
+                        var initial = (ulong)random.Next();
+                        FuzzyContext.Set(initial, (FuzzyRange<ulong>)call[0]);
+                        return initial;
+                    });
                 arrange = fuzzy.Build(Arg.Is<FuzzyRange<ulong>>(x => x.Minimum == 1 && x.Maximum == Math.Pow(2, 53) - 1)).Returns(mantissa);
                 arrange = fuzzy.Build(Arg.Is<FuzzyRange<short>>(x => x.Minimum == -1076 && x.Maximum == 972)).Returns(exponent);
 
