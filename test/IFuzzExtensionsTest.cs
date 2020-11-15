@@ -56,25 +56,27 @@ namespace Fuzzy
 
         public class DateTime: IFuzzExtensionsTest
         {
+            readonly System.DateTime expectedValue = new System.DateTime(random.Next());
+            FuzzyDateTime actualSpec = null;
+
+            public DateTime() {
+                ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzyDateTime>(spec => actualSpec = spec)).Returns(expectedValue);
+            }
+
             [Fact]
             public void ReturnsValueBuiltByFuzzyDateTime() {
-                FuzzyDateTime actualSpec = null;
-                var expectedValue = new System.DateTime(random.Next());
-                ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzyDateTime>(spec => actualSpec = spec)).Returns(expectedValue);
-
                 System.DateTime actualValue = fuzzy.DateTime();
 
                 Assert.Equal(expectedValue, actualValue);
                 Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
+                Assert.Null(actualSpec.Field<DateTimeKind?>().Value);
             }
 
             [Theory, InlineData(DateTimeKind.Unspecified), InlineData(DateTimeKind.Local), InlineData(DateTimeKind.Utc)]
             public void ReturnsValueBuiltByFuzzyDateTimeWithGivenKind(DateTimeKind expectedKind) {
-                FuzzyDateTime actualSpec = null;
-                var arrange = fuzzy.Build(Arg.Do<FuzzyDateTime>(spec => actualSpec = spec));
+                System.DateTime actualValue = fuzzy.DateTime(expectedKind);
 
-                System.DateTime verifiedByAnotherTest = fuzzy.DateTime(expectedKind);
-
+                Assert.Equal(expectedValue, actualValue);
                 Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
                 Assert.Equal(expectedKind, actualSpec.Field<DateTimeKind?>().Value);
             }
