@@ -2,8 +2,6 @@
 [![Tests](https://img.shields.io/appveyor/tests/olegsych/fuzzy/master)](https://ci.appveyor.com/project/olegsych/fuzzy/branch/master/tests)
 [![Nuget](https://img.shields.io/nuget/v/fuzzy.svg)](https://www.nuget.org/packages/fuzzy)
 
-# what and why
-
 Fuzzy is a simple .NET API for fuzz testing, or more specifically, for generating fuzzy inputs in unit tests.
 
 Why use fuzz testing? To prevent system under test from making incorrect assumptions about its inputs and
