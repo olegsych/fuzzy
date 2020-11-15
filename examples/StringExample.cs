@@ -11,7 +11,7 @@ namespace Fuzzy
             string value = fuzzy.String();
         }
 
-        [Fact(Skip = Reason.NotImplemented)]
+        [Fact]
         public void GetFuzzyStringWithLengthConstraint() {
             string value = fuzzy.String(Length.Between(41, 43));
         }
