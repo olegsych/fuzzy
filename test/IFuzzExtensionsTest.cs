@@ -236,16 +236,36 @@ namespace Fuzzy
 
         public class String: IFuzzExtensionsTest
         {
+            FuzzyString actualSpec = null;
+            readonly string expectedValue = $"generated{random.Next()}";
+
+            public String() {
+                ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzyString>(spec => actualSpec = spec)).Returns(expectedValue);
+            }
+
             [Fact]
             public void ReturnsValueBuiltByFuzzyString() {
-                FuzzyString actualSpec = null;
-                string expectedValue = "generated";
-                ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzyString>(spec => actualSpec = spec)).Returns(expectedValue);
-
                 string actualValue = fuzzy.String();
 
                 Assert.Same(expectedValue, actualValue);
                 Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
+            }
+
+            [Fact]
+            public void ReturnsValueWithGivenLength() {
+                var expectedLength = new Length();
+
+                string actualValue = fuzzy.String(expectedLength);
+
+                Assert.Same(expectedValue, actualValue);
+                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
+                Assert.Same(expectedLength, actualSpec.Field<Length>().Value);
+            }
+
+            [Fact]
+            public void ThrowsDescriptiveExceptionWhenLengthIsNullBecauseOverloadWithoutLengthExists() {
+                var thrown = Assert.Throws<ArgumentNullException>(() => fuzzy.String(null));
+                Assert.Equal("length", thrown.ParamName);
             }
         }
 

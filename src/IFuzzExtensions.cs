@@ -35,7 +35,7 @@ namespace Fuzzy
         public static float Single(this IFuzz fuzzy) => new FuzzySingle(fuzzy);
 
         public static string String(this IFuzz fuzzy) => new FuzzyString(fuzzy);
-        public static string String(this IFuzz fuzzy, Length length) => throw new NotImplementedException();
+        public static string String(this IFuzz fuzzy, Length length) => new FuzzyString(fuzzy, length ?? throw new ArgumentNullException(nameof(length)), null);
 
         public static TimeSpan TimeSpan(this IFuzz fuzzy) => new FuzzyTimeSpan(fuzzy);
 
