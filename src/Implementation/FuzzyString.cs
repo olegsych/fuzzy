@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,13 +7,17 @@ namespace Fuzzy.Implementation
     sealed class FuzzyString: Fuzzy<string>
     {
         static readonly IEnumerable<char> printableAsciiCharacters = PrintableAsciiCharacters();
-
-        readonly IEnumerable<char> characters;
         readonly Length length;
+        IEnumerable<char> characters;
 
         public FuzzyString(IFuzz fuzzy, Length length = default, IEnumerable<char> characters = default) : base(fuzzy) {
             this.characters = characters ?? printableAsciiCharacters;
             this.length = length ?? new Length();
+        }
+
+        public IEnumerable<char> Characters {
+            get => characters;
+            set => characters = value ?? throw new ArgumentNullException(nameof(value));
         }
 
         protected internal override string Build() => new string(fuzzy.Array(characters, length));

@@ -34,7 +34,7 @@ namespace Fuzzy.Implementation
             }
 
             [Fact]
-            public void InitializesCharactersWithGivenCollection() => Assert.Same(characters, sut.Field<IEnumerable<char>>().Value);
+            public void InitializesCharactersWithGivenCollection() => Assert.Same(characters, ((FuzzyString)sut).Characters);
 
             [Fact]
             public void InitializesCharactersWithPrintableAsciiCharactersByDefault() {
@@ -44,7 +44,7 @@ namespace Fuzzy.Implementation
 
                 var actual = new FuzzyString(fuzzy, length, default);
 
-                Assert.Equal(expected, actual.Field<IEnumerable<char>>().Value);
+                Assert.Equal(expected, actual.Characters);
             }
         }
 
@@ -80,6 +80,19 @@ namespace Fuzzy.Implementation
             [Fact]
             public void ReturnsStringCreatedWithGivenLength() =>
                 Assert.Same(length, actualSpec.Field<Length>().Value);
+        }
+
+        public class Characters: FuzzyStringTest
+        {
+            new readonly FuzzyString sut;
+
+            public Characters() => sut = (FuzzyString)base.sut;
+
+            [Fact]
+            public void ThrowsDescriptiveExceptionWhenValueIsNull() {
+                var thrown = Assert.Throws<ArgumentNullException>(() => sut.Characters = null);
+                Assert.Equal("value", thrown.ParamName);
+            }
         }
     }
 }
