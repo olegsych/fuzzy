@@ -2,12 +2,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <IsPackable>false</IsPackable>
-    <AssemblyName>Fuzzy.Tests</AssemblyName>
     <RootNamespace>Fuzzy</RootNamespace>
-    <LangVersion>latest</LangVersion>
-    <!-- https://docs.microsoft.com/en-us/dotnet/standard/library-guidance/strong-naming -->
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\Fuzzy.snk</AssemblyOriginatorKeyFile>
     <!-- Make integer arithmetics checked by default -->
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
