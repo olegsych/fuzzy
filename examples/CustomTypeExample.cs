@@ -5,7 +5,7 @@ namespace Fuzzy
     class CustomType
     {
         public int Foo;
-        public string Bar;
+        public string? Bar;
     }
 
     static class IFuzzExtensions
