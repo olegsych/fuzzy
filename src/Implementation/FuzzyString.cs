@@ -10,7 +10,7 @@ namespace Fuzzy.Implementation
         readonly Length length;
         IEnumerable<char> characters;
 
-        public FuzzyString(IFuzz fuzzy, Length length = default, IEnumerable<char> characters = default) : base(fuzzy) {
+        public FuzzyString(IFuzz fuzzy, Length? length = default, IEnumerable<char>? characters = default) : base(fuzzy) {
             this.characters = characters ?? printableAsciiCharacters;
             this.length = length ?? new Length();
         }
