@@ -14,13 +14,13 @@ namespace Fuzzy
         {
             [Theory, InlineData(true), InlineData(false)]
             public void ReturnsValueBuiltByFuzzyBoolean(bool expectedValue) {
-                FuzzyBoolean actualSpec = null;
+                FuzzyBoolean? actualSpec = null;
                 ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzyBoolean>(spec => actualSpec = spec)).Returns(expectedValue);
 
                 bool actualValue = fuzzy.Boolean();
 
                 Assert.Equal(expectedValue, actualValue);
-                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
+                Assert.Same(fuzzy, actualSpec!.Field<IFuzz>().Value);
             }
         }
 
@@ -28,14 +28,14 @@ namespace Fuzzy
         {
             [Fact]
             public void ReturnsValueBuiltByFuzzyByte() {
-                FuzzyByte actualSpec = null;
+                FuzzyByte? actualSpec = null;
                 var expectedValue = (byte)(random.Next() % byte.MaxValue);
                 ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzyByte>(spec => actualSpec = spec)).Returns(expectedValue);
 
                 byte actualValue = fuzzy.Byte();
 
                 Assert.Equal(expectedValue, actualValue);
-                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
+                Assert.Same(fuzzy, actualSpec!.Field<IFuzz>().Value);
             }
         }
 
@@ -43,21 +43,21 @@ namespace Fuzzy
         {
             [Fact]
             public void ReturnsValueBuiltByFuzzyChar() {
-                FuzzyChar actualSpec = null;
+                FuzzyChar? actualSpec = null;
                 var expectedValue = (char)(random.Next() % char.MaxValue);
                 ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzyChar>(spec => actualSpec = spec)).Returns(expectedValue);
 
                 char actualValue = fuzzy.Char();
 
                 Assert.Equal(expectedValue, actualValue);
-                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
+                Assert.Same(fuzzy, actualSpec!.Field<IFuzz>().Value);
             }
         }
 
         public class DateTime: IFuzzExtensionsTest
         {
             readonly System.DateTime expectedValue = new System.DateTime(random.Next());
-            FuzzyDateTime actualSpec = null;
+            FuzzyDateTime? actualSpec = null;
 
             public DateTime() {
                 ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzyDateTime>(spec => actualSpec = spec)).Returns(expectedValue);
@@ -68,7 +68,7 @@ namespace Fuzzy
                 System.DateTime actualValue = fuzzy.DateTime();
 
                 Assert.Equal(expectedValue, actualValue);
-                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
+                Assert.Same(fuzzy, actualSpec!.Field<IFuzz>().Value);
                 Assert.Null(actualSpec.Field<DateTimeKind?>().Value);
             }
 
@@ -77,7 +77,7 @@ namespace Fuzzy
                 System.DateTime actualValue = fuzzy.DateTime(expectedKind);
 
                 Assert.Equal(expectedValue, actualValue);
-                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
+                Assert.Same(fuzzy, actualSpec!.Field<IFuzz>().Value);
                 Assert.Equal(expectedKind, actualSpec.Field<DateTimeKind?>().Value);
             }
         }
@@ -86,14 +86,14 @@ namespace Fuzzy
         {
             [Fact]
             public void ReturnsValueBuiltByFuzzyDateTimeOffset() {
-                FuzzyDateTimeOffset actualSpec = null;
+                FuzzyDateTimeOffset? actualSpec = null;
                 var expectedValue = new System.DateTimeOffset(random.Next(), System.TimeSpan.Zero);
                 ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzyDateTimeOffset>(spec => actualSpec = spec)).Returns(expectedValue);
 
                 System.DateTimeOffset actualValue = fuzzy.DateTimeOffset();
 
                 Assert.Equal(expectedValue, actualValue);
-                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
+                Assert.Same(fuzzy, actualSpec!.Field<IFuzz>().Value);
             }
         }
 
@@ -101,14 +101,14 @@ namespace Fuzzy
         {
             [Fact]
             public void ReturnsValueBuiltByFuzzyDouble() {
-                FuzzyDouble actualSpec = null;
+                FuzzyDouble? actualSpec = null;
                 double expectedValue = random.Next();
                 ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzyDouble>(spec => actualSpec = spec)).Returns(expectedValue);
 
                 double actualValue = fuzzy.Double();
 
                 Assert.Equal(expectedValue, actualValue);
-                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
+                Assert.Same(fuzzy, actualSpec!.Field<IFuzz>().Value);
             }
         }
 
@@ -116,7 +116,7 @@ namespace Fuzzy
         {
             [Fact]
             public void ReturnsValueBuiltByFuzzyElement() {
-                FuzzyElement<TestStruct> actualSpec = null;
+                FuzzyElement<TestStruct>? actualSpec = null;
                 var expectedValue = new TestStruct(random.Next());
                 ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzyElement<TestStruct>>(spec => actualSpec = spec)).Returns(expectedValue);
                 var elements = new TestStruct[0];
@@ -124,7 +124,7 @@ namespace Fuzzy
                 TestStruct actualValue = fuzzy.Element(elements);
 
                 Assert.Equal(expectedValue, actualValue);
-                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
+                Assert.Same(fuzzy, actualSpec!.Field<IFuzz>().Value);
                 Assert.Same(elements, actualSpec.Field<IEnumerable<TestStruct>>().Value);
             }
         }
@@ -133,14 +133,14 @@ namespace Fuzzy
         {
             [Fact]
             public void ReturnsValueBuiltByFuzzyEnum() {
-                FuzzyEnum<TestEnum> actualSpec = null;
+                FuzzyEnum<TestEnum>? actualSpec = null;
                 var expectedValue = (TestEnum)random.Next();
                 ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzyEnum<TestEnum>>(spec => actualSpec = spec)).Returns(expectedValue);
 
                 TestEnum actualValue = fuzzy.Enum<TestEnum>();
 
                 Assert.Equal(expectedValue, actualValue);
-                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
+                Assert.Same(fuzzy, actualSpec!.Field<IFuzz>().Value);
             }
         }
 
@@ -148,7 +148,7 @@ namespace Fuzzy
         {
             [Fact]
             public void ReturnsValueBuiltByFuzzyIndex() {
-                FuzzyIndex<TestStruct> actualSpec = null;
+                FuzzyIndex<TestStruct>? actualSpec = null;
                 int expectedValue = random.Next();
                 ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzyIndex<TestStruct>>(spec => actualSpec = spec)).Returns(expectedValue);
                 var elements = new TestStruct[0];
@@ -156,7 +156,7 @@ namespace Fuzzy
                 int actualValue = fuzzy.Index(elements);
 
                 Assert.Equal(expectedValue, actualValue);
-                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
+                Assert.Same(fuzzy, actualSpec!.Field<IFuzz>().Value);
                 Assert.Same(elements, actualSpec.Field<IEnumerable<TestStruct>>().Value);
             }
         }
@@ -165,14 +165,14 @@ namespace Fuzzy
         {
             [Fact]
             public void ReturnsValueBuiltByFuzzyInt16() {
-                FuzzyInt16 actualSpec = null;
+                FuzzyInt16? actualSpec = null;
                 var expectedValue = (short)(random.Next() % short.MaxValue);
                 ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzyInt16>(spec => actualSpec = spec)).Returns(expectedValue);
 
                 short actualValue = fuzzy.Int16();
 
                 Assert.Equal(expectedValue, actualValue);
-                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
+                Assert.Same(fuzzy, actualSpec!.Field<IFuzz>().Value);
             }
         }
 
@@ -180,14 +180,14 @@ namespace Fuzzy
         {
             [Fact]
             public void ReturnsValueBuiltByFuzzyInt32() {
-                FuzzyInt32 actualSpec = null;
+                FuzzyInt32? actualSpec = null;
                 var expectedValue = (int)random.Next();
                 ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzyInt32>(spec => actualSpec = spec)).Returns(expectedValue);
 
                 int actualValue = fuzzy.Int32();
 
                 Assert.Equal(expectedValue, actualValue);
-                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
+                Assert.Same(fuzzy, actualSpec!.Field<IFuzz>().Value);
             }
         }
 
@@ -195,14 +195,14 @@ namespace Fuzzy
         {
             [Fact]
             public void ReturnsValueBuiltByFuzzyInt64() {
-                FuzzyInt64 actualSpec = null;
+                FuzzyInt64? actualSpec = null;
                 var expectedValue = (long)random.Next();
                 ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzyInt64>(spec => actualSpec = spec)).Returns(expectedValue);
 
                 long actualValue = fuzzy.Int64();
 
                 Assert.Equal(expectedValue, actualValue);
-                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
+                Assert.Same(fuzzy, actualSpec!.Field<IFuzz>().Value);
             }
         }
 
@@ -210,14 +210,14 @@ namespace Fuzzy
         {
             [Fact]
             public void ReturnsValueBuiltByFuzzySByte() {
-                FuzzySByte actualSpec = null;
+                FuzzySByte? actualSpec = null;
                 var expectedValue = (sbyte)(random.Next() % sbyte.MaxValue);
                 ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzySByte>(spec => actualSpec = spec)).Returns(expectedValue);
 
                 sbyte actualValue = fuzzy.SByte();
 
                 Assert.Equal(expectedValue, actualValue);
-                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
+                Assert.Same(fuzzy, actualSpec!.Field<IFuzz>().Value);
             }
         }
 
@@ -225,20 +225,20 @@ namespace Fuzzy
         {
             [Fact]
             public void ReturnsValueBuiltByFuzzySingle() {
-                FuzzySingle actualSpec = null;
+                FuzzySingle? actualSpec = null;
                 float expectedValue = random.Next();
                 ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzySingle>(spec => actualSpec = spec)).Returns(expectedValue);
 
                 float actualValue = fuzzy.Single();
 
                 Assert.Equal(expectedValue, actualValue);
-                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
+                Assert.Same(fuzzy, actualSpec!.Field<IFuzz>().Value);
             }
         }
 
         public class String: IFuzzExtensionsTest
         {
-            FuzzyString actualSpec = null;
+            FuzzyString? actualSpec = null;
             readonly string expectedValue = $"generated{random.Next()}";
 
             public String() {
@@ -250,7 +250,7 @@ namespace Fuzzy
                 string actualValue = fuzzy.String();
 
                 Assert.Same(expectedValue, actualValue);
-                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
+                Assert.Same(fuzzy, actualSpec!.Field<IFuzz>().Value);
             }
 
             [Fact]
@@ -260,13 +260,13 @@ namespace Fuzzy
                 string actualValue = fuzzy.String(expectedLength);
 
                 Assert.Same(expectedValue, actualValue);
-                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
+                Assert.Same(fuzzy, actualSpec!.Field<IFuzz>().Value);
                 Assert.Same(expectedLength, actualSpec.Field<Length>().Value);
             }
 
             [Fact]
             public void ThrowsDescriptiveExceptionWhenLengthIsNullBecauseOverloadWithoutLengthExists() {
-                var thrown = Assert.Throws<ArgumentNullException>(() => fuzzy.String(null));
+                var thrown = Assert.Throws<ArgumentNullException>(() => fuzzy.String(null!));
                 Assert.Equal("length", thrown.ParamName);
             }
         }
@@ -275,14 +275,14 @@ namespace Fuzzy
         {
             [Fact]
             public void ReturnsValueBuiltByFuzzyTimeSpan() {
-                FuzzyTimeSpan actualSpec = null;
+                FuzzyTimeSpan? actualSpec = null;
                 var expectedValue = new System.TimeSpan(random.Next());
                 ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzyTimeSpan>(spec => actualSpec = spec)).Returns(expectedValue);
 
                 System.TimeSpan actualValue = fuzzy.TimeSpan();
 
                 Assert.Equal(expectedValue, actualValue);
-                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
+                Assert.Same(fuzzy, actualSpec!.Field<IFuzz>().Value);
             }
         }
 
@@ -290,14 +290,14 @@ namespace Fuzzy
         {
             [Fact]
             public void ReturnsValueBuiltByFuzzyUInt16() {
-                FuzzyUInt16 actualSpec = null;
+                FuzzyUInt16? actualSpec = null;
                 var expectedValue = (ushort)(random.Next() % ushort.MaxValue);
                 ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzyUInt16>(spec => actualSpec = spec)).Returns(expectedValue);
 
                 ushort actualValue = fuzzy.UInt16();
 
                 Assert.Equal(expectedValue, actualValue);
-                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
+                Assert.Same(fuzzy, actualSpec!.Field<IFuzz>().Value);
             }
         }
 
@@ -305,14 +305,14 @@ namespace Fuzzy
         {
             [Fact]
             public void ReturnsValueBuiltByFuzzyUInt32() {
-                FuzzyUInt32 actualSpec = null;
+                FuzzyUInt32? actualSpec = null;
                 var expectedValue = (uint)random.Next();
                 ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzyUInt32>(spec => actualSpec = spec)).Returns(expectedValue);
 
                 uint actualValue = fuzzy.UInt32();
 
                 Assert.Equal(expectedValue, actualValue);
-                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
+                Assert.Same(fuzzy, actualSpec!.Field<IFuzz>().Value);
             }
         }
 
@@ -320,14 +320,14 @@ namespace Fuzzy
         {
             [Fact]
             public void ReturnsValueBuiltByFuzzyUInt64() {
-                FuzzyUInt64 actualSpec = null;
+                FuzzyUInt64? actualSpec = null;
                 var expectedValue = (ulong)random.Next();
                 ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzyUInt64>(spec => actualSpec = spec)).Returns(expectedValue);
 
                 ulong actualValue = fuzzy.UInt64();
 
                 Assert.Equal(expectedValue, actualValue);
-                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
+                Assert.Same(fuzzy, actualSpec!.Field<IFuzz>().Value);
             }
         }
 
@@ -335,14 +335,14 @@ namespace Fuzzy
         {
             [Fact]
             public void ReturnsValueBuiltByFuzzyUri() {
-                FuzzyUri actualSpec = null;
+                FuzzyUri? actualSpec = null;
                 var expectedValue = new System.Uri($"file://{random.Next()}");
                 ConfiguredCall arrange = fuzzy.Build(Arg.Do<FuzzyUri>(spec => actualSpec = spec)).Returns(expectedValue);
 
                 System.Uri actualValue = fuzzy.Uri();
 
                 Assert.Same(expectedValue, actualValue);
-                Assert.Same(fuzzy, actualSpec.Field<IFuzz>().Value);
+                Assert.Same(fuzzy, actualSpec!.Field<IFuzz>().Value);
             }
         }
     }

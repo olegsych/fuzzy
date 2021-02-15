@@ -37,7 +37,7 @@ namespace Fuzzy.Implementation
 
             [Fact]
             public void ThrowsDescriptiveExceptionWhenSpecIsNull() {
-                var thrown = Assert.Throws<ArgumentNullException>(() => sut.Build<TestClass>(null));
+                var thrown = Assert.Throws<ArgumentNullException>(() => sut.Build<TestClass>(null!));
                 Assert.Equal("spec", thrown.ParamName);
             }
         }

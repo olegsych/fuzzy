@@ -29,7 +29,7 @@ namespace Fuzzy.Implementation
                 var expected = (TestEnum)random.Next();
                 Expression<Predicate<FuzzyElement<TestEnum>>> fuzzyEnumElement =
                     f => Enum.GetValues(typeof(TestEnum)).Cast<TestEnum>()
-                        .SequenceEqual(f.Field<IEnumerable<TestEnum>>().Value);
+                        .SequenceEqual(f.Field<IEnumerable<TestEnum>>().Value!);
                 ConfiguredCall arrange = fuzzy.Build(Arg.Is(fuzzyEnumElement)).Returns(expected);
 
                 TestEnum actual = sut.Build();

@@ -32,7 +32,7 @@ namespace Fuzzy.Implementation
 
             [Fact]
             public void ThrowsDescriptiveExceptionWhenCandidatesIsNull() {
-                var thrown = Assert.Throws<ArgumentNullException>(() => new FuzzyElement<TestStruct>(fuzzy, null));
+                var thrown = Assert.Throws<ArgumentNullException>(() => new FuzzyElement<TestStruct>(fuzzy, null!));
                 Assert.Equal("candidates", thrown.ParamName);
             }
         }

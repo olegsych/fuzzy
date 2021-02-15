@@ -23,7 +23,7 @@ namespace Fuzzy.Implementation
 
         [Fact]
         public void SetThrowsDescriptiveExceptionWhenSpecIsNull() {
-            var thrown = Assert.Throws<ArgumentNullException>(() => FuzzyContext.Set(value, null));
+            var thrown = Assert.Throws<ArgumentNullException>(() => FuzzyContext.Set(value, null!));
             Assert.Equal("spec", thrown.ParamName);
         }
 

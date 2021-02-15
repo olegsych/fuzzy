@@ -52,7 +52,7 @@ namespace Fuzzy.Implementation
         {
             // Arrange
             readonly char[] expectedCharacters = Enumerable.Range(0, 8 + random.Next() % 5).Select(n => (char)(random.Next() % char.MaxValue)).ToArray();
-            FuzzyArray<char> actualSpec = null;
+            FuzzyArray<char>? actualSpec = null;
             readonly string actualString;
 
             public Build() {
@@ -72,14 +72,14 @@ namespace Fuzzy.Implementation
                 Expression<Predicate<FuzzyElement<char>>> fuzzyElement = f => ReferenceEquals(characters, f.Field<IEnumerable<char>>().Value);
                 ConfiguredCall arrange = fuzzy.Build(Arg.Is(fuzzyElement)).Returns(expected);
 
-                char actual = actualSpec.Field<Func<char>>().Value();
+                char actual = actualSpec!.Field<Func<char>>().Value!();
 
                 Assert.Equal(expected, actual);
             }
 
             [Fact]
             public void ReturnsStringCreatedWithGivenLength() =>
-                Assert.Same(length, actualSpec.Field<Length>().Value);
+                Assert.Same(length, actualSpec!.Field<Length>().Value);
         }
 
         public class Characters: FuzzyStringTest
@@ -90,7 +90,7 @@ namespace Fuzzy.Implementation
 
             [Fact]
             public void ThrowsDescriptiveExceptionWhenValueIsNull() {
-                var thrown = Assert.Throws<ArgumentNullException>(() => sut.Characters = null);
+                var thrown = Assert.Throws<ArgumentNullException>(() => sut.Characters = null!);
                 Assert.Equal("value", thrown.ParamName);
             }
         }
