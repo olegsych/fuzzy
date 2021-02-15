@@ -32,19 +32,19 @@ namespace Fuzzy.Implementation
         {
             [Fact]
             public void ThrowsDescriptiveExceptionWhenFuzzIsNull() {
-                var thrown = Assert.Throws<ArgumentNullException>(() => new FuzzyList<TestItem>(null, itemFactory, itemCount));
+                var thrown = Assert.Throws<ArgumentNullException>(() => new FuzzyList<TestItem>(null!, itemFactory, itemCount));
                 Assert.Equal(sut.Constructor().Parameter<IFuzz>().Name, thrown.ParamName);
             }
 
             [Fact]
             public void ThrowsDescriptiveExceptionWhenItemFactoryIsNull() {
-                var thrown = Assert.Throws<ArgumentNullException>(() => new FuzzyList<TestItem>(fuzzy, null, itemCount));
+                var thrown = Assert.Throws<ArgumentNullException>(() => new FuzzyList<TestItem>(fuzzy, null!, itemCount));
                 Assert.Equal(sut.Constructor().Parameter<Func<TestItem>>().Name, thrown.ParamName);
             }
 
             [Fact]
             public void ThrowsDescriptiveExceptionWhenItemCountIsNull() {
-                var thrown = Assert.Throws<ArgumentNullException>(() => new FuzzyList<TestItem>(fuzzy, itemFactory, null));
+                var thrown = Assert.Throws<ArgumentNullException>(() => new FuzzyList<TestItem>(fuzzy, itemFactory, null!));
                 Assert.Equal(sut.Constructor().Parameter<Count>().Name, thrown.ParamName);
             }
         }

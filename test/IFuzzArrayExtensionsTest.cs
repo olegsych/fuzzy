@@ -13,7 +13,7 @@ namespace Fuzzy
     {
         // Test fixture
         readonly TestStruct[] expected = new TestStruct[0];
-        FuzzyArray<TestStruct> spec;
+        FuzzyArray<TestStruct>? spec;
 
         public IFuzzArrayExtensionsTest() {
             ConfiguredCall unused = fuzzy.Build(Arg.Do<FuzzyArray<TestStruct>>(s => spec = s)).Returns(expected);
@@ -30,7 +30,7 @@ namespace Fuzzy
                 TestStruct[] actual = fuzzy.Array(createElement, length);
 
                 AssertExpectedFuzzyArray(actual);
-                Assert.Same(length, spec.Field<Length>().Value);
+                Assert.Same(length, spec!.Field<Length>().Value);
             }
 
             [Fact]
@@ -38,11 +38,11 @@ namespace Fuzzy
                 TestStruct[] actual = fuzzy.Array(createElement);
 
                 AssertExpectedFuzzyArray(actual);
-                Assert.Equal(new Length(), spec.Field<Length>().Value);
+                Assert.Equal(new Length(), spec!.Field<Length>().Value);
             }
 
             protected override void AssertExpectedFuzzyElementFactory() =>
-                Assert.Same(createElement, spec.Field<Func<TestStruct>>().Value);
+                Assert.Same(createElement, spec!.Field<Func<TestStruct>>().Value);
         }
 
         public class ArrayIEnumerableT: IFuzzArrayExtensionsTest
@@ -56,7 +56,7 @@ namespace Fuzzy
                 TestStruct[] actual = fuzzy.Array(elements, length);
 
                 AssertExpectedFuzzyArray(actual);
-                Assert.Same(length, spec.Field<Length>().Value);
+                Assert.Same(length, spec!.Field<Length>().Value);
             }
 
             [Fact]
@@ -64,7 +64,7 @@ namespace Fuzzy
                 TestStruct[] actual = fuzzy.Array(elements);
 
                 AssertExpectedFuzzyArray(actual);
-                Assert.Equal(new Length(), spec.Field<Length>().Value);
+                Assert.Equal(new Length(), spec!.Field<Length>().Value);
             }
 
             protected override void AssertExpectedFuzzyElementFactory() {
@@ -72,7 +72,7 @@ namespace Fuzzy
                 Expression<Predicate<FuzzyElement<TestStruct>>> fuzzyElement = f => ReferenceEquals(elements, f.Field<IEnumerable<TestStruct>>().Value);
                 ConfiguredCall arrange = fuzzy.Build(Arg.Is(fuzzyElement)).Returns(expected);
 
-                TestStruct actual = spec.Field<Func<TestStruct>>().Value();
+                TestStruct actual = spec!.Field<Func<TestStruct>>().Value!();
 
                 Assert.Equal(expected, actual);
             }
@@ -80,7 +80,7 @@ namespace Fuzzy
 
         void AssertExpectedFuzzyArray(TestStruct[] actual) {
             Assert.Same(expected, actual);
-            Assert.Same(fuzzy, spec.Field<IFuzz>().Value);
+            Assert.Same(fuzzy, spec!.Field<IFuzz>().Value);
             AssertExpectedFuzzyElementFactory();
         }
 

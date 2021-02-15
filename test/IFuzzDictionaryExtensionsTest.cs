@@ -13,12 +13,11 @@ namespace Fuzzy
     {
         // Test fixture
         readonly Dictionary<TestKey, TestValue> expected = new Dictionary<TestKey, TestValue>();
-        FuzzyDictionary<TestKey, TestValue> spec;
-        ConfiguredCall arrange;
+        FuzzyDictionary<TestKey, TestValue>? spec;
+        object? arrange;
 
-        public IFuzzDictionaryExtensionsTest() {
-            ConfiguredCall unused = fuzzy.Build(Arg.Do<FuzzyDictionary<TestKey, TestValue>>(s => spec = s)).Returns(expected);
-        }
+        public IFuzzDictionaryExtensionsTest() =>
+            arrange = fuzzy.Build(Arg.Do<FuzzyDictionary<TestKey, TestValue>>(s => spec = s)).Returns(expected);
 
         public class DictionaryFuncOfTValue: IFuzzDictionaryExtensionsTest
         {
@@ -32,7 +31,7 @@ namespace Fuzzy
                 Dictionary<TestKey, TestValue> actual = fuzzy.Dictionary(createKey, createValue, count);
 
                 AssertExpectedFuzzyDictionary(actual);
-                Assert.Same(count, spec.Field<Count>().Value);
+                Assert.Same(count, spec!.Field<Count>().Value);
             }
 
             [Fact]
@@ -40,17 +39,17 @@ namespace Fuzzy
                 Dictionary<TestKey, TestValue> actual = fuzzy.Dictionary(createKey, createValue);
 
                 AssertExpectedFuzzyDictionary(actual);
-                Assert.Equal(new Count(), spec.Field<Count>().Value);
+                Assert.Equal(new Count(), spec!.Field<Count>().Value);
             }
 
             protected override void AssertExpectedKeyFactory() =>
-                Assert.Same(createKey, spec.Field<Func<TestKey>>().Value);
+                Assert.Same(createKey, spec!.Field<Func<TestKey>>().Value);
 
             protected override void AssertExpectedValueFactory() {
                 var expectedValue = new TestValue();
                 arrange = createValue.Invoke().Returns(expectedValue);
 
-                TestValue actualValue = spec.Field<Func<TestKey, TestValue>>().Value.Invoke(new TestKey());
+                TestValue actualValue = spec!.Field<Func<TestKey, TestValue>>().Value!(new TestKey());
 
                 Assert.Same(expectedValue, actualValue);
             }
@@ -68,7 +67,7 @@ namespace Fuzzy
                 Dictionary<TestKey, TestValue> actual = fuzzy.Dictionary(createKey, createValue, count);
 
                 AssertExpectedFuzzyDictionary(actual);
-                Assert.Same(count, spec.Field<Count>().Value);
+                Assert.Same(count, spec!.Field<Count>().Value);
             }
 
             [Fact]
@@ -76,14 +75,14 @@ namespace Fuzzy
                 Dictionary<TestKey, TestValue> actual = fuzzy.Dictionary(createKey, createValue);
 
                 AssertExpectedFuzzyDictionary(actual);
-                Assert.Equal(new Count(), spec.Field<Count>().Value);
+                Assert.Equal(new Count(), spec!.Field<Count>().Value);
             }
 
             protected override void AssertExpectedKeyFactory() =>
-                Assert.Same(createKey, spec.Field<Func<TestKey>>().Value);
+                Assert.Same(createKey, spec!.Field<Func<TestKey>>().Value);
 
             protected override void AssertExpectedValueFactory() =>
-                Assert.Same(createValue, spec.Field<Func<TestKey, TestValue>>().Value);
+                Assert.Same(createValue, spec!.Field<Func<TestKey, TestValue>>().Value);
         }
 
         public class DictionaryIEnumerableKeyValuePair: IFuzzDictionaryExtensionsTest
@@ -97,7 +96,7 @@ namespace Fuzzy
                 Dictionary<TestKey, TestValue> actual = fuzzy.Dictionary(elements, count);
 
                 AssertExpectedFuzzyDictionary(actual);
-                Assert.Same(count, spec.Field<Count>().Value);
+                Assert.Same(count, spec!.Field<Count>().Value);
             }
 
             [Fact]
@@ -105,7 +104,7 @@ namespace Fuzzy
                 Dictionary<TestKey, TestValue> actual = fuzzy.Dictionary(elements);
 
                 AssertExpectedFuzzyDictionary(actual);
-                Assert.Equal(new Count(), spec.Field<Count>().Value);
+                Assert.Equal(new Count(), spec!.Field<Count>().Value);
             }
 
             protected override void AssertExpectedKeyFactory() {
@@ -114,7 +113,7 @@ namespace Fuzzy
                     arg => ReferenceEquals(elements, arg.Field<IEnumerable<KeyValuePair<TestKey, TestValue>>>().Value);
                 ConfiguredCall arrange = fuzzy.Build(Arg.Is(fuzzyElement)).Returns(expected);
 
-                TestKey actual = spec.Field<Func<TestKey>>().Value.Invoke();
+                TestKey actual = spec!.Field<Func<TestKey>>().Value!();
 
                 Assert.Equal(expected.Key, actual);
             }
@@ -124,7 +123,7 @@ namespace Fuzzy
                 var original = (Dictionary<TestKey, TestValue>)elements;
                 original[expected.Key] = expected.Value;
 
-                TestValue actualValue = spec.Field<Func<TestKey, TestValue>>().Value.Invoke(expected.Key);
+                TestValue actualValue = spec!.Field<Func<TestKey, TestValue>>().Value!(expected.Key);
 
                 Assert.Same(expected.Value, actualValue);
             }
@@ -132,7 +131,7 @@ namespace Fuzzy
 
         void AssertExpectedFuzzyDictionary(Dictionary<TestKey, TestValue> actual) {
             Assert.Same(expected, actual);
-            Assert.Same(fuzzy, spec.Field<IFuzz>().Value);
+            Assert.Same(fuzzy, spec!.Field<IFuzz>().Value);
             AssertExpectedKeyFactory();
             AssertExpectedValueFactory();
         }

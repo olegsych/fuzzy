@@ -33,25 +33,25 @@ namespace Fuzzy.Implementation
         {
             [Fact]
             public void ThrowsDescriptiveExceptionWhenFuzzIsNull() {
-                var thrown = Assert.Throws<ArgumentNullException>(() => new FuzzyDictionary<TestKey, TestValue>(null, keyFactory, valueFactory, count));
+                var thrown = Assert.Throws<ArgumentNullException>(() => new FuzzyDictionary<TestKey, TestValue>(null!, keyFactory, valueFactory, count));
                 Assert.Equal(sut.Constructor().Parameter<IFuzz>().Name, thrown.ParamName);
             }
 
             [Fact]
             public void ThrowsDescriptiveExceptionWhenKeyFactoryIsNull() {
-                var thrown = Assert.Throws<ArgumentNullException>(() => new FuzzyDictionary<TestKey, TestValue>(fuzzy, null, valueFactory, count));
+                var thrown = Assert.Throws<ArgumentNullException>(() => new FuzzyDictionary<TestKey, TestValue>(fuzzy, null!, valueFactory, count));
                 Assert.Equal(sut.Constructor().Parameter<Func<TestKey>>().Name, thrown.ParamName);
             }
 
             [Fact]
             public void ThrowsDescriptiveExceptionWhenValueFactoryIsNull() {
-                var thrown = Assert.Throws<ArgumentNullException>(() => new FuzzyDictionary<TestKey, TestValue>(fuzzy, keyFactory, null, count));
+                var thrown = Assert.Throws<ArgumentNullException>(() => new FuzzyDictionary<TestKey, TestValue>(fuzzy, keyFactory, null!, count));
                 Assert.Equal(sut.Constructor().Parameter<Func<TestKey, TestValue>>().Name, thrown.ParamName);
             }
 
             [Fact]
             public void ThrowsDescriptiveExceptionWhenCountIsNull() {
-                var thrown = Assert.Throws<ArgumentNullException>(() => new FuzzyDictionary<TestKey, TestValue>(fuzzy, keyFactory, valueFactory, null));
+                var thrown = Assert.Throws<ArgumentNullException>(() => new FuzzyDictionary<TestKey, TestValue>(fuzzy, keyFactory, valueFactory, null!));
                 Assert.Equal(sut.Constructor().Parameter<Count>().Name, thrown.ParamName);
             }
         }
