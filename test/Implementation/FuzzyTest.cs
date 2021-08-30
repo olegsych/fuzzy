@@ -31,7 +31,7 @@ namespace Fuzzy.Implementation
                 Assert.Same(fuzz, sut.Field<IFuzz>().Value);
         }
 
-        public class ImplicitTypeConversionOperator : FuzzyTest
+        public class Generate : FuzzyTest
         {
             [Fact]
             public void ReturnsNewValueBuiltFromSut()
@@ -40,8 +40,8 @@ namespace Fuzzy.Implementation
                 var expected2 = new TestClass();
                 ConfiguredCall arrange = fuzz.Build(sut).Returns(expected1, expected2);
 
-                TestClass actual1 = sut;
-                TestClass actual2 = sut;
+                TestClass actual1 = sut.Generate();
+                TestClass actual2 = sut.Generate();
 
                 Assert.Same(expected1, actual1);
                 Assert.Same(expected2, actual2);

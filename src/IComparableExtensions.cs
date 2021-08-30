@@ -9,19 +9,19 @@ namespace Fuzzy
             FuzzyRange<T> spec = FuzzyContext.Get<T, FuzzyRange<T>>(value);
             spec.Minimum = minimum;
             spec.Maximum = maximum;
-            return spec;
+            return spec.Generate();
         }
 
         public static T Minimum<T>(this T value, T minimum) where T : struct, IComparable<T> {
             FuzzyRange<T> spec = FuzzyContext.Get<T, FuzzyRange<T>>(value);
             spec.Minimum = minimum;
-            return spec;
+            return spec.Generate();
         }
 
         public static T Maximum<T>(this T value, T maximum) where T : struct, IComparable<T> {
             FuzzyRange<T> spec = FuzzyContext.Get<T, FuzzyRange<T>>(value);
             spec.Maximum = maximum;
-            return spec;
+            return spec.Generate();
         }
     }
 }

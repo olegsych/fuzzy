@@ -11,6 +11,6 @@ namespace Fuzzy.Implementation
 
         protected internal abstract T Build();
 
-        public static implicit operator T(Fuzzy<T> spec) => spec.fuzzy.Build(spec);
+        public T Generate() => fuzzy.Build(this);
     }
 }
