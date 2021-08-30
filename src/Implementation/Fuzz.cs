@@ -4,7 +4,7 @@ namespace Fuzzy.Implementation
     {
         public abstract int Next();
 
-        T IFuzz.Build<T>(Fuzzy<T> spec) {
+        public T Build<T>(Fuzzy<T> spec) {
             if(spec is null)
                 throw new System.ArgumentNullException(nameof(spec));
             T value = spec.Build();
