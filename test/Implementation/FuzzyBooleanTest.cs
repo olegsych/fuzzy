@@ -15,13 +15,13 @@ namespace Fuzzy.Implementation
         {
             [Fact]
             public void ReturnsTrueWhenNextFuzzyValueIsOdd() {
-                ConfiguredCall arrange = fuzzy.Next().Returns(OddNumber());
+                ConfiguredCall arrange = fuzzy.Number().Returns(OddNumber());
                 Assert.True(sut.Build());
             }
 
             [Fact]
             public void ReturnsFalseWhenNextFuzzyValueIsEven() {
-                ConfiguredCall arrange = fuzzy.Next().Returns(EvenNumber());
+                ConfiguredCall arrange = fuzzy.Number().Returns(EvenNumber());
                 Assert.False(sut.Build());
             }
         }

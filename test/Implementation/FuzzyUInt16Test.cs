@@ -31,10 +31,10 @@ namespace Fuzzy.Implementation
             [InlineData(5, 15, -10, 15)] // In case SequentialFuzz has negative seed
             [InlineData(ushort.MinValue, ushort.MaxValue, 0, ushort.MinValue)]
             [InlineData(ushort.MinValue, ushort.MaxValue, ushort.MaxValue, ushort.MaxValue)]
-            public void CalculatesValueBasedOnMinimumMaximumAndNextSample(ushort minimum, ushort maximum, int next, ushort expected) {
+            public void CalculatesValueBasedOnMinimumMaximumAndNextSample(ushort minimum, ushort maximum, int number, ushort expected) {
                 sut.Minimum = minimum;
                 sut.Maximum = maximum;
-                ConfiguredCall arrange = fuzzy.Next().Returns(next);
+                ConfiguredCall arrange = fuzzy.Number().Returns(number);
 
                 ushort actual = sut.Build();
 

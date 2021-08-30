@@ -8,6 +8,6 @@ namespace Fuzzy
 
         public RandomFuzz(int seed = 0) => random = new Random(seed);
 
-        public override int Next() => random.Next();
+        public override int Number() => random.Next();
     }
 }
