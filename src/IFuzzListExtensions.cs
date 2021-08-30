@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using Fuzzy.Implementation;
 
+#pragma warning disable CA1002 // Do not expose generic lists
+// These extension methods are meant specifically for generic lists
+
 namespace Fuzzy
 {
     public static class IFuzzListExtensions
