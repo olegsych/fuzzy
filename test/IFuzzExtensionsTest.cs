@@ -69,7 +69,7 @@ namespace Fuzzy
 
                 Assert.Equal(expectedValue, actualValue);
                 Assert.Same(fuzzy, actualSpec!.Field<IFuzz>().Value);
-                Assert.Null(actualSpec.Field<DateTimeKind?>().Value);
+                Assert.Null(actualSpec!.Field<DateTimeKind?>().Value);
             }
 
             [Theory, InlineData(DateTimeKind.Unspecified), InlineData(DateTimeKind.Local), InlineData(DateTimeKind.Utc)]
@@ -78,7 +78,7 @@ namespace Fuzzy
 
                 Assert.Equal(expectedValue, actualValue);
                 Assert.Same(fuzzy, actualSpec!.Field<IFuzz>().Value);
-                Assert.Equal(expectedKind, actualSpec.Field<DateTimeKind?>().Value);
+                Assert.Equal(expectedKind, actualSpec!.Field<DateTimeKind?>().Value);
             }
         }
 
@@ -125,7 +125,7 @@ namespace Fuzzy
 
                 Assert.Equal(expectedValue, actualValue);
                 Assert.Same(fuzzy, actualSpec!.Field<IFuzz>().Value);
-                Assert.Same(elements, actualSpec.Field<IEnumerable<TestStruct>>().Value);
+                Assert.Same(elements, actualSpec!.Field<IEnumerable<TestStruct>>().Value);
             }
         }
 
@@ -157,7 +157,7 @@ namespace Fuzzy
 
                 Assert.Equal(expectedValue, actualValue);
                 Assert.Same(fuzzy, actualSpec!.Field<IFuzz>().Value);
-                Assert.Same(elements, actualSpec.Field<IEnumerable<TestStruct>>().Value);
+                Assert.Same(elements, actualSpec!.Field<IEnumerable<TestStruct>>().Value);
             }
         }
 
@@ -261,7 +261,7 @@ namespace Fuzzy
 
                 Assert.Same(expectedValue, actualValue);
                 Assert.Same(fuzzy, actualSpec!.Field<IFuzz>().Value);
-                Assert.Same(expectedLength, actualSpec.Field<Length>().Value);
+                Assert.Same(expectedLength, actualSpec!.Field<Length>().Value);
             }
 
             [Fact]
