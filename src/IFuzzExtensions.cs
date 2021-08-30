@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using Fuzzy.Implementation;
 
+// Extension methods are intentionally named after built-in types they generate
+#pragma warning disable CA1720
+
 namespace Fuzzy
 {
     public static class IFuzzExtensions
