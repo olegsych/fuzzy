@@ -31,6 +31,9 @@ namespace Fuzzy
             maximum = max;
         }
 
+        #pragma warning disable CA1000 // Do not declare static members on generic types
+        // The following static methods are meant to be invoked on the non-generic child types.
+
         public static TSize Between(int min, int max)
         {
             var range = new TSize();
@@ -54,6 +57,8 @@ namespace Fuzzy
             range.Initialize(null, max);
             return range;
         }
+
+        #pragma warning restore CA1000
 
         public int Build(IFuzz fuzzy) {
             if(fuzzy == null)
