@@ -6,7 +6,7 @@ namespace Fuzzy.Implementation
     {
         protected readonly IFuzz fuzzy;
 
-        public Fuzzy(IFuzz fuzzy) =>
+        protected Fuzzy(IFuzz fuzzy) =>
             this.fuzzy = fuzzy ?? throw new ArgumentNullException(nameof(fuzzy));
 
         protected internal abstract T Build();
