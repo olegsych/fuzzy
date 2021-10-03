@@ -19,7 +19,7 @@ namespace Fuzzy
             {
                 var expected = new SequentialFuzz(0);
                 var actual = new SequentialFuzz();
-                Assert.Equal(expected.Next(), actual.Next());
+                Assert.Equal(expected.Number(), actual.Number());
             }
         }
 
@@ -28,8 +28,8 @@ namespace Fuzzy
             [Fact]
             public void ReturnIncrementedSeedValue()
             {
-                Assert.Equal(seed + 1, sut.Next());
-                Assert.Equal(seed + 2, sut.Next());
+                Assert.Equal(seed + 1, sut.Number());
+                Assert.Equal(seed + 2, sut.Number());
             }
         }
     }

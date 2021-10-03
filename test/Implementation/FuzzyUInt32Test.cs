@@ -32,11 +32,11 @@ namespace Fuzzy.Implementation
             [InlineData(5, 15, 10, 15)]
             [InlineData(uint.MinValue, uint.MaxValue, 0, uint.MinValue)]
             [InlineData(uint.MinValue, uint.MaxValue, uint.MaxValue, uint.MaxValue)]
-            public void CalculatesValueBasedOnMinimumMaximumAndNextSample(uint minimum, uint maximum, uint next, uint expected) {
+            public void CalculatesValueBasedOnMinimumMaximumAndNextSample(uint minimum, uint maximum, uint number, uint expected) {
                 sut.Minimum = minimum;
                 sut.Maximum = maximum;
-                var first = (ushort)(next & 0xFFFF);
-                var second = (ushort)(next >> 16);
+                var first = (ushort)(number & 0xFFFF);
+                var second = (ushort)(number >> 16);
                 Expression<Predicate<FuzzyRange<ushort>>> unlimitedUInt16 = f => f.Minimum == ushort.MinValue && f.Maximum == ushort.MaxValue;
                 ConfiguredCall arrange = fuzzy.Build(Arg.Is(unlimitedUInt16)).Returns(first, second);
 

@@ -16,12 +16,12 @@ namespace Fuzzy.Implementation
         {
             [Fact]
             public void ReturnsUriBasedOnNextFuzzyValue() {
-                int next = random.Next();
-                ConfiguredCall arrange = fuzzy.Next().Returns(next);
+                int number = random.Next();
+                ConfiguredCall arrange = fuzzy.Number().Returns(number);
 
                 Uri actual = sut.Build();
 
-                Assert.Equal($"https://fuzzy{next}/", actual.ToString());
+                Assert.Equal($"https://fuzzy{number}/", actual.ToString());
             }
         }
     }

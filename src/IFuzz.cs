@@ -4,7 +4,7 @@ namespace Fuzzy
 {
     public interface IFuzz
     {
-        int Next();
+        int Number();
         T Build<T>(Fuzzy<T> spec);
     }
 }

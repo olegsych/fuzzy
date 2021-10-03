@@ -6,6 +6,6 @@ namespace Fuzzy
 
         public SequentialFuzz(int seed = default) => current = seed;
 
-        public override int Next() => ++current;
+        public override int Number() => ++current;
     }
 }

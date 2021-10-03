@@ -19,7 +19,7 @@ namespace Fuzzy
             {
                 var expected = new RandomFuzz(0);
                 var actual = new RandomFuzz();
-                Assert.Equal(expected.Next(), actual.Next());
+                Assert.Equal(expected.Number(), actual.Number());
             }
         }
 
@@ -29,7 +29,7 @@ namespace Fuzzy
             public void ReturnsNextRandomValue()
             {
                 var expected = new Random(seed);
-                Assert.Equal(expected.Next(), sut.Next());
+                Assert.Equal(expected.Next(), sut.Number());
             }
         }
     }

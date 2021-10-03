@@ -11,8 +11,8 @@ namespace Fuzzy
         int? maximum;
         int? minimum;
 
-        public override bool Equals(object other) =>
-            other is Size<TSize> otherSize &&
+        public override bool Equals(object obj) =>
+            obj is Size<TSize> otherSize &&
             otherSize.minimum.Equals(minimum) &&
             otherSize.maximum.Equals(maximum);
 
@@ -30,6 +30,9 @@ namespace Fuzzy
             minimum = min;
             maximum = max;
         }
+
+        #pragma warning disable CA1000 // Do not declare static members on generic types
+        // The following static methods are meant to be invoked on the non-generic child types.
 
         public static TSize Between(int min, int max)
         {
@@ -54,6 +57,8 @@ namespace Fuzzy
             range.Initialize(null, max);
             return range;
         }
+
+        #pragma warning restore CA1000
 
         public int Build(IFuzz fuzzy) {
             if(fuzzy == null)
