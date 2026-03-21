@@ -4,5 +4,9 @@
     <AssemblyName>Fuzzy</AssemblyName>
     <RootNamespace>Fuzzy</RootNamespace>
     <Description>A simple library for fuzz testing .NET code.</Description>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\StrongName.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 </Project>

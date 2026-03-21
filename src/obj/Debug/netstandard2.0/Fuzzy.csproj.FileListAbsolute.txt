@@ -1,6 +1,0 @@
-/home/runner/work/fuzzy/fuzzy/src/obj/Debug/netstandard2.0/Fuzzy.csproj.AssemblyReference.cache
-/home/runner/work/fuzzy/fuzzy/src/obj/Debug/netstandard2.0/Fuzzy.GeneratedMSBuildEditorConfig.editorconfig
-/home/runner/work/fuzzy/fuzzy/src/obj/Debug/netstandard2.0/Fuzzy.AssemblyInfoInputs.cache
-/home/runner/work/fuzzy/fuzzy/src/obj/Debug/netstandard2.0/Fuzzy.AssemblyInfo.cs
-/home/runner/work/fuzzy/fuzzy/src/obj/Debug/netstandard2.0/Fuzzy.csproj.CoreCompileInputs.cache
-/home/runner/work/fuzzy/fuzzy/src/obj/Debug/netstandard2.0/Fuzzy.sourcelink.json
