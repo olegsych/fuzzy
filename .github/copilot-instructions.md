@@ -2,9 +2,9 @@
 
 ## Project Overview
 
-**fuzzy** is a .NET library (targeting `netstandard2.0`) that provides a fluent API for generating random ("fuzzy") inputs in unit tests. It helps prevent code under test from making incorrect assumptions about its inputs and makes unit tests more concise.
+See [README.md](../README.md) for project description and usage examples.
 
-The public NuGet package is `fuzzy`. The primary entry point is the `IFuzz` interface.
+The public NuGet package is `fuzzy` (targeting `netstandard2.0`). The primary entry point is the `IFuzz` interface.
 
 ## Repository Structure
 
@@ -67,20 +67,7 @@ For non-range types, add type-specific extension methods in a `*Extensions.cs` f
 
 ## Build & Test
 
-**Clone** (required — repository has submodules and symlinks):
-```powershell
-git clone --recurse-submodules -c core.symlinks=true https://github.com/olegsych/fuzzy.git
-```
-
-**Build:**
-```powershell
-dotnet build .\Fuzzy.sln
-```
-
-**Test:**
-```powershell
-dotnet test .\test\Tests.csproj
-```
+See [CONTRIBUTING.md](../CONTRIBUTING.md) for clone, build, and test instructions.
 
 **Pack (Release):**
 ```powershell
@@ -109,9 +96,7 @@ dotnet pack .\src\Fuzzy.csproj --configuration Release --include-symbols
 
 ## CI / Deployment
 
-- CI runs on **AppVeyor** (`appveyor.yml`): builds, tests, and packs on every master push and PR.
-- NuGet packages are published manually from AppVeyor deployments to nuget.org.
-- No GitHub Actions workflows are present.
+See [CONTRIBUTING.md](../CONTRIBUTING.md) for CI and release information. Note: no GitHub Actions workflows are present; CI runs exclusively on AppVeyor.
 
 ## Known Gotchas
 
