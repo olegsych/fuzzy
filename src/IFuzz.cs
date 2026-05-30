@@ -18,7 +18,7 @@ namespace Fuzzy
         int Next();
 
         /// <summary>
-        /// Returns a fuzzy value of type <typeparamref name="T"/> built from the given specification.
+        /// Returns a fuzzy <typeparamref name="T"/> built from <paramref name="spec"/>.
         /// </summary>
         /// <remarks>
         /// Implementations must register the returned value with its <paramref name="spec"/> via
