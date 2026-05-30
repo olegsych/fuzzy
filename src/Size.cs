@@ -2,6 +2,12 @@ using System;
 
 namespace Fuzzy
 {
+    /// <summary>Specifies an inclusive range of non-negative integer sizes for fuzzy values.</summary>
+    /// <remarks>
+    /// When neither bound is specified, <see cref="Build"/> uses the range <c>[8, 13]</c>; when only one bound is
+    /// specified, the other is derived from it.
+    /// </remarks>
+    /// <typeparam name="TSize">The derived size type, per the curiously recurring template pattern.</typeparam>
     public abstract class Size<TSize> where TSize : Size<TSize>, new()
     {
         const int defaultMinimum = 8;
@@ -11,14 +17,21 @@ namespace Fuzzy
         int? maximum;
         int? minimum;
 
+        /// <inheritdoc/>
         public override bool Equals(object other) =>
             other is Size<TSize> otherSize &&
             otherSize.minimum.Equals(minimum) &&
             otherSize.maximum.Equals(maximum);
 
+        /// <inheritdoc/>
         public override int GetHashCode() =>
             (minimum, maximum).GetHashCode();
 
+        /// <summary>Sets the inclusive minimum and maximum bounds of this size.</summary>
+        /// <param name="min">The inclusive lower bound, or <see langword="null"/> to leave the lower bound unspecified.</param>
+        /// <param name="max">The inclusive upper bound, or <see langword="null"/> to leave the upper bound unspecified.</param>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="min"/> or <paramref name="max"/> is negative.</exception>
+        /// <exception cref="ArgumentException"><paramref name="max"/> is less than <paramref name="min"/>.</exception>
         protected virtual void Initialize(int? min, int? max)
         {
             if(min < 0)
@@ -31,6 +44,9 @@ namespace Fuzzy
             maximum = max;
         }
 
+        /// <summary>Returns a <typeparamref name="TSize"/> bounded inclusively by <paramref name="min"/> and <paramref name="max"/>.</summary>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="min"/> or <paramref name="max"/> is negative.</exception>
+        /// <exception cref="ArgumentException"><paramref name="max"/> is less than <paramref name="min"/>.</exception>
         public static TSize Between(int min, int max)
         {
             var range = new TSize();
@@ -38,9 +54,13 @@ namespace Fuzzy
             return range;
         }
 
+        /// <summary>Returns a <typeparamref name="TSize"/> bounded inclusively to a single <paramref name="value"/>.</summary>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="value"/> is negative.</exception>
         public static TSize Exactly(int value) =>
             Between(value, value);
 
+        /// <summary>Returns a <typeparamref name="TSize"/> with an inclusive lower bound of <paramref name="min"/> and no explicit upper bound.</summary>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="min"/> is negative.</exception>
         public static TSize Min(int min)
         {
             var range = new TSize();
@@ -48,6 +68,8 @@ namespace Fuzzy
             return range;
         }
 
+        /// <summary>Returns a <typeparamref name="TSize"/> with no explicit lower bound and an inclusive upper bound of <paramref name="max"/>.</summary>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="max"/> is negative.</exception>
         public static TSize Max(int max)
         {
             var range = new TSize();
@@ -55,6 +77,8 @@ namespace Fuzzy
             return range;
         }
 
+        /// <summary>Returns a fuzzy size within the configured bounds.</summary>
+        /// <exception cref="ArgumentNullException"><paramref name="fuzzy"/> is <see langword="null"/>.</exception>
         public int Build(IFuzz fuzzy) {
             if(fuzzy == null)
                 throw new ArgumentNullException(nameof(fuzzy));
