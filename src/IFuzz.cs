@@ -20,6 +20,11 @@ namespace Fuzzy
         /// <summary>
         /// Returns a fuzzy value of type <typeparamref name="T"/> built from the given specification.
         /// </summary>
+        /// <remarks>
+        /// Implementations must register the returned value with its <paramref name="spec"/> via
+        /// <see cref="FuzzyContext.Set{T}(T, Fuzzy{T})"/> so that fluent constraint extensions such as
+        /// <see cref="IComparableExtensions.Between{T}(T, T, T)"/> can recover the specification from the value.
+        /// </remarks>
         /// <typeparam name="T">The type of value to build.</typeparam>
         /// <param name="spec">The specification that describes how to build the value.</param>
         /// <exception cref="ArgumentNullException"><paramref name="spec"/> is <see langword="null"/>.</exception>
