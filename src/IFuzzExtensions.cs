@@ -30,7 +30,7 @@ namespace Fuzzy
         /// <exception cref="ArgumentNullException"><paramref name="fuzzy"/> is <see langword="null"/>.</exception>
         public static DateTime DateTime(this IFuzz fuzzy, DateTimeKind kind) => new FuzzyDateTime(fuzzy, kind);
 
-        /// <summary>Returns a fuzzy <see cref="System.DateTimeOffset"/>.</summary>
+        /// <summary>Returns a fuzzy <see cref="DateTimeOffset"/>.</summary>
         /// <exception cref="ArgumentNullException"><paramref name="fuzzy"/> is <see langword="null"/>.</exception>
         public static DateTimeOffset DateTimeOffset(this IFuzz fuzzy) => new FuzzyDateTimeOffset(fuzzy);
 
@@ -78,7 +78,7 @@ namespace Fuzzy
         /// <exception cref="ArgumentNullException"><paramref name="fuzzy"/> or <paramref name="length"/> is <see langword="null"/>.</exception>
         public static string String(this IFuzz fuzzy, Length length) => new FuzzyString(fuzzy, length ?? throw new ArgumentNullException(nameof(length)), null);
 
-        /// <summary>Returns a fuzzy <see cref="System.TimeSpan"/>.</summary>
+        /// <summary>Returns a fuzzy <see cref="TimeSpan"/>.</summary>
         /// <exception cref="ArgumentNullException"><paramref name="fuzzy"/> is <see langword="null"/>.</exception>
         public static TimeSpan TimeSpan(this IFuzz fuzzy) => new FuzzyTimeSpan(fuzzy);
 
@@ -94,7 +94,7 @@ namespace Fuzzy
         /// <exception cref="ArgumentNullException"><paramref name="fuzzy"/> is <see langword="null"/>.</exception>
         public static ulong UInt64(this IFuzz fuzzy) => new FuzzyUInt64(fuzzy);
 
-        /// <summary>Returns a fuzzy <see cref="System.Uri"/>.</summary>
+        /// <summary>Returns a fuzzy <see cref="Uri"/>.</summary>
         /// <exception cref="ArgumentNullException"><paramref name="fuzzy"/> is <see langword="null"/>.</exception>
         public static Uri Uri(this IFuzz fuzzy) => new FuzzyUri(fuzzy);
     }
