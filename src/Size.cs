@@ -72,6 +72,9 @@ namespace Fuzzy
             return range;
         }
 
+        /// <summary>Returns a fuzzy size within the configured bounds.</summary>
+        /// <param name="fuzzy">The <see cref="IFuzz"/> instance used to generate the value.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="fuzzy"/> is <see langword="null"/>.</exception>
         public int Build(IFuzz fuzzy) {
             if(fuzzy == null)
                 throw new ArgumentNullException(nameof(fuzzy));
