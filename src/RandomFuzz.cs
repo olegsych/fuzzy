@@ -3,7 +3,7 @@ using System;
 namespace Fuzzy
 {
     /// <summary>
-    /// Produces fuzzy <see langword="int"/> values from a pseudo-random sequence.
+    /// Produces fuzzy test values from a pseudo-random sequence.
     /// </summary>
     public class RandomFuzz : Implementation.Fuzz
     {
