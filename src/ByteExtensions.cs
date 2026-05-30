@@ -6,13 +6,13 @@ namespace Fuzzy
     /// </remarks>
     public static class ByteExtensions
     {
-        /// <summary>Returns a fuzzy <see langword="byte"/> value constrained to the range between <paramref name="minimum"/> and <paramref name="maximum"/>, inclusive.</summary>
+        /// <inheritdoc cref="IComparableExtensions.Between{T}(T, T, T)"/>
         public static byte Between(this byte value, byte minimum, byte maximum) => IComparableExtensions.Between(value, minimum, maximum);
 
-        /// <summary>Returns a fuzzy <see langword="byte"/> value no greater than <paramref name="maximum"/>.</summary>
+        /// <inheritdoc cref="IComparableExtensions.Maximum{T}(T, T)"/>
         public static byte Maximum(this byte value, byte maximum) => IComparableExtensions.Maximum(value, maximum);
 
-        /// <summary>Returns a fuzzy <see langword="byte"/> value no less than <paramref name="minimum"/>.</summary>
+        /// <inheritdoc cref="IComparableExtensions.Minimum{T}(T, T)"/>
         public static byte Minimum(this byte value, byte minimum) => IComparableExtensions.Minimum(value, minimum);
     }
 }
