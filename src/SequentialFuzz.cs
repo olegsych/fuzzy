@@ -13,7 +13,9 @@ namespace Fuzzy
         /// <param name="seed">The value preceding the first integer returned by <see cref="Next"/>.</param>
         public SequentialFuzz(int seed = default) => current = seed;
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Returns the next integer in the predictable sequence, incremented by one on each call.
+        /// </summary>
         public override int Next() => ++current;
     }
 }
