@@ -3,7 +3,7 @@ using System;
 namespace Fuzzy.Implementation
 {
     /// <summary>
-    /// Base class for <see cref="Fuzzy{T}"/> specifications that produce values within an inclusive range.
+    /// Provides a base class for <see cref="Fuzzy{T}"/> specifications that produce values within an inclusive range.
     /// </summary>
     public abstract class FuzzyRange<T>: Fuzzy<T> where T : struct, IComparable<T>
     {
