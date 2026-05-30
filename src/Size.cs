@@ -3,6 +3,10 @@ using System;
 namespace Fuzzy
 {
     /// <summary>Specifies an inclusive range of non-negative integer sizes for fuzzy values.</summary>
+    /// <remarks>
+    /// When a bound is left unspecified, <see cref="Build"/> derives it from the specified bound and a default range of 5,
+    /// falling back to <c>[8, 13]</c> when neither bound is specified.
+    /// </remarks>
     /// <typeparam name="TSize">The derived size type, per the curiously recurring template pattern.</typeparam>
     public abstract class Size<TSize> where TSize : Size<TSize>, new()
     {
@@ -58,7 +62,7 @@ namespace Fuzzy
         public static TSize Exactly(int value) =>
             Between(value, value);
 
-        /// <summary>Returns a <typeparamref name="TSize"/> with an inclusive lower bound of <paramref name="min"/> and no upper bound.</summary>
+        /// <summary>Returns a <typeparamref name="TSize"/> with an inclusive lower bound of <paramref name="min"/> and no explicit upper bound.</summary>
         /// <param name="min">The inclusive lower bound.</param>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="min"/> is negative.</exception>
         public static TSize Min(int min)
@@ -68,7 +72,7 @@ namespace Fuzzy
             return range;
         }
 
-        /// <summary>Returns a <typeparamref name="TSize"/> with no lower bound and an inclusive upper bound of <paramref name="max"/>.</summary>
+        /// <summary>Returns a <typeparamref name="TSize"/> with no explicit lower bound and an inclusive upper bound of <paramref name="max"/>.</summary>
         /// <param name="max">The inclusive upper bound.</param>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="max"/> is negative.</exception>
         public static TSize Max(int max)
