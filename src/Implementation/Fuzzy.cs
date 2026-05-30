@@ -21,7 +21,6 @@ namespace Fuzzy.Implementation
         /// <summary>
         /// Initializes a new instance of the <see cref="Fuzzy{T}"/> class.
         /// </summary>
-        /// <param name="fuzzy">The <see cref="IFuzz"/> used to build the fuzzy value.</param>
         /// <exception cref="ArgumentNullException"><paramref name="fuzzy"/> is <see langword="null"/>.</exception>
         public Fuzzy(IFuzz fuzzy) =>
             this.fuzzy = fuzzy ?? throw new ArgumentNullException(nameof(fuzzy));
@@ -34,7 +33,6 @@ namespace Fuzzy.Implementation
         /// <summary>
         /// Returns a fuzzy value of type <typeparamref name="T"/> built from <paramref name="spec"/>.
         /// </summary>
-        /// <param name="spec">The specification supplying the value.</param>
         public static implicit operator T(Fuzzy<T> spec) => spec.fuzzy.Build(spec);
     }
 }
