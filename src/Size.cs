@@ -23,6 +23,11 @@ namespace Fuzzy
         public override int GetHashCode() =>
             (minimum, maximum).GetHashCode();
 
+        /// <summary>Sets the inclusive minimum and maximum bounds of this size.</summary>
+        /// <param name="min">The inclusive lower bound, or <see langword="null"/> for unbounded.</param>
+        /// <param name="max">The inclusive upper bound, or <see langword="null"/> for unbounded.</param>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="min"/> or <paramref name="max"/> is negative.</exception>
+        /// <exception cref="ArgumentException"><paramref name="max"/> is less than <paramref name="min"/>.</exception>
         protected virtual void Initialize(int? min, int? max)
         {
             if(min < 0)
