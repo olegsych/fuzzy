@@ -1,9 +1,7 @@
 namespace Fuzzy
 {
     /// <summary>Provides range constraints for fuzzy <see langword="short"/> values.</summary>
-    /// <remarks>
-    /// Needed because compiler cannot resolve <see cref="IComparableExtensions"/> calls made with literal numbers.
-    /// </remarks>
+    // Needed because compiler cannot resolve IComparableExtensions calls made with literal numbers.
     public static class Int16Extensions
     {
         /// <inheritdoc cref="IComparableExtensions.Between{T}(T, T, T)"/>
