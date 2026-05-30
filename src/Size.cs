@@ -40,6 +40,8 @@ namespace Fuzzy
             maximum = max;
         }
 
+        /// <summary>Returns a <typeparamref name="TSize"/> bounded inclusively by <paramref name="min"/> and <paramref name="max"/>.</summary>
+        /// <inheritdoc cref="Initialize(int?, int?)"/>
         public static TSize Between(int min, int max)
         {
             var range = new TSize();
@@ -47,9 +49,13 @@ namespace Fuzzy
             return range;
         }
 
+        /// <summary>Returns a <typeparamref name="TSize"/> bounded inclusively to a single <paramref name="value"/>.</summary>
+        /// <inheritdoc cref="Initialize(int?, int?)"/>
         public static TSize Exactly(int value) =>
             Between(value, value);
 
+        /// <summary>Returns a <typeparamref name="TSize"/> with an inclusive lower bound of <paramref name="min"/> and no upper bound.</summary>
+        /// <inheritdoc cref="Initialize(int?, int?)"/>
         public static TSize Min(int min)
         {
             var range = new TSize();
@@ -57,6 +63,8 @@ namespace Fuzzy
             return range;
         }
 
+        /// <summary>Returns a <typeparamref name="TSize"/> with no lower bound and an inclusive upper bound of <paramref name="max"/>.</summary>
+        /// <inheritdoc cref="Initialize(int?, int?)"/>
         public static TSize Max(int max)
         {
             var range = new TSize();
