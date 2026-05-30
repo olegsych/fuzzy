@@ -5,7 +5,8 @@ using Fuzzy.Implementation;
 namespace Fuzzy
 {
     /// <summary>
-    /// Provides extension methods that produce fuzzy values of built-in .NET types from an <see cref="IFuzz"/>.
+    /// Provides <see cref="IFuzz"/> extension methods that produce fuzzy values of common .NET types
+    /// and pick fuzzy elements or indexes from a sequence.
     /// </summary>
     public static class IFuzzExtensions
     {
