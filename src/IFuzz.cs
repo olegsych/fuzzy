@@ -12,7 +12,7 @@ namespace Fuzzy
     public interface IFuzz
     {
         /// <summary>
-        /// Returns a non-negative, fuzzy <see cref="int"/>.
+        /// Returns a non-negative, fuzzy <see langword="int"/>.
         /// </summary>
         int Next();
 
