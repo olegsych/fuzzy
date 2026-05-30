@@ -4,8 +4,8 @@ namespace Fuzzy
 {
     /// <summary>Specifies an inclusive range of non-negative integer sizes for fuzzy values.</summary>
     /// <remarks>
-    /// When a bound is left unspecified, <see cref="Build"/> derives it from the specified bound and a default range of 5,
-    /// falling back to <c>[8, 13]</c> when neither bound is specified.
+    /// When neither bound is specified, <see cref="Build"/> uses the range <c>[8, 13]</c>; when only one bound is
+    /// specified, the other is derived from it.
     /// </remarks>
     /// <typeparam name="TSize">The derived size type, per the curiously recurring template pattern.</typeparam>
     public abstract class Size<TSize> where TSize : Size<TSize>, new()
