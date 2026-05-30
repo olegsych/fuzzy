@@ -1,8 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>Fuzzy</AssemblyName>
-    <RootNamespace>Fuzzy</RootNamespace>
     <Description>A simple library for fuzz testing .NET code.</Description>
   </PropertyGroup>
 </Project>
