@@ -4,7 +4,7 @@ using Fuzzy.Implementation;
 namespace Fuzzy
 {
     /// <summary>
-    /// Produces fuzzy values for use in tests.
+    /// Produces fuzzy test values.
     /// </summary>
     /// <remarks>
     /// Implementations supply the source of values that powers the <see cref="IFuzz"/> extension methods.
