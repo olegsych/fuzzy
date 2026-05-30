@@ -1,3 +1,4 @@
+using System;
 using Fuzzy.Implementation;
 
 namespace Fuzzy
@@ -21,6 +22,7 @@ namespace Fuzzy
         /// </summary>
         /// <typeparam name="T">The type of value to build.</typeparam>
         /// <param name="spec">The specification that describes how to build the value.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="spec"/> is <see langword="null"/>.</exception>
         T Build<T>(Fuzzy<T> spec);
     }
 }
