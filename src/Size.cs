@@ -13,11 +13,13 @@ namespace Fuzzy
         int? maximum;
         int? minimum;
 
+        /// <inheritdoc/>
         public override bool Equals(object other) =>
             other is Size<TSize> otherSize &&
             otherSize.minimum.Equals(minimum) &&
             otherSize.maximum.Equals(maximum);
 
+        /// <inheritdoc/>
         public override int GetHashCode() =>
             (minimum, maximum).GetHashCode();
 
