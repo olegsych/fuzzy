@@ -2,6 +2,8 @@ using System;
 
 namespace Fuzzy
 {
+    /// <summary>Specifies an inclusive range of non-negative integer sizes for fuzzy values.</summary>
+    /// <typeparam name="TSize">The derived size type, per the curiously recurring template pattern.</typeparam>
     public abstract class Size<TSize> where TSize : Size<TSize>, new()
     {
         const int defaultMinimum = 8;
