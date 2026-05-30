@@ -7,7 +7,7 @@ namespace Fuzzy
     /// Produces fuzzy test values.
     /// </summary>
     /// <remarks>
-    /// Implementations supply the source of values that powers the <see cref="IFuzz"/> extension methods.
+    /// Implementations supply the source of values that powers the <c>IFuzz</c> extension methods.
     /// Most consumers obtain fuzzy values through those extensions rather than calling members of this interface directly.
     /// </remarks>
     public interface IFuzz
