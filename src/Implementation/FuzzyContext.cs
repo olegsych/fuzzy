@@ -20,6 +20,10 @@ namespace Fuzzy.Implementation
             stored.Value = (value, spec);
         }
 
+        /// <summary>
+        /// Returns the fuzzy specification most recently stored with <paramref name="value"/> on the current thread.
+        /// </summary>
+        /// <exception cref="ArgumentException"><paramref name="value"/> does not match the value most recently stored on the current thread.</exception>
         public static TSpec Get<TValue, TSpec>(TValue value) where TSpec : Fuzzy<TValue> {
             (TValue value, Fuzzy<TValue> spec) retrieved = ((TValue, Fuzzy<TValue>))stored.Value;
             EnsureValueWasPreviouslyStored(value, retrieved.value);
