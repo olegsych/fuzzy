@@ -4,7 +4,7 @@ using System.Threading;
 namespace Fuzzy.Implementation
 {
     /// <summary>
-    /// Enables fluid API for fuzzy specifications.
+    /// Enables a fluent API for fuzzy specifications by carrying the originating <see cref="Fuzzy{T}"/> across the call boundary between <see cref="IFuzz.Build{T}"/> and constraint extensions.
     /// </summary>
     public static class FuzzyContext
     {
