@@ -8,7 +8,7 @@ namespace Fuzzy
 
         /// <summary>Returns a fuzzy value constrained to the range between <paramref name="minimum"/> and <paramref name="maximum"/>, inclusive.</summary>
         /// <exception cref="ArgumentException"><paramref name="value"/> is not a fuzzy value.</exception>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="minimum"/> is greater than <paramref name="maximum"/>.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="minimum"/> is greater than the current maximum of the fuzzy range, or <paramref name="maximum"/> is less than <paramref name="minimum"/>.</exception>
         public static T Between<T>(this T value, T minimum, T maximum) where T : struct, IComparable<T> {
             FuzzyRange<T> spec = FuzzyContext.Get<T, FuzzyRange<T>>(value);
             spec.Minimum = minimum;
