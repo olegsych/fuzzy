@@ -45,8 +45,6 @@ namespace Fuzzy
         }
 
         /// <summary>Returns a <typeparamref name="TSize"/> bounded inclusively by <paramref name="min"/> and <paramref name="max"/>.</summary>
-        /// <param name="min">The inclusive lower bound.</param>
-        /// <param name="max">The inclusive upper bound.</param>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="min"/> or <paramref name="max"/> is negative.</exception>
         /// <exception cref="ArgumentException"><paramref name="max"/> is less than <paramref name="min"/>.</exception>
         public static TSize Between(int min, int max)
@@ -57,13 +55,11 @@ namespace Fuzzy
         }
 
         /// <summary>Returns a <typeparamref name="TSize"/> bounded inclusively to a single <paramref name="value"/>.</summary>
-        /// <param name="value">The inclusive bound.</param>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="value"/> is negative.</exception>
         public static TSize Exactly(int value) =>
             Between(value, value);
 
         /// <summary>Returns a <typeparamref name="TSize"/> with an inclusive lower bound of <paramref name="min"/> and no explicit upper bound.</summary>
-        /// <param name="min">The inclusive lower bound.</param>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="min"/> is negative.</exception>
         public static TSize Min(int min)
         {
@@ -73,7 +69,6 @@ namespace Fuzzy
         }
 
         /// <summary>Returns a <typeparamref name="TSize"/> with no explicit lower bound and an inclusive upper bound of <paramref name="max"/>.</summary>
-        /// <param name="max">The inclusive upper bound.</param>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="max"/> is negative.</exception>
         public static TSize Max(int max)
         {
@@ -83,7 +78,6 @@ namespace Fuzzy
         }
 
         /// <summary>Returns a fuzzy size within the configured bounds.</summary>
-        /// <param name="fuzzy">The <see cref="IFuzz"/> instance used to generate the value.</param>
         /// <exception cref="ArgumentNullException"><paramref name="fuzzy"/> is <see langword="null"/>.</exception>
         public int Build(IFuzz fuzzy) {
             if(fuzzy == null)
