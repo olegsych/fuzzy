@@ -42,7 +42,7 @@ namespace Fuzzy
         /// <exception cref="ArgumentNullException"><paramref name="fuzzy"/> or <paramref name="candidates"/> is <see langword="null"/>.</exception>
         public static T Element<T>(this IFuzz fuzzy, IEnumerable<T> candidates) => new FuzzyElement<T>(fuzzy, candidates);
 
-        /// <summary>Returns a fuzzy value of the enumeration type <typeparamref name="T"/>.</summary>
+        /// <summary>Returns a fuzzy value defined by the enumeration type <typeparamref name="T"/>.</summary>
         /// <exception cref="ArgumentNullException"><paramref name="fuzzy"/> is <see langword="null"/>.</exception>
         public static T Enum<T>(this IFuzz fuzzy) where T : Enum => new FuzzyEnum<T>(fuzzy);
 
