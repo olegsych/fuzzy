@@ -74,7 +74,7 @@ namespace Fuzzy
         /// <exception cref="ArgumentNullException"><paramref name="fuzzy"/> is <see langword="null"/>.</exception>
         public static string String(this IFuzz fuzzy) => new FuzzyString(fuzzy);
 
-        /// <summary>Returns a fuzzy <see langword="string"/> whose size is constrained by <paramref name="length"/>.</summary>
+        /// <summary>Returns a fuzzy <see langword="string"/> whose length is constrained by <paramref name="length"/>.</summary>
         /// <exception cref="ArgumentNullException"><paramref name="fuzzy"/> or <paramref name="length"/> is <see langword="null"/>.</exception>
         public static string String(this IFuzz fuzzy, Length length) => new FuzzyString(fuzzy, length ?? throw new ArgumentNullException(nameof(length)), null);
 
