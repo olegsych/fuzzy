@@ -7,13 +7,13 @@ namespace Fuzzy
     /// Produces fuzzy values for use in tests.
     /// </summary>
     /// <remarks>
-    /// Implementations supply the source of randomness that powers the <c>Fuzzy</c> extension methods.
+    /// Implementations supply the source of values that powers the <c>Fuzzy</c> extension methods.
     /// Most consumers obtain fuzzy values through those extensions rather than calling members of this interface directly.
     /// </remarks>
     public interface IFuzz
     {
         /// <summary>
-        /// Returns a non-negative, fuzzy <see langword="int"/>.
+        /// Returns the next fuzzy <see langword="int"/>.
         /// </summary>
         int Next();
 
