@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="examples/Examples.csproj" />
+  <Project Path="src/Fuzzy.csproj" />
+  <Project Path="test/Tests.csproj" />
+</Solution>
