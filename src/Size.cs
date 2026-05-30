@@ -41,7 +41,10 @@ namespace Fuzzy
         }
 
         /// <summary>Returns a <typeparamref name="TSize"/> bounded inclusively by <paramref name="min"/> and <paramref name="max"/>.</summary>
-        /// <inheritdoc cref="Initialize(int?, int?)"/>
+        /// <param name="min">The inclusive lower bound.</param>
+        /// <param name="max">The inclusive upper bound.</param>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="min"/> or <paramref name="max"/> is negative.</exception>
+        /// <exception cref="ArgumentException"><paramref name="max"/> is less than <paramref name="min"/>.</exception>
         public static TSize Between(int min, int max)
         {
             var range = new TSize();
@@ -50,12 +53,14 @@ namespace Fuzzy
         }
 
         /// <summary>Returns a <typeparamref name="TSize"/> bounded inclusively to a single <paramref name="value"/>.</summary>
-        /// <inheritdoc cref="Initialize(int?, int?)"/>
+        /// <param name="value">The inclusive bound.</param>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="value"/> is negative.</exception>
         public static TSize Exactly(int value) =>
             Between(value, value);
 
         /// <summary>Returns a <typeparamref name="TSize"/> with an inclusive lower bound of <paramref name="min"/> and no upper bound.</summary>
-        /// <inheritdoc cref="Initialize(int?, int?)"/>
+        /// <param name="min">The inclusive lower bound.</param>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="min"/> is negative.</exception>
         public static TSize Min(int min)
         {
             var range = new TSize();
@@ -64,7 +69,8 @@ namespace Fuzzy
         }
 
         /// <summary>Returns a <typeparamref name="TSize"/> with no lower bound and an inclusive upper bound of <paramref name="max"/>.</summary>
-        /// <inheritdoc cref="Initialize(int?, int?)"/>
+        /// <param name="max">The inclusive upper bound.</param>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="max"/> is negative.</exception>
         public static TSize Max(int max)
         {
             var range = new TSize();
