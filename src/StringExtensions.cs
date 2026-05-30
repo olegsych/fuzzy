@@ -3,6 +3,7 @@ using Fuzzy.Implementation;
 
 namespace Fuzzy
 {
+    /// <summary>Provides character-set constraints for fuzzy <see langword="string"/> values.</summary>
     public static class StringExtensions
     {
         public static string LettersOrDigits(this string value) {
