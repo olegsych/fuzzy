@@ -10,6 +10,8 @@ namespace Fuzzy
     /// </summary>
     public static class IFuzzDictionaryExtensions
     {
+        /// <summary>Returns a fuzzy dictionary whose keys are produced by <paramref name="createKey"/> and values are produced by <paramref name="createValue"/>.</summary>
+        /// <exception cref="ArgumentNullException"><paramref name="fuzzy"/> or <paramref name="createKey"/> is <see langword="null"/>.</exception>
         public static Dictionary<TKey, TValue> Dictionary<TKey, TValue>(this IFuzz fuzzy, Func<TKey> createKey, Func<TValue> createValue, Count? count = default)
             => fuzzy.Dictionary(createKey, k => createValue(), count);
 
