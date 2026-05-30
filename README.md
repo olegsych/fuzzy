@@ -1,5 +1,5 @@
-[![Build](https://img.shields.io/appveyor/ci/olegsych/fuzzy/master)](https://ci.appveyor.com/project/olegsych/fuzzy/branch/master)
-[![Tests](https://img.shields.io/appveyor/tests/olegsych/fuzzy/master)](https://ci.appveyor.com/project/olegsych/fuzzy/branch/master/tests)
+[![Build](https://github.com/olegsych/fuzzy/actions/workflows/build.yml/badge.svg)](https://github.com/olegsych/fuzzy/actions/workflows/build.yml)
+[![codecov](https://codecov.io/github/olegsych/fuzzy/graph/badge.svg)](https://codecov.io/github/olegsych/fuzzy)
 [![Nuget](https://img.shields.io/nuget/v/fuzzy.svg)](https://www.nuget.org/packages/fuzzy)
 
 Fuzzy is a simple .NET API for fuzz testing, or more specifically, for generating fuzzy inputs in unit tests.
