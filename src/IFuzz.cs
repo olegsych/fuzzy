@@ -26,7 +26,7 @@ namespace Fuzzy
         /// <see cref="IComparableExtensions.Between{T}(T, T, T)"/> can recover the specification from the value.
         /// </remarks>
         /// <typeparam name="T">The type of value to build.</typeparam>
-        /// <param name="spec">The specification whose <see cref="Fuzzy{T}.Build"/> result is registered in <see cref="FuzzyContext"/>.</param>
+        /// <param name="spec">The specification supplying the value via <see cref="Fuzzy{T}.Build"/>.</param>
         /// <exception cref="ArgumentNullException"><paramref name="spec"/> is <see langword="null"/>.</exception>
         T Build<T>(Fuzzy<T> spec);
     }
