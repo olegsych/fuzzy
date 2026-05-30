@@ -10,6 +10,10 @@ namespace Fuzzy.Implementation
     {
         static readonly ThreadLocal<object> stored = new ThreadLocal<object>();
 
+        /// <summary>
+        /// Associates a fuzzy value with its specification on the current thread.
+        /// </summary>
+        /// <exception cref="ArgumentNullException"><paramref name="spec"/> is <see langword="null"/>.</exception>
         public static void Set<T>(T value, Fuzzy<T> spec) {
             if(spec == null)
                 throw new ArgumentNullException(nameof(spec));
