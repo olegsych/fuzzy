@@ -1,5 +1,6 @@
 namespace Fuzzy
 {
+    /// <summary>Provides range constraints for fuzzy <see langword="ushort"/> values.</summary>
     /// <remarks>
     /// Needed because compiler cannot resolve <see cref="IComparableExtensions"/> calls made with literal numbers.
     /// </remarks>
