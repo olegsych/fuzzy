@@ -1,7 +1,7 @@
 namespace Fuzzy
 {
     /// <summary>
-    /// Produces fuzzy test values from a monotonically increasing sequence of integers.
+    /// Produces fuzzy test values from a predictable sequence of integers.
     /// </summary>
     public class SequentialFuzz : Implementation.Fuzz
     {
