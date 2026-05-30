@@ -35,7 +35,6 @@ namespace Fuzzy.Implementation
         /// Returns a fuzzy value of type <typeparamref name="T"/> built from <paramref name="spec"/>.
         /// </summary>
         /// <param name="spec">The specification supplying the value.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="spec"/> is <see langword="null"/>.</exception>
         public static implicit operator T(Fuzzy<T> spec) => spec.fuzzy.Build(spec);
     }
 }
