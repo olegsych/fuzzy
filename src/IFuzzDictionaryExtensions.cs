@@ -5,6 +5,9 @@ using Fuzzy.Implementation;
 
 namespace Fuzzy
 {
+    /// <summary>
+    /// Provides <see cref="IFuzz"/> extension methods that produce fuzzy dictionaries.
+    /// </summary>
     public static class IFuzzDictionaryExtensions
     {
         public static Dictionary<TKey, TValue> Dictionary<TKey, TValue>(this IFuzz fuzzy, Func<TKey> createKey, Func<TValue> createValue, Count? count = default)
