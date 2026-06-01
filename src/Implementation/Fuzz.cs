@@ -1,12 +1,9 @@
 namespace Fuzzy.Implementation
 {
-    /// <summary>
-    /// Provides a base class for <see cref="IFuzz"/> implementations whose derived classes only need to implement
-    /// <see cref="IFuzz.Next"/>; the shared <see cref="IFuzz.Build{T}(Fuzzy{T})"/> implementation is supplied here.
-    /// </summary>
+    /// <summary>For internal use.</summary>
     public abstract class Fuzz: IFuzz
     {
-        /// <inheritdoc/>
+        /// <summary>For internal use.</summary>
         public abstract int Next();
 
         T IFuzz.Build<T>(Fuzzy<T> spec) {
