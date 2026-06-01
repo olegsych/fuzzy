@@ -48,6 +48,8 @@ namespace Fuzzy
 
         /// <summary>Returns a fuzzy index into <paramref name="elements"/>.</summary>
         /// <exception cref="ArgumentNullException"><paramref name="fuzzy"/> or <paramref name="elements"/> is <see langword="null"/>.</exception>
+        // TODO: When elements is empty, an internal ArgumentOutOfRangeException (ParamName == "value") leaks from the
+        // FuzzyRange.Maximum setter via Between(0, -1), instead of a domain-appropriate exception about elements.
         public static int Index<T>(this IFuzz fuzzy, IEnumerable<T> elements) => new FuzzyIndex<T>(fuzzy, elements);
 
         /// <summary>Returns a fuzzy <see langword="short"/>.</summary>
