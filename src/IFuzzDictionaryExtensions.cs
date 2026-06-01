@@ -16,6 +16,8 @@ namespace Fuzzy
         // is invoked, instead of an ArgumentNullException with ParamName == "createValue".
         // TODO: When createKey is null, the ArgumentNullException thrown by FuzzyDictionary<TKey, TValue> has
         // ParamName == "keyFactory" instead of "createKey".
+        // TODO: When createKey produces duplicate keys, they are silently overwritten, which can result in the returned
+        // dictionary having a Count smaller than the requested boundaries.
         public static Dictionary<TKey, TValue> Dictionary<TKey, TValue>(this IFuzz fuzzy, Func<TKey> createKey, Func<TValue> createValue, Count? count = default)
             => fuzzy.Dictionary(createKey, k => createValue(), count);
 
@@ -25,6 +27,8 @@ namespace Fuzzy
         // ParamName == "keyFactory" instead of "createKey".
         // TODO: When createValue is null, the ArgumentNullException thrown by FuzzyDictionary<TKey, TValue> has
         // ParamName == "valueFactory" instead of "createValue".
+        // TODO: When createKey produces duplicate keys, they are silently overwritten, which can result in the returned
+        // dictionary having a Count smaller than the requested boundaries.
         public static Dictionary<TKey, TValue> Dictionary<TKey, TValue>(this IFuzz fuzzy, Func<TKey> createKey, Func<TKey, TValue> createValue, Count? count = default)
             => new FuzzyDictionary<TKey, TValue>(fuzzy, createKey, createValue, count ?? new Count());
 
@@ -35,6 +39,8 @@ namespace Fuzzy
         // TODO: When elements is empty and the generated dictionary count is non-zero, an internal ArgumentOutOfRangeException
         // (ParamName == "value") leaks from the FuzzyRange.Maximum setter via Between(0, -1), instead of a domain-appropriate
         // exception about elements.
+        // TODO: When elements is sampled, duplicate keys are silently overwritten, which can result in the returned
+        // dictionary having a Count smaller than the requested boundaries.
         public static Dictionary<TKey, TValue> Dictionary<TKey, TValue>(this IFuzz fuzzy, IReadOnlyDictionary<TKey, TValue> elements, Count? count = default)
             => fuzzy.Dictionary(() => fuzzy.Element(elements).Key, k => elements[k], count);
     }
