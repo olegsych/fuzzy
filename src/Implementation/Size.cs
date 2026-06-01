@@ -19,13 +19,13 @@ namespace Fuzzy.Implementation
 
         internal Size() {} // Not meant to be extended by users
 
-        /// <inheritdoc/>
+        /// <summary>Determines whether this size equals another object.</summary>
         public override bool Equals(object other) =>
             other is Size<TSize> otherSize &&
             otherSize.minimum.Equals(minimum) &&
             otherSize.maximum.Equals(maximum);
 
-        /// <inheritdoc/>
+        /// <summary>Returns a hash code for this size.</summary>
         public override int GetHashCode() =>
             (minimum, maximum).GetHashCode();
 
