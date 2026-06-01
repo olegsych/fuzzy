@@ -28,6 +28,7 @@ namespace Fuzzy
 
         /// <summary>Returns a fuzzy <see cref="System.DateTime"/> with the specified <see cref="DateTimeKind"/>.</summary>
         /// <exception cref="ArgumentNullException"><paramref name="fuzzy"/> is <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentException"><paramref name="kind"/> is not one of the <see cref="DateTimeKind"/> values.</exception>
         public static DateTime DateTime(this IFuzz fuzzy, DateTimeKind kind) => new FuzzyDateTime(fuzzy, kind);
 
         /// <summary>Returns a fuzzy <see cref="System.DateTimeOffset"/>.</summary>
