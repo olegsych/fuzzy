@@ -8,7 +8,7 @@ namespace Fuzzy.Implementation
     public abstract class Fuzzy<T>
     {
         /// <summary>
-        /// The <see cref="IFuzz"/> used to build the fuzzy value.
+        /// Stores the <see cref="IFuzz"/> used to build the fuzzy value.
         /// </summary>
         protected readonly IFuzz fuzzy;
 
