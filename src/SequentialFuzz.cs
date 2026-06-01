@@ -16,6 +16,7 @@ namespace Fuzzy
         /// <summary>
         /// Returns the next <see langword="int"/> in the predictable sequence, incremented by one on each call.
         /// </summary>
+        // TODO: Fail fast on overflow using checked arithmetic
         public override int Next() => ++current;
     }
 }
