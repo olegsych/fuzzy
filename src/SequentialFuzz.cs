@@ -10,7 +10,7 @@ namespace Fuzzy
         /// <summary>
         /// Initializes a new instance of the <see cref="SequentialFuzz"/> class.
         /// </summary>
-        /// <param name="seed">The value preceding the first <see langword="int"/> returned by <see cref="Next"/>.</param>
+        /// <param name="seed">The value preceding the first value returned by <see cref="Next"/>.</param>
         public SequentialFuzz(int seed = default) => current = seed;
 
         /// <summary>
