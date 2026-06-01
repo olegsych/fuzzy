@@ -14,11 +14,17 @@ namespace Fuzzy
         /// <exception cref="ArgumentNullException"><paramref name="fuzzy"/> or <paramref name="createKey"/> is <see langword="null"/>.</exception>
         // TODO: When createValue is null, a NullReferenceException leaks from the captured lambda when the value factory
         // is invoked, instead of an ArgumentNullException with ParamName == "createValue".
+        // TODO: When createKey is null, the ArgumentNullException thrown by FuzzyDictionary<TKey, TValue> has
+        // ParamName == "keyFactory" instead of "createKey".
         public static Dictionary<TKey, TValue> Dictionary<TKey, TValue>(this IFuzz fuzzy, Func<TKey> createKey, Func<TValue> createValue, Count? count = default)
             => fuzzy.Dictionary(createKey, k => createValue(), count);
 
         /// <summary>Returns a fuzzy dictionary whose keys are produced by <paramref name="createKey"/> and whose values are produced by <paramref name="createValue"/> from each key.</summary>
         /// <exception cref="ArgumentNullException"><paramref name="fuzzy"/>, <paramref name="createKey"/>, or <paramref name="createValue"/> is <see langword="null"/>.</exception>
+        // TODO: When createKey is null, the ArgumentNullException thrown by FuzzyDictionary<TKey, TValue> has
+        // ParamName == "keyFactory" instead of "createKey".
+        // TODO: When createValue is null, the ArgumentNullException thrown by FuzzyDictionary<TKey, TValue> has
+        // ParamName == "valueFactory" instead of "createValue".
         public static Dictionary<TKey, TValue> Dictionary<TKey, TValue>(this IFuzz fuzzy, Func<TKey> createKey, Func<TKey, TValue> createValue, Count? count = default)
             => new FuzzyDictionary<TKey, TValue>(fuzzy, createKey, createValue, count ?? new Count());
 
