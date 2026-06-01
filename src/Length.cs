@@ -4,5 +4,7 @@ namespace Fuzzy
     /// <remarks>The default range is <c>[8, 13]</c>.</remarks>
     public sealed class Length : Implementation.Size<Length>
     {
+        /// <summary>Initializes a new instance of the <see cref="Length"/> class.</summary>
+        public Length() {}
     }
 }
