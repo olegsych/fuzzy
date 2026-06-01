@@ -18,7 +18,7 @@ namespace Fuzzy.Implementation
 
         internal Size() {} // Not meant to be extended by users
 
-        /// <summary>Determines whether this size equals another object.</summary>
+        /// <summary>Returns <see langword="true"/> if this size equals <paramref name="other"/>; otherwise, <see langword="false"/>.</summary>
         public override bool Equals(object other) =>
             other is Size<TSize> otherSize &&
             otherSize.minimum.Equals(minimum) &&
