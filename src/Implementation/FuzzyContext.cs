@@ -25,8 +25,11 @@ namespace Fuzzy.Implementation
         /// </summary>
         /// <exception cref="ArgumentException"><paramref name="value"/> does not match the value most recently stored on the current thread.</exception>
         public static TSpec Get<TValue, TSpec>(TValue value) where TSpec : Fuzzy<TValue> {
+            // TODO: throw ArgumentException instead of NullReferenceException when nothing was stored on the current thread (csharp.instructions: no low-level exceptions).
+            // TODO: throw ArgumentException instead of InvalidCastException when TValue doesn't match the stored value type (csharp.instructions: no low-level exceptions).
             (TValue value, Fuzzy<TValue> spec) retrieved = ((TValue, Fuzzy<TValue>))stored.Value;
             EnsureValueWasPreviouslyStored(value, retrieved.value);
+            // TODO: throw ArgumentException instead of InvalidCastException when TSpec doesn't match the stored spec type (csharp.instructions: no low-level exceptions).
             return (TSpec)retrieved.spec;
         }
 
