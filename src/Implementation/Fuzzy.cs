@@ -33,6 +33,7 @@ namespace Fuzzy.Implementation
         /// <summary>
         /// Returns a fuzzy value of type <typeparamref name="T"/> built from <paramref name="spec"/>.
         /// </summary>
+        // TODO: leaks NullReferenceException when spec is null; should throw ArgumentNullException instead.
         public static implicit operator T(Fuzzy<T> spec) => spec.fuzzy.Build(spec);
     }
 }
