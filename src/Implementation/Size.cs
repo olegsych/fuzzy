@@ -4,8 +4,7 @@ namespace Fuzzy.Implementation
 {
     /// <summary>Specifies an inclusive range of non-negative integer sizes for fuzzy values.</summary>
     /// <remarks>
-    /// When neither bound is specified, <see cref="Build"/> uses the range <c>[8, 13]</c>; when only one bound is
-    /// specified, the other is derived from it.
+    /// When neither bound is specified, <see cref="Build"/> uses the range <c>[8, 13]</c>.
     /// </remarks>
     /// <typeparam name="TSize">The derived size type, per the curiously recurring template pattern.</typeparam>
     public abstract class Size<TSize> where TSize : Size<TSize>, new()
