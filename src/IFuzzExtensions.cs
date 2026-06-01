@@ -40,6 +40,8 @@ namespace Fuzzy
 
         /// <summary>Returns a fuzzy element chosen from <paramref name="candidates"/>.</summary>
         /// <exception cref="ArgumentNullException"><paramref name="fuzzy"/> or <paramref name="candidates"/> is <see langword="null"/>.</exception>
+        // TODO: When candidates is empty, an internal ArgumentOutOfRangeException (ParamName == "value") leaks from the
+        // FuzzyRange.Maximum setter via Between(0, -1), instead of a domain-appropriate exception about candidates.
         public static T Element<T>(this IFuzz fuzzy, IEnumerable<T> candidates) => new FuzzyElement<T>(fuzzy, candidates);
 
         /// <summary>Returns a fuzzy value defined by the enumeration type <typeparamref name="T"/>.</summary>
