@@ -6,7 +6,6 @@ namespace Fuzzy.Implementation
     /// <remarks>
     /// When neither bound is specified, <see cref="Build"/> uses the range <c>[8, 13]</c>.
     /// </remarks>
-    /// <typeparam name="TSize">The derived size type, per the curiously recurring template pattern.</typeparam>
     public abstract class Size<TSize> where TSize : Size<TSize>, new()
     {
         const int defaultMinimum = 8;
