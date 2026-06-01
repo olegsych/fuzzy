@@ -1,13 +1,11 @@
 using System;
 
-namespace Fuzzy
+namespace Fuzzy.Implementation
 {
     /// <summary>Specifies an inclusive range of non-negative integer sizes for fuzzy values.</summary>
     /// <remarks>
-    /// When neither bound is specified, <see cref="Build"/> uses the range <c>[8, 13]</c>; when only one bound is
-    /// specified, the other is derived from it.
+    /// When neither bound is specified, <see cref="Build"/> uses the range <c>[8, 13]</c>.
     /// </remarks>
-    /// <typeparam name="TSize">The derived size type, per the curiously recurring template pattern.</typeparam>
     public abstract class Size<TSize> where TSize : Size<TSize>, new()
     {
         const int defaultMinimum = 8;
@@ -17,13 +15,15 @@ namespace Fuzzy
         int? maximum;
         int? minimum;
 
-        /// <inheritdoc/>
+        internal Size() {} // Not meant to be extended by users
+
+        /// <summary>Returns <see langword="true"/> if this size equals <paramref name="other"/>; otherwise, <see langword="false"/>.</summary>
         public override bool Equals(object other) =>
             other is Size<TSize> otherSize &&
             otherSize.minimum.Equals(minimum) &&
             otherSize.maximum.Equals(maximum);
 
-        /// <inheritdoc/>
+        /// <summary>Returns a hash code for this size.</summary>
         public override int GetHashCode() =>
             (minimum, maximum).GetHashCode();
 
@@ -57,6 +57,7 @@ namespace Fuzzy
         /// <summary>Returns a <typeparamref name="TSize"/> bounded inclusively to a single <paramref name="value"/>.</summary>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="value"/> is negative.</exception>
         public static TSize Exactly(int value) =>
+            // TODO: Bug: ArgumentOutOfRangeException.ParamName is "min", not "value".
             Between(value, value);
 
         /// <summary>Returns a <typeparamref name="TSize"/> with an inclusive lower bound of <paramref name="min"/> and no explicit upper bound.</summary>
@@ -77,7 +78,7 @@ namespace Fuzzy
             return range;
         }
 
-        /// <summary>Returns a fuzzy size within the configured bounds.</summary>
+        /// <summary>Returns a fuzzy size within this size's bounds.</summary>
         /// <exception cref="ArgumentNullException"><paramref name="fuzzy"/> is <see langword="null"/>.</exception>
         public int Build(IFuzz fuzzy) {
             if(fuzzy == null)
@@ -89,6 +90,8 @@ namespace Fuzzy
             if(maximum.HasValue)
                 return maximum.Value;
             int minimum = Minimum();
+            // TODO: Bug: minimum + defaultRange overflows when minimum >= int.MaxValue - defaultRange,
+            // producing a negative upper bound that Build then rejects with ArgumentOutOfRangeException.
             return minimum >= defaultMaximum
                 ? minimum + defaultRange
                 : defaultMaximum;
