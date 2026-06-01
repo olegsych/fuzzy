@@ -91,6 +91,8 @@ namespace Fuzzy.Implementation
             if(maximum.HasValue)
                 return maximum.Value;
             int minimum = Minimum();
+            // TODO: Bug: minimum + defaultRange overflows when minimum >= int.MaxValue - defaultRange,
+            // producing a negative upper bound that Build then rejects with ArgumentOutOfRangeException.
             return minimum >= defaultMaximum
                 ? minimum + defaultRange
                 : defaultMaximum;
