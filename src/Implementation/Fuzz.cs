@@ -9,7 +9,6 @@ namespace Fuzzy.Implementation
         /// <inheritdoc/>
         public abstract int Next();
 
-        /// <inheritdoc/>
         T IFuzz.Build<T>(Fuzzy<T> spec) {
             if(spec is null)
                 throw new System.ArgumentNullException(nameof(spec));
