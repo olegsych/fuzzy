@@ -46,6 +46,8 @@ namespace Fuzzy
 
         /// <summary>Returns a fuzzy value defined by the enumeration type <typeparamref name="T"/>.</summary>
         /// <exception cref="ArgumentNullException"><paramref name="fuzzy"/> is <see langword="null"/>.</exception>
+        // TODO: When T has no defined values, an internal ArgumentOutOfRangeException (ParamName == "value")
+        // leaks via Element/Index, instead of a domain-appropriate exception about T.
         public static T Enum<T>(this IFuzz fuzzy) where T : Enum => new FuzzyEnum<T>(fuzzy);
 
         /// <summary>Returns a fuzzy index into <paramref name="elements"/>.</summary>
