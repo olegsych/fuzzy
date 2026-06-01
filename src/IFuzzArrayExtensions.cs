@@ -17,6 +17,7 @@ namespace Fuzzy
 
         /// <summary>Returns a fuzzy array whose elements are chosen from <paramref name="elements"/>.</summary>
         /// <exception cref="ArgumentNullException"><paramref name="fuzzy"/> is <see langword="null"/>, or <paramref name="elements"/> is <see langword="null"/> and the generated array length is non-zero.</exception>
+        // TODO: When elements is null and the generated length is non-zero, the ArgumentNullException thrown by FuzzyElement<T> has ParamName == "candidates" instead of "elements".
         public static T[] Array<T>(this IFuzz fuzzy, IEnumerable<T> elements, Length? length = default) =>
             fuzzy.Array(() => fuzzy.Element(elements), length);
     }
