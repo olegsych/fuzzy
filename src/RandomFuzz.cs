@@ -18,7 +18,7 @@ namespace Fuzzy
         /// </remarks>
         public RandomFuzz(int seed = 0) => random = new Random(seed);
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="IFuzz.Next"/>
         public override int Next() => random.Next();
     }
 }
