@@ -18,6 +18,8 @@ namespace Fuzzy
         /// <summary>Returns a fuzzy array whose elements are chosen from <paramref name="elements"/> and whose length is within <paramref name="length"/>, or a default <see cref="Length"/> if <see langword="null"/>.</summary>
         /// <exception cref="ArgumentNullException"><paramref name="fuzzy"/> is <see langword="null"/>, or <paramref name="elements"/> is <see langword="null"/> and the generated array length is non-zero.</exception>
         // TODO: When elements is null and the generated length is non-zero, the ArgumentNullException thrown by FuzzyElement<T> has ParamName == "candidates" instead of "elements".
+        // TODO: When elements is empty and the generated length is non-zero, an internal ArgumentOutOfRangeException (ParamName == "value")
+        // leaks from the FuzzyRange.Maximum setter via Between(0, -1), instead of a domain-appropriate exception about elements.
         public static T[] Array<T>(this IFuzz fuzzy, IEnumerable<T> elements, Length? length = default) =>
             fuzzy.Array(() => fuzzy.Element(elements), length);
     }
