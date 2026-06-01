@@ -3,6 +3,7 @@
 namespace Fuzzy
 {
     /// <summary>Provides range constraints for fuzzy <see cref="DateTimeOffset"/> values.</summary>
+    // TODO: Rename to DateTimeOffsetExtensions to fix the duplicated "Offset" typo. Requires a breaking API change.
     public static class DateTimeOffsetOffsetExtensions
     {
         /// <summary>Returns a fuzzy value constrained to the range between <paramref name="minimum"/> and <paramref name="minimum"/> plus <paramref name="timeSpan"/>, inclusive.</summary>
