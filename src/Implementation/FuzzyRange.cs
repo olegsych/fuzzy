@@ -15,6 +15,7 @@ namespace Fuzzy.Implementation
         /// </summary>
         /// <exception cref="ArgumentNullException"><paramref name="fuzz"/> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="maximum"/> is less than <paramref name="minimum"/>.</exception>
+        // TODO: When fuzz is null, the ArgumentNullException thrown by the base Fuzzy<T> constructor has ParamName == "fuzzy" instead of "fuzz".
         public FuzzyRange(IFuzz fuzz, T minimum, T maximum) : base(fuzz) {
             if(maximum.CompareTo(minimum) < 0)
                 throw new ArgumentOutOfRangeException(nameof(maximum), $"{maximum} is less than the {nameof(minimum)} value {minimum}");
