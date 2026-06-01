@@ -58,6 +58,7 @@ namespace Fuzzy.Implementation
         /// <summary>Returns a <typeparamref name="TSize"/> bounded inclusively to a single <paramref name="value"/>.</summary>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="value"/> is negative.</exception>
         public static TSize Exactly(int value) =>
+            // TODO: Bug: ArgumentOutOfRangeException.ParamName is "min", not "value".
             Between(value, value);
 
         /// <summary>Returns a <typeparamref name="TSize"/> with an inclusive lower bound of <paramref name="min"/> and no explicit upper bound.</summary>
