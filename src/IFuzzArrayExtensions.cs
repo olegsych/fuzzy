@@ -11,6 +11,7 @@ namespace Fuzzy
     {
         /// <summary>Returns a fuzzy array whose elements are produced by <paramref name="createElement"/>.</summary>
         /// <exception cref="ArgumentNullException"><paramref name="fuzzy"/> or <paramref name="createElement"/> is <see langword="null"/>.</exception>
+        // TODO: When createElement is null, the ArgumentNullException thrown by FuzzyArray<T> has ParamName == "itemFactory" instead of "createElement".
         public static T[] Array<T>(this IFuzz fuzzy, Func<T> createElement, Length? length = default) =>
             new FuzzyArray<T>(fuzzy, createElement, length ?? new Length());
 
