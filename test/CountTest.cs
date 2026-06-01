@@ -2,6 +2,6 @@ namespace Fuzzy
 {
     public class CountTest
     {
-        readonly Size<Count> sut = new Count();
+        readonly Implementation.Size<Count> sut = new Count();
     }
 }

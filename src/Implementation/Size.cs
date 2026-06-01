@@ -1,6 +1,6 @@
 using System;
 
-namespace Fuzzy
+namespace Fuzzy.Implementation
 {
     /// <summary>Specifies an inclusive range of non-negative integer sizes for fuzzy values.</summary>
     /// <remarks>
@@ -16,6 +16,8 @@ namespace Fuzzy
 
         int? maximum;
         int? minimum;
+
+        internal Size() {} // Not meant to be extended by users
 
         /// <inheritdoc/>
         public override bool Equals(object other) =>
