@@ -18,13 +18,19 @@ namespace Fuzzy.Implementation
                 ArrangeBuildOfFuzzyInt16();
             }
 
+#if NET
+            const double epsilon = 0;
+#else
+            const double epsilon = double.Epsilon;
+#endif
+
             [Theory]
             [InlineData(true, 1, -1076, 1 / double.PositiveInfinity)] // Positive 0
-            [InlineData(true, 1, -1075, double.Epsilon)]
+            [InlineData(true, 1, -1075, epsilon)]
             [InlineData(true, 0x1FFFFFFFFFFFFF, 971, double.MaxValue)]
             [InlineData(true, 0x1FFFFFFFFFFFFF, 972, double.PositiveInfinity)]
             [InlineData(false, 1, -1076, 1 / double.NegativeInfinity)] // Negative 0
-            [InlineData(false, 1, -1075, -double.Epsilon)]
+            [InlineData(false, 1, -1075, -epsilon)]
             [InlineData(false, 0x1FFFFFFFFFFFFF, 971, double.MinValue)]
             [InlineData(false, 0x1FFFFFFFFFFFFF, 972, double.NegativeInfinity)]
             public void ReturnsDoubleValueComputedFromFuzzySignMantissaAndExponent(bool positive, ulong mantissa, short exponent, double expected) {

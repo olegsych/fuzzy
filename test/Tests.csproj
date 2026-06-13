@@ -1,17 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-    <IsPackable>false</IsPackable>
+    <TargetFrameworks>net472;net8.0;net9.0;net10.0</TargetFrameworks>
+    <OutputType>exe</OutputType>
     <RootNamespace>Fuzzy</RootNamespace>
     <!-- Make integer arithmetics checked by default -->
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
+  <PropertyGroup Condition="!$([MSBuild]::IsOSPlatform('Windows'))">
+    <!-- Skip net472 tests on Linux, they require Mono to run -->
+    <IsTestingPlatformApplication Condition="'$(TargetFramework)' == 'net472'">false</IsTestingPlatformApplication>
+  </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Inspector" Version="*" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.*" />
-    <PackageReference Include="NSubstitute" Version="4.*" />
-    <PackageReference Include="xunit" Version="2.*" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.*" />
+    <PackageReference Include="Inspector" />
+    <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" />
+    <PackageReference Include="NSubstitute" />
+    <PackageReference Include="xunit.v3" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\src\Fuzzy.csproj" />
