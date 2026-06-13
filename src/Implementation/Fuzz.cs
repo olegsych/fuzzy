@@ -1,9 +1,14 @@
 namespace Fuzzy.Implementation
 {
-    /// <summary>For internal use.</summary>
+    /// <summary>
+    /// Provides a base class for <see cref="IFuzz"/> implementations that derive every fuzzy value from a sequence of <see langword="int"/> values.
+    /// </summary>
+    /// <remarks>
+    /// <see cref="RandomFuzz"/> and <see cref="SequentialFuzz"/> derive from this class, each supplying the sequence through its own <see cref="Next"/> override.
+    /// </remarks>
     public abstract class Fuzz: IFuzz
     {
-        /// <summary>For internal use.</summary>
+        /// <inheritdoc cref="IFuzz.Next"/>
         public abstract int Next();
 
         T IFuzz.Build<T>(Fuzzy<T> spec) {
