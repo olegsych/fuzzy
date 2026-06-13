@@ -6,7 +6,7 @@ git clone --recurse-submodules -c core.symlinks=true https://github.com/olegsych
 
 # build
 ```PowerShell
-dotnet build ./Fuzzy.sln
+dotnet build ./Fuzzy.slnx
 ```
 
 # test
