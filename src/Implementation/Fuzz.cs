@@ -8,7 +8,7 @@ namespace Fuzzy.Implementation
     /// </remarks>
     public abstract class Fuzz: IFuzz
     {
-        /// <inheritdoc cref="IFuzz.Next"/>
+        /// <inheritdoc/>
         public abstract int Next();
 
         T IFuzz.Build<T>(Fuzzy<T> spec) {
