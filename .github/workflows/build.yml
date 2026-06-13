@@ -7,6 +7,7 @@ on:
     branches: [master]
 
 env:
+  Configuration: Release
   Artifacts: ${{ github.workspace }}/out
   Logs: ${{ github.workspace }}/out/logs
   Tests: ${{ github.workspace }}/out/tests
@@ -26,7 +27,7 @@ jobs:
           fetch-depth: 0
       - run: dotnet build -bl:"${{ env.Logs }}/build.binLog"
       - run: dotnet test --no-build test/Tests.csproj -bl:"${{ env.Logs }}/test.binLog"
-      - run: dotnet pack src/Fuzzy.csproj -bl:"${{ env.Logs }}/pack.binLog"
+      - run: dotnet pack --no-build src/Fuzzy.csproj -bl:"${{ env.Logs }}/pack.binLog"
       - name: Locate Codecov input files (workaround for files glob not working on Windows)
         if: always()
         id: test
