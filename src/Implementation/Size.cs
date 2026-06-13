@@ -78,7 +78,7 @@ namespace Fuzzy.Implementation
             return range;
         }
 
-        /// <summary>Returns a fuzzy size within the configured bounds.</summary>
+        /// <summary>Returns a fuzzy size within this size's bounds.</summary>
         /// <exception cref="ArgumentNullException"><paramref name="fuzzy"/> is <see langword="null"/>.</exception>
         public int Build(IFuzz fuzzy) {
             if(fuzzy == null)
