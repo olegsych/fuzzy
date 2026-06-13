@@ -6,10 +6,11 @@ git clone --recurse-submodules -c core.symlinks=true https://github.com/olegsych
 
 # build
 ```PowerShell
-dotnet build .\Fuzzy.sln
+dotnet build ./Fuzzy.sln
 ```
 
 # test
 ```PowerShell
-dotnet test .\test\Tests.csproj
+dotnet test --project ./test/Tests.csproj
+wsl -e dotnet test --project ./test/Tests.csproj
 ```
