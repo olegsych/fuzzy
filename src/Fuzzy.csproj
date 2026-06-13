@@ -3,4 +3,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Description>A simple library for fuzz testing .NET code.</Description>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Nerdbank.GitVersioning" PrivateAssets="all" />
+  </ItemGroup>
 </Project>
