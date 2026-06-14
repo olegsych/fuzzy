@@ -1,16 +1,42 @@
-# clone
-This repository contains submodules and symlinks.
+# Clone
+
+- _Include submodules and symlinks_.
 ```PowerShell
 git clone --recurse-submodules -c core.symlinks=true https://github.com/olegsych/fuzzy.git
 ```
 
-# build
+If you already cloned without `--recurse-submodules`, initialize them manually:
 ```PowerShell
-dotnet build ./Fuzzy.slnx
+git submodule update --init --recursive
 ```
 
-# test
+The build depends on symlinked files from the `modules/csharp.common` submodule. Without it the build will fail.
+
+# Build
+
+_Build the `Release` configuration for full build-time validation_.
 ```PowerShell
-dotnet test --project ./test/Tests.csproj
-wsl -e dotnet test --project ./test/Tests.csproj
+dotnet build -c Release
 ```
+
+# Test
+
+- _Run tests in the default `Debug` configuration on all frameworks and platforms_.
+  Tests may require `#if DEBUG` hooks and fail with `-c Release`.
+  ```PowerShell
+  dotnet test
+  wsl -e dotnet test
+  ```
+
+- _Troubleshoot specific projects, target frameworks, tests, including explicit tests_
+  ```PowerShell
+  dotnet run --project ./examples/Examples.csproj -f net10.0 -- -reporter verbose -namespace * -class * -method * -explicit on
+  ```
+
+# Pack
+
+```PowerShell
+dotnet pack
+```
+
+This builds the `Release` configuration by default and creates NuGet packages in the `out/packages/` directory.
