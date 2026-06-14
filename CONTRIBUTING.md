@@ -28,7 +28,7 @@ dotnet build -c Release
   wsl -e dotnet test
   ```
 
-- _Troubleshoot specific projects, target frameworks, tests, including explicit tests_
+- _Troubleshoot specific projects, target frameworks, and tests (including explicit tests)_
   ```PowerShell
   dotnet run --project ./examples/Examples.csproj -f net10.0 -- -reporter verbose -namespace * -class * -method * -explicit on
   ```
