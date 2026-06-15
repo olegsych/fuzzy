@@ -36,13 +36,16 @@ namespace Fuzzy
 
         public class Except: StringExtensionsTest
         {
+            // Method parameters
+            readonly char[] characters = new[] { '{', '}' };
+
             [Fact]
             public void ReturnsFuzzyStringExcludingSpecifiedCharacters() {
-                char[] excludedChars = new[] { '{', '}' };
-                string returned = value.Except(excludedChars);
+                string returned = value.Except(characters);
 
                 Assert.Equal(newValue, returned);
-                Assert.True(spec.Characters.All(c => !excludedChars.Contains(c)));
+                Assert.True(spec.Characters.All(c => !characters.Contains(c)));
+                Assert.Contains('a', spec.Characters);
             }
         }
     }
