@@ -36,6 +36,12 @@ namespace Fuzzy
                 Assert.True(spec.Characters.All(c => !characters.Contains(c)));
                 Assert.Contains('a', spec.Characters);
             }
+
+            [Fact]
+            public void ThrowsDescriptiveExceptionWhenCharactersIsNull() {
+                var thrown = Assert.Throws<ArgumentNullException>(() => value.Except(null!));
+                Assert.Equal("characters", thrown.ParamName);
+            }
         }
 
         public class LettersOrDigits: StringExtensionsTest

@@ -18,8 +18,8 @@ namespace Fuzzy
         /// <summary>Returns a fuzzy <see langword="string"/> that excludes the specified characters.</summary>
         /// <exception cref="ArgumentException"><paramref name="value"/> is not a fuzzy value.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="characters"/> is <see langword="null"/>.</exception>
-        // TODO: When characters is null, the ArgumentNullException thrown by Enumerable.Contains has ParamName == "source" instead of "characters".
         public static string Except(this string value, params char[] characters) {
+            if (characters == null) throw new ArgumentNullException(nameof(characters));
             FuzzyString spec = FuzzyContext.Get<string, FuzzyString>(value);
             spec.Characters = spec.Characters.Where(c => !characters.Contains(c)).ToArray();
             return spec;
