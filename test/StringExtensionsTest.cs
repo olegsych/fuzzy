@@ -23,17 +23,6 @@ namespace Fuzzy
             ConfiguredCall arrange = fuzzy.Build(spec).Returns(newValue);
         }
 
-        public class LettersOrDigits: StringExtensionsTest
-        {
-            [Fact]
-            public void ReturnsFuzzyStringConstrainedToTicks() {
-                string returned = value.LettersOrDigits();
-
-                Assert.Equal(newValue, returned);
-                Assert.True(spec.Characters.All(c => char.IsLetterOrDigit(c)));
-            }
-        }
-
         public class Except: StringExtensionsTest
         {
             // Method parameters
@@ -46,6 +35,17 @@ namespace Fuzzy
                 Assert.Equal(newValue, returned);
                 Assert.True(spec.Characters.All(c => !characters.Contains(c)));
                 Assert.Contains('a', spec.Characters);
+            }
+        }
+
+        public class LettersOrDigits: StringExtensionsTest
+        {
+            [Fact]
+            public void ReturnsFuzzyStringConstrainedToTicks() {
+                string returned = value.LettersOrDigits();
+
+                Assert.Equal(newValue, returned);
+                Assert.True(spec.Characters.All(c => char.IsLetterOrDigit(c)));
             }
         }
     }
