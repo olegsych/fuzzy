@@ -14,5 +14,15 @@ namespace Fuzzy
             spec.Characters = spec.Characters.Where(c => char.IsLetterOrDigit(c)).ToArray();
             return spec;
         }
+
+        /// <summary>Returns a fuzzy <see langword="string"/> that excludes the specified characters.</summary>
+        /// <exception cref="ArgumentException"><paramref name="value"/> is not a fuzzy value.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="characters"/> is <see langword="null"/>.</exception>
+        public static string Except(this string value, params char[] characters) {
+            if (characters == null) throw new ArgumentNullException(nameof(characters));
+            FuzzyString spec = FuzzyContext.Get<string, FuzzyString>(value);
+            spec.Characters = spec.Characters.Where(c => !characters.Contains(c)).ToArray();
+            return spec;
+        }
     }
 }
